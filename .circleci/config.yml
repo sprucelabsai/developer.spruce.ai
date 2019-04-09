@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  release_prod:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "ec:9f:2e:aa:1f:c9:ab:49:57:8f:c0:cd:2e:5b:f3:b0"
+      - checkout
+      - run: yarn install --ignore-scripts --frozen-lockfile
+      - run: git config --global user.email "$GIT_AUTHOR_EMAIL"
+      - run: git config --global user.name "$GIT_AUTHOR_NAME"
+      - run: yarn run release
+workflows:
+  version: 2
+  do_build:
+    jobs:
+      - release_prod:
+          filters:
+            branches:
+              only:
+                - master
