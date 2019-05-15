@@ -8,6 +8,18 @@ While sending a message to a `user` whose `status === 'offline'` is allowed, abu
 
 Sending a `message` to a `guest` should be a last resort. It is much better to send a message to a `teammate` to have them deliver the `message`. It's the human-to-human contact of this type of interaction that makes what we are all doing so unique.
 
+## Message Types
+
+To ensure that we appropriately message users at the right times (and to comply with various laws) we need to classify the messages that we're sending.  Currently there are 2 buckets of messages:
+
+* Promotional Messages (`type=promotional`) - This is the default type of message and should be used when sending the user anything that they have not specifically requested to receive. Some examples include: sending a coupon, nudging the user to fill out additional information in the skill, telling the user about a new feature, etc. If you are unsure of what type of message you're sending, error on the side of marking it as "promotional"
+
+* Transactional Messages (`type=transactional`) - This is a message that the user needs to know about and has specifically opted in to receive. Some examples include: notifying the user that their haircut has been cancelled, sending the user a summary of their weekly schedule **after they have opted-in to receive these messages**.  As a rule of thumb, a message should only be marked as transactional **if the user has the option to turn this type of message on or off in the skill's settings**.  Also, you should **never opt users in by default**. Instead, prompt the user to save their preferences on how and when they get sent notifications.
+
+Behind the scenes, the Spruce platform considers transactional messages critical information that the user needs to know and will place fewer limits on sending these messages. Promotional messages on the other hand will be queued and delivered at opportune times with rate limiting. Promotional messages _might_ also never be delivered depending on user preferences and/or local laws.
+
+Abusing the message system or inappropriate classification of messages will make users not want to use your skill and may have other penalties. Please be responsible.
+
 ## API
 
 ```js
@@ -16,8 +28,28 @@ const message = await ctx.sb.message(locationId: UUID4, userId: UUID4, message:
  String, {
     linksToWebView: Bool, // optional (true|false)
     webViewQueryData: Object, // optional (query string sent to skill when user taps it)
-    payload: Object // optional, anything else you want to pass through to the messaging layer
+    payload: Object, // optional, anything else you want to pass through to the messaging layer
+    type: string // optional ("promotional", "transactional"), default "promotional"
 });
+```
+
+### Advanced Usage
+
+Sometimes it might be useful to queue up multiple messages to send at a later time. For example in a cron you might be queuing up messages once a day that will be delivered to users throughout the rest of the day
+
+```js
+// Queue multiple messages to send in the future
+const messages = await ctx.sb.queueMessages([{
+    message: string, // required. The message to send
+    sendAtTimestamp: number, // required. The unix timestamp of when to send this message
+    locationId: string, // required. The location where the message is being sent from
+    userId: string, // required. The user to send the message to
+    linksToWebView: Bool, // optional (true|false)
+    webViewQueryData: Object, // optional (query string sent to skill when user taps it)
+    payload: Object, // optional, anything else you want to pass through to the messaging layer
+    type: string // optional ("promotional", "transactional"), default "promotional"
+}])
+
 ```
 
 ### Push Notifications
@@ -90,7 +122,7 @@ const messagePushPayload = {
             },
             message: "Thanks so much again for the great service today. I can't wait for my next visit!"
         }
-        
+
     }
 }
 
