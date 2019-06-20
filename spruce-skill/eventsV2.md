@@ -4,15 +4,7 @@ The latest event version which supports Skill Views.
 
 ## Event Object
 
-The incoming event is automatically processed and _might_ contain any (or none) of:
-
-* `userId` - The id of the User associated with this event
-
-* `locationId` - The id of the Location associated with this event
-
-* `organizationId` - The id of the Organization associated with this event
-
-If these ids are detected, a call is made to the Core API to get the data which are then attached to `ctx.auth`
+The incoming event is automatically processed and models are attached to `ctx.auth`.
 
 The data that is fetched and attached to `ctx.auth` is based on [your skill's config/auth.js file](https://github.com/sprucelabsai/workspace.sprucebot-skills-kit/blob/dev/packages/spruce-skill/config/auth.js).
 
