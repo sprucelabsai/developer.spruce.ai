@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.0.1...v1.0.2) (2019-06-20)
+
+
+### Documentation
+
+* details on custom event ids and event versions ([603a2e9](https://github.com/sprucelabsai/developer.spruce.ai/commit/603a2e9))
+
 ## [1.0.1](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.0.0...v1.0.1) (2019-05-17)
 
 
