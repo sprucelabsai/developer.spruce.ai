@@ -8,27 +8,18 @@ The following diagram follows the `did-enter` event as it flows through the syst
 <img src="images/did-enter.gif?raw=true" />
 </p>
 
-## Event object
+# Event Versions
 
-The `event` object is really a [`user`](user.md) object, with one exception; `event.User` and associated fields are optional. Whether or not an `event.User` exists in the `event` is up to the Skill that emits it. For core and 99% of skills, you can expect `event.User` and it's associated fields to exist. Each skill _should_ document the events they `emit`, so you won't be guessing. In fact, at the time of this writing, there is not a single case where a `event.User` is not provided.
+As the platform evolves to support new features with breaking changes to the event system, the `EVENT_VERSION` environment variable allows controlling which version of events your skill can receive and process.
 
-```js
-{
-    Location: Location, // required
-    User: User, // optional
-    createdAt: Date, // date the guest joined the location (optional)
-    updatedAt: Date, // date the guest changed their subscription to the location (optional)
-    role: String, // owner|teammate|guest (optional)
-    status: String, // offline|online (optional)
-    visits: Number, // how many visits to this location (optional)
-    lastRecordedVisit: Date, // when they last visited the shop (optional)
-    payload: Object // data the skill or core is passing on (optional)
-}
-```
+Current Versions:
+
+[Event Version 1](./eventsV1.md) - The current default version. Skill will use version 1 unless otherwise specified.
+
+<!-- TODO: Add links for heartwood and skill views -->
+[Event Version 2](./eventsV2.md) - The new event version, used in conjunction with Heartwood and Skill Views
 
 ## Core Events
-
-These events are built in. They all come with `event.User`.
 
 - `did-signup` - When a guest signs up at a location. Check ctx.status === 'online' to know if they are on the wifi
 - `did-enter` - When a guest returns and their phone hits the wifi
@@ -64,14 +55,9 @@ module.exports = async (ctx, next) => {
 }
 ```
 
-## Listening to custom events
+## Event naming
 
-A custom `event` is broken into 2 segments, the `slug` of the skill emitting it and the `event-name`. For example, the `Vip Alert` skill will emit `vip-alerts:will-send` just before an alert is sent to the team. You can hook into this event and cancel it, modify the messages sent, or send your own alerts. If you replace the `:` with a `/`, you'll have your file path.
-
-- `vip-alerts:will-send` -> `server/events/vip-alerts/will-send.js`
-- `scratch-win:will-manually-send` -> `server/events/scratch-win/will-manually-send.js`
-
-## CRUD Events
+### Naming events that your skill listens to
 
 For events you listen to that perform an action in your skill, follow a <verb>-<noun> naming convention. For example, I might emit `booking:create-appointment` or `booking:get-location-services`
 
@@ -84,6 +70,35 @@ For events you listen to that perform an action in your skill, follow a <verb>-<
 - Set (PUT): `set`
 
 - Delete (DELETE): `delete`
+
+### Naming events that are triggered by actions in your skill
+
+We follow a `will`/`did` convention for our events. When creating your own event, start it with `will-` or `did-`.
+
+`Will` events happen before an operation and should always honor `preventDefault`.
+
+`Did` events happen after any operation.
+
+```js
+// emit your custom event
+const responses = await this.sb.emit(
+  guest.Location.id,
+  'myskill:will-do-something',
+  {
+    foo: 'bar'
+  }
+)
+
+// did anyone prevent default?
+const preventDefault = responses.reduce((preventDefault, response) => {
+  return preventDefault || !!response.payload.preventDefault
+}, false)
+
+// bail
+if (preventDefault) {
+  return false
+}
+```
 
 ## Emitting custom events
 
@@ -107,15 +122,39 @@ const responses = await ctx.sb.emit(ctx.auth.Location.id, 'scratch-and-win:will-
 console.log(responses) // [EventResponse, EventResponse]
 ```
 
-## Event Contracts
+### `eventId`s and `retryId`s
 
-In order to receive events you'll need to subscribe to them. Likewise, in order to emit events you should publish them along with information about required parameters. You'll set these up in `config/default.js`
+Every event comes with an `eventId` which is a UUID and is automatically generated. If this is an event retry, it will also have a unique `retryId`. Logging the `eventId` can aid with debugging.
 
+The `eventId` can be accessed on an incoming event at `ctx.event.eventId`
+
+#### Custom event ids
+
+Sometimes it might be useful to control the `eventId` that is used for a particular emitted event.  You can pass a custom eventId:
+
+```js
+const eventId = uuid.v4() // The eventId MUST BE A UUID
+const responses = await ctx.sb.emit(ctx.auth.Location.id, 'scratch-and-win:will-manually-send', {
+    userId: ctx.user.User.id, // the id of the guest (ctx.user set in middleware)
+    message: ctx.utilities.lang('manualSendMessage', {
+        to: ctx.user.User.id,
+        from: ctx.auth.User.id
+    }),
+    teammateId: ctx.auth.User.id,
+    sendToSelf: config.DEV_MODE // this event will emit back to you (for testing)
+}, {}, eventId)
 ```
-eventContract: {
-  events: {
-    ///////// CUSTOM EVENTS /////////
-    'booking:get-service': {
+
+## Listening to events
+
+### Step 1: Event Contracts
+
+In order to receive events you'll need to subscribe to them. You'll set these up in `config/default.js`
+
+<!--
+TODO: Add docs on schema when implemented...for example:
+
+'booking:get-service': {
       description: 'Gets a single service',
       publish: true,
       subscribe: false,
@@ -145,7 +184,12 @@ eventContract: {
         }
       }
     },
-    ///////// CORE EVENTS /////////
+
+-->
+
+```
+eventContract: {
+  events: {
     'did-message': {
       subscribe: true
     },
@@ -161,10 +205,25 @@ eventContract: {
       description: 'When the skill is installed to a location',
       subscribe: true
     },
-
+    'booking:did-cancel-appointment': {
+      description: 'Booking appointment was cancelled',
+      subscribe: true,
+    }
   }
 }
 ```
+
+### Step 2: Create the event handler file
+
+For core events, you'll create files such as:
+
+- `did-enter` -> `server/events/did-enter.js`
+
+A custom `event` is broken into 2 segments, the `slug` of the skill emitting it and the `event-name`. For example, the `Vip Alert` skill will emit `vip-alerts:will-send` just before an alert is sent to the team. You can hook into this event and cancel it, modify the messages sent, or send your own alerts. If you replace the `:` with a `/`, you'll have your file path.
+
+- `vip-alerts:will-send` -> `server/events/vip-alerts/will-send.js`
+-
+- `scratch-win:will-manually-send` -> `server/events/scratch-win/will-manually-send.js`
 
 ## EventResponse object
 
@@ -202,40 +261,11 @@ module.exports = async (ctx, next) => {
 }
 ```
 
-## Naming events that are triggered by actions in your skill
-
-We follow a `will`/`did` convention for our events. When creating your own event, start it with `will-` or `did-`.
-
-`Will` events happen before an operation and should always honor `preventDefault`.
-
-`Did` events happen after any operation.
-
-```js
-// emit your custom event
-const responses = await this.sb.emit(
-  guest.Location.id,
-  'myskill:will-do-something',
-  {
-    foo: 'bar'
-  }
-)
-
-// did anyone prevent default?
-const preventDefault = responses.reduce((preventDefault, response) => {
-  return preventDefault || !!response.payload.preventDefault
-}, false)
-
-// bail
-if (preventDefault) {
-  return false
-}
-```
-
 ## Gotchya's
 
 - Event listeners need to respond in 5 seconds or they will be ignored. That means you may need to respond to Sprucebot right away and run your logic after.
 - Custom events will not `emit` back to your skill unless you set `sendToSelf=true`. This makes testing way easier, but should def be off in production (why we tie it to `DEV_MODE=true`).
-- Your skill's `slug` can't be arbitrary. It is assigned to you by Spruce Labs when you begin creating your skill.
+- Your skill's `slug` can't be arbitrary. It is assigned to you by Spruce Labs when you begin creating your skill and **can not be changed**.
 
 ## Examples
 
