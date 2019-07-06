@@ -1,18 +1,18 @@
 {
-	"version": "1.0.2",
-	"name": "developer.spruce.ai",
-	"description": "Spruce Experience Platform Documentation. https://developer.spruce.ai",
-	"scripts": {
-		"docs": "docsify serve -p 3100 ./",
-		"release": "semantic-release"
-	},
-	"dependencies": {},
-	"devDependencies": {
-		"@semantic-release/changelog": "^3.0.0",
-		"@semantic-release/git": "^7.0.1",
-		"@sprucelabs/semantic-release": "^1.0.1",
-		"conventional-changelog-sprucelabs": "^1.1.0",
-		"docsify": "^4.8.6",
-		"semantic-release": "^15.10.6"
-	}
+    "version": "1.0.2",
+    "name": "developer.spruce.ai",
+    "description": "Spruce Experience Platform Documentation. https://developer.spruce.ai",
+    "scripts": {
+        "docs": "docsify serve -p 3100 ./",
+        "release": "semantic-release"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@semantic-release/changelog": "^3.0.0",
+        "@semantic-release/git": "^7.0.1",
+        "@sprucelabs/semantic-release": "^1.0.1",
+        "conventional-changelog-sprucelabs": "^1.1.0",
+        "docsify": "^4.8.6",
+        "semantic-release": "^15.10.6"
+    }
 }
