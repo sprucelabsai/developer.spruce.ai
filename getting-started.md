@@ -1,7 +1,10 @@
 # Getting started
 
-Sprucebot here.⚡️️️
-To get started, you gotta get the [sprucebot-cli](https://github.com/sprucelabsai/sprucebot-cli). It's really easy!
+Sprucebot here!⚡️️️️️️️️️️️️
+
+Starting your skill is really easy.
+
+Use the [sprucebot-cli](https://github.com/sprucelabsai/sprucebot-cli).
 
 ```bash
 yarn global-add sprucebot-cli
@@ -10,13 +13,18 @@ sprucebot skill create
 
 ## Event Architecture
 
-Whenever I say "event", I mean a thing that happens in a place at a time. In the diagram below you'll see some examples of events that exist in the platform.
+Whenever I say "event", I mean a thing that happens in space and time.
+
+In the diagram below you'll see some examples of events that exist in the platform and how my skills connect.
 
 ![Event Architecture](../_images/Architecture.png?raw=true "Event Architecture")
 
 As a skills developer, this gives you the ability to think about the experiences you want to create based on events happening in the real world!
 
-In addition to core events, skills have the ability to introduce their own events. Then, skills can leverage those new events to create totally unique experiences!! It's super powerful! You can checkout [event docs](spruce-skill/events) for more deets.
+In addition to core events, skills have the ability to introduce their own events. Then, skills can leverage those new events to create totally unique experiences!! It's super powerful! You can checkout [event docs](events.md) for more deets.
+
+// TODO: Update diagram to show skills introducing new events
+![Event Architecture](../_images/Architecture.png?raw=true "Event Architecture")
 
 ## Skill Stack
 
@@ -32,7 +40,7 @@ Each kit comes with a `.vscode` folder with a `launch.json` configured for debug
 
 -   `Attach` - Will launch the debugger and attach to process already running. This would be if you ran `yarn local` from another terminal and wanted to start debugging.
 -   `Debug` - Starts the skill (runs `yarn local`) and attaches the debugger immediately.
--   `Mocha (Test single file)` - Lets you run all the tests in a single [test](spruce-skill/tests) file.
+-   `Mocha (Test single file)` - Lets you run all the tests in a single [test](tests.md) file.
 
 #### Debugging without VS Code
 
@@ -43,7 +51,7 @@ When you run `yarn local`, by default your skill will listen for a debugger on p
 -   `.vscode` - Settings for `Visual Studio Code`, our preferred IDE
 -   `config` - Per environment settings, managed via [config](https://github.com/lorenwest/node-config)
 -   `docs` - Put the docs for your skill here!
--   [`interface`](spruce-skill/interface.md) - Holds your React pages. Powered by [Nextjs](https://github.com/zeit/next.js/)
+-   `interface` - Holds your React pages. Powered by [Nextjs](https://github.com/zeit/next.js/)
     -   `.next` - Caching for Nextjs
     -   `components` - Anything reusable that will not contain much (if any) logic.
     -   `containers` - Logic containing `components`. Most of the time a `container` will render one or more `components`, passing `props` down.
@@ -51,7 +59,7 @@ When you run `yarn local`, by default your skill will listen for a debugger on p
     -   `pages` - Each page of your `interface`. Rendered using Nextjs
     -   `styles` - Custom stylesheets, imported using `import '../styles/global.scss'` in any React page
 -   `node_modules` - You know this one
--   [`server`](spruce-skill/server.md) - Backend powered by [spruce-skill-server](https://github.com/sprucelabsai/spruce-skill-server) + [koajs](http://koajs.com)
+-   `server`- Backend powered by [spruce-skill-server](https://github.com/sprucelabsai/spruce-skill-server) + [koajs](http://koajs.com)
     -   `controllers` - Where your routes are defined (deprecated in favor of `gql`)
         -   `cron.js` - Drop in logic that runs on a schedule
     -   `events` - All your event listeners
@@ -74,6 +82,6 @@ When you run `yarn local`, by default your skill will listen for a debugger on p
 -   `package.json` - Dependencies n' such.
 -   `README.md` - Readme about your skill.
 
-# What's next?
+# What's Next?
 
 We should start by building our first skill I think. Lets [dive in](spruce-skill/first)!
