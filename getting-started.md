@@ -7,7 +7,7 @@ Starting your skill is really easy.
 Use the [sprucebot-cli](https://github.com/sprucelabsai/sprucebot-cli).
 
 ```bash
-yarn global-add sprucebot-cli
+yarn global add @sprucelabs/sprucebot-cli
 sprucebot skill create
 ```
 
@@ -73,7 +73,7 @@ When you run `yarn local`, by default your skill will listen for a debugger on p
     -   `utilities` - Helpers and other small bits of reusable code
     -   `server.js` - Hands control over to `spruce-skill-server`
 -   `.babelrc` - Transpiling code
--   `.editorconfig` - Holds our formatting preferences.h
+-   `.editorconfig` - Holds our formatting preferences
 -   `.env.example` - Your starter `.env` file
 -   `.eslintrc` - Our [eslint](https://eslint.org) preferences. Formats code automatically!
 -   `.gitignore` - Files we don't want included in version control.
