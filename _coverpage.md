@@ -1,8 +1,8 @@
 ![logo](_images/lockup-cover.svg)
 
-# Build the future of brick-and-mortar retail
+# Experience Management for the Individual
 
 [Github](https://github.com/sprucelabsai/workspace.sprucebot-skills-kit)
-[Get Started](/spruce-skill/skills)
+[Lets go already!!!](/?id=introduction)
 
 ![color](#fff)
