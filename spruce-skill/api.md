@@ -6,8 +6,8 @@ This kit uses [`spruce-node`](https://github.com/sprucelabsai/spruce-node) to co
 
 Learn about the `user` object [here](user.md).
 
-- `user` locationId, userId
-- `users`
+-   `user` locationId, userId
+-   `users`
 
 ```js
   // USER API
