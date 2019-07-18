@@ -34,22 +34,22 @@ The first thing you have to do is tell the Experience Platform the events you in
 eventContract: {
   events: {
     'did-message': { // the name of the event
-      subscribe: true // you are subscribing
+        subscribe: true // you are subscribing
     },
     'did-enter': {
-     subscribe: true
+        subscribe: true
     }
     'did-update-user': {
-      subscribe: true
+        subscribe: true
     },
     'was-installed': {
-      subscribe: true
+        subscribe: true
     },
     'vip-alerts:will-send-vip-alerts': { // the word before the colon : is another skills' slug
         subscribe: true
     },
     'booking:did-book-appointment': { // everytime someone books an appointment from the booking skill
-      subscribe: true
+        subscribe: true
     }
   }
 }
