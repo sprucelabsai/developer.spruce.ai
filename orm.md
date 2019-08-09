@@ -18,15 +18,17 @@ ORM_LOGGING=true
 
 ## Core models
 
-The following list of models are part of core that you're skill has access to that you can query against. Keep in mind some models are **read only** and to create or update them you'll need to check the [api](api.md).
+The following list of models are part of core that you're skill has access to. Keep in mind some models are **read only** and to create or update them you'll need to check the [api](api.md).
 
 You can find the core model files in the `server/models` directory.
 
 ### FileItem
 
-_Read Only_
-
 After you upload a file using the [`uploads`](upload.md) service, you can query for the it through the `FileItem` model.
+
+Path: `/server/models/FileItem.js`
+
+_Read Only_
 
 -   Properties
     -   `id`: `UUID4` - ID of the file
@@ -57,6 +59,7 @@ You can read more about groups [here](orgs-locations-groups.md).
     -   `LocationGroups`: [[`LocationGroup`]](#locationgroup) - An array of `LocationGroup` models that link this group to locations
     -   `UserGroups`: [[`UserGroup`]](#usergroup) - An array of `UserGroup` models that link this group to [Group Managers](roles-jobs-permissions.md)
     -   `Locations`: [[`Location`]](#location) - An array of `Location` models setup as convenience to access locations in this group vs. having to work through the `LocationGroup` model
+    -   `Ussers`: [[`User`]](#user) - An array of `User` models available as a convenience
 
 ### Job
 
