@@ -1,3 +1,7 @@
+# Roles, Jobs, & Permissions
+
+The 3 of these concepts are what allow you to know the role a person plays in the store experience and what thay can/cannot do.
+
 # Roles
 
 The Spruce platform breaks people into 5 roles. These roles can apply to an Organization, a Group, or a Location.
@@ -27,7 +31,7 @@ When it's time to check if a user has permission to do something, use the `acl` 
     -   `organizationId`: `UUID4` - Always pass the organization to check perms agains.
     -   `locationId` : `UUID4` (optional) - If a permission is tied to a location, pass it's id.
 
-### ACL check Example
+### Example
 
 ```js
 const {

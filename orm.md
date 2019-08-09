@@ -24,7 +24,7 @@ You can find the core model files in the `server/models` directory.
 
 ### FileItem
 
-After you upload a file using the [`uploads`](upload.md) service, you can query for the it through the `FileItem` model.
+After you upload a file using the [`uploads`](uploads.md) service, you can query for the it through the `FileItem` model.
 
 Path: `/server/models/FileItem.js`
 

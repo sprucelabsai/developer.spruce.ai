@@ -5,7 +5,7 @@ Whenever a person needs to find anything in the platform, Big Search is the answ
 There are 3 was to invoke Big Search
 
 1. Using the search box in the upper right of the platform.spruce.ai
-2. From a skill using `this.props.skil.search()`
+2. From a skill using `this.props.skill.search()`
 3. From the mobile app by the tapping `Users` tab
 
 ![Big Search Example](../_images/big-search.gif?raw=true "Big Search Example")
