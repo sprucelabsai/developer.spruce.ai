@@ -114,6 +114,8 @@ The following events exist without any skills installed.
 
 TODO: add additional core events (location-schedule, teammate-location-schedule, etc)
 
+-   `big-search` - Fired when somenone uses [Big Search](big-search.md).
+-   `import-from-search` - Fired when somenone uses [Big Search](big-search.md) to do an import.
 -   `did-signup` - When a guest "opts into" a location. Check `ctx.status === 'online'` to know if they signed up by joining the wifi.
 -   `did-enter` - When a guest returns and their phone hits the wifi.
 -   `did-leave` - Triggered an hour after a guest leaves the wifi.
