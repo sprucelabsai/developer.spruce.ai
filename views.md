@@ -10,7 +10,7 @@ Pages are built using the [Heartwood](#heartwood) design system (which is totall
 
 ## Skill View Pages
 
-When you use `sprucebot skill create` as your starting point, you'll have a ton of placeholder view pages to get you started. Ultimately, rendering a skill view is a 2 steps to setting up a Skill View.
+When you use `sprucebot skill create` as your starting point, you'll have a ton of placeholder view pages to get you started. Ultimately, rendering a skill view is a 3 steps to setting up a Skill View.
 
 ### Step 1: Event contracts
 
