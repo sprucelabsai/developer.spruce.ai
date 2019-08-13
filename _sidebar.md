@@ -1,6 +1,6 @@
 -   [Introduction](/?id=introduction)
 -   [Getting Started](getting-started.md)
--   [Spruce Academy](/academy/)
+-   [Spruce Academy](/academy.md)
 -   [API](api.md)
 -   [Big Search](big-search.md)
 -   [CLI](cli.md)
