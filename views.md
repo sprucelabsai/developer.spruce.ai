@@ -6,7 +6,7 @@ On most pages, Views are accessible through tabs:
 
 ![Skill Views](_images/skill-views.png?raw=true "Skill Views")
 
-Pages are built using the [Heartwood](#heartwood) design system (which is totally ready for you to play with at [https://storybook.spruce.ai].)
+Pages are built using the [Heartwood](#heartwood) design system (which is totally ready for you to play with at [storybook.spruce.ai](https://storybook.spruce.ai).)
 
 ## Skill View Pages
 
@@ -81,7 +81,8 @@ noun: the dense inner part of a tree trunk, yielding the hardest timber.
 
 Heartwood is the design system you'll be using to build all your skill views. It's a library of flexible components that ensure visual and experiential consistency throughout the platform.
 
-[Begin exploring Heartwood.](https://canary-storybook.sprucelabs.ai/?path=/story/page--page)
+-   [Heartwood in Storybook.](https://canary-storybook.sprucelabs.ai/?path=/story/page--page)
+-   [Heartwood in Figma.](https://www.figma.com/file/I0By1hIW5Y6sEkMUKkGa9dRz/Heartwood?node-id=106%3A31/duplicate)
 
 ## Cookies
 
