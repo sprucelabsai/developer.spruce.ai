@@ -14,7 +14,7 @@ When you use `sprucebot skill create` as your starting point, you'll have a ton 
 
 ### Step 1: Event contracts
 
-Uncomment the following block:
+Uncomment the following block in `config/default.js`:
 
 ```js
 'get-views': {
