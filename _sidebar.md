@@ -3,6 +3,7 @@
 -   [Spruce Academy](/academy.md)
 -   [API](api.md)
 -   [Big Search](big-search.md)
+-   [Calendar](calendar.md)
 -   [CLI](cli.md)
 -   [Core Pages](core-pages.md)
 -   [Events](events.md)

@@ -31,7 +31,7 @@ In order for the example script to work,you'll need to have `DB_ENABLED=true`.
 
 When your event listener is hit, it will come with the following event payload:
 
--   `cxt.event.payload`
+-   `ctx.event.payload`
     -   `limit`: `number` - How to limit search results
     -   `offset`: `number` - How many search results to skip
     -   `search`: `string` - Whatever the person typed into Big Search
