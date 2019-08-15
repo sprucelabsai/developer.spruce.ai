@@ -27,17 +27,35 @@ Uncomment the following block in `config/default.js`:
 
 Jump into `server/events/get-views.ts` and return a valid view configuration by modifying the switch. Oh, and also take some time to review this file:
 
+-   `ctx.event.payload`
+    -   `page`: `string` - The slug of the page being rendered, see [Core Pages](core-pages.md) for possible values
+    -   `routeParams`: `Record<string, string | number>` - Any parameters used in the route (e.g. `organizationId` or `locationId`)
+
+#### how to structure your response
+
+When you respond, you'll retun a an array of `SkillView`s. Those look like this:
+
+-   `SkillView`
+    `id`: `string` - An arbitrary id to for your view. Used for deep linking and state tracking on the client
+    `title`: `string` - The title rendered in the tab for this skill view
+    `host`: `string` - The host to the interface, usually set to `config.INTERFACE_HOST`
+    `path`: `string` - The path to the view being rendered, should match what you have in your `interface/pages` directory
+
 ```js
 
-case 'dashboard_location`:
-    views.push({
-        id: 'my-page',
-        title: 'Loyalty Points',
-        host,
-        path: `/skill-views/dashboard_location`
-    })
+switch (page) {
+    case 'dashboard_location`:
+        views.push({
+            id: 'my-page',
+            title: 'Loyalty Points',
+            host,
+            path: `/skill-views/dashboard_location`
+        })
+        break
+}
 
-    break
+ctx.body = views
+await next()
 
 ```
 
