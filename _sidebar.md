@@ -12,6 +12,7 @@
 -   [ORM](orm.md)
 -   [Roles, Jobs, Permissions](roles-jobs-perms.md)
 -   [Services & Utilities](services-utilities.md)
+-   [Settings](skill-settings.md)
 -   [Uploads](uploads.md)
 -   [Views](views.md)
 -   [Changelog](CHANGELOG.md)

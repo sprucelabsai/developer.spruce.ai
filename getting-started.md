@@ -32,7 +32,7 @@ In addition to core events, skills have the ability to introduce their own event
 
 ## Debugging
 
-Each kit comes with a `.vscode` folder with a `launch.json` configured for debugging with [Visual Studio Code](https://code.visualstudio.com). Simply open create a new project based off your skill's directory in vscode, jump to the Debug Pane, select "Debug" and hit the green Play button.
+Each kit comes with a `.vscode` folder with a `launch.tson` configured for debugging with [Visual Studio Code](https://code.visualstudio.com). Simply open create a new project based off your skill's directory in vscode, jump to the Debug Pane, select "Debug" and hit the green Play button.
 
 ![Debug](../_images/debug.jpg?raw=true "Debug")
 
@@ -51,7 +51,7 @@ When you run `yarn local`, by default your skill will listen for a debugger on p
 -   `.vscode` - Settings for `Visual Studio Code`, our preferred IDE
 -   `config` - Per environment settings, managed via [config](https://github.com/lorenwest/node-config)
 -   `docs` - Put the docs for your skill here!
--   `interface` - Holds your React pages. Powered by [Nextjs](https://github.com/zeit/next.js/)
+-   `interface` - Holds your React pages. Powered by [Nextjs](https://github.com/zeit/next.ts/)
     -   `.next` - Caching for Nextjs
     -   `components` - Anything reusable that will not contain much (if any) logic.
     -   `containers` - Logic containing `components`. Most of the time a `container` will render one or more `components`, passing `props` down.
@@ -61,7 +61,7 @@ When you run `yarn local`, by default your skill will listen for a debugger on p
 -   `node_modules` - You know this one
 -   `server`- Backend powered by [spruce-skill-server](https://github.com/sprucelabsai/spruce-skill-server) + [koajs](http://koajs.com)
     -   `controllers` - Where your routes are defined (deprecated in favor of `gql`)
-        -   `cron.js` - Drop in logic that runs on a schedule
+        -   `cron.ts` - Drop in logic that runs on a schedule
     -   `events` - All your event listeners
     -   `gql` - Your graphql resolvers, connections, subscriptions, and types
     -   `lib` - Put the code that does work in here
@@ -71,7 +71,7 @@ When you run `yarn local`, by default your skill will listen for a debugger on p
     -   `static` - Host your flat files here. Available at `/${filename}`
     -   `tests` - [Mocha](https://mochajs.org) tests and mock data
     -   `utilities` - Helpers and other small bits of reusable code
-    -   `server.js` - Hands control over to `spruce-skill-server`
+    -   `server.ts` - Hands control over to `spruce-skill-server`
 -   `.babelrc` - Transpiling code
 -   `.editorconfig` - Holds our formatting preferences
 -   `.env.example` - Your starter `.env` file
