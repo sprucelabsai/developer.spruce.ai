@@ -1,8 +1,8 @@
-![logo](_images/lockup-cover.svg)
+![logo](_images/lockup-cover.svg ':size=400x170')
 
-# Experience Management for the Individual
+# Experience first.
 
-[Github](https://github.com/sprucelabsai/workspace.sprucebot-skills-kit)
+[Github](https://github.com/sprucelabsai/sprucebot-cli)
 [Lets go already!!!](/?id=introduction)
 
 ![color](#fff)
