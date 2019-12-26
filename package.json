@@ -6,7 +6,9 @@
         "docs": "docsify serve -p 3100 ./",
         "release": "semantic-release"
     },
-    "dependencies": {},
+    "dependencies": {
+        "docsify-cli": "^4.3.0"
+    },
     "devDependencies": {
         "@semantic-release/changelog": "^3.0.0",
         "@semantic-release/git": "^7.0.1",
