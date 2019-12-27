@@ -1,6 +1,6 @@
-# Core Pages
+# Core Routes
 
-The following pages are where you can render Skill Views:
+The following routes are where you can render Skill Views:
 
 -   `calendar_location`
 -   `calendar_settings_org`

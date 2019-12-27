@@ -5,7 +5,7 @@
 -   [Big Search](big-search.md)
 -   [Calendar](calendar.md)
 -   [CLI](cli.md)
--   [Core Pages](core-pages.md)
+-   [Core Routes](core-routes.md)
 -   [Events](events.md)
 -   [GQL](gql.md)
 -   [Orgs, Locations, Groups](orgs-locations-groups.md)
