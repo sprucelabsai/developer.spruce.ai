@@ -1,8 +1,7 @@
-![logo](_images/lockup-cover.svg ':size=400x170')
+![logo](_images/sprucelabs.svg ':size=100x50')
 
-# Experience first.
+# **Hey there!** Lets get this party started!
 
 [Github](https://github.com/sprucelabsai/sprucebot-cli)
 [Lets go already!!!](/?id=introduction)
 
-![color](#fff)

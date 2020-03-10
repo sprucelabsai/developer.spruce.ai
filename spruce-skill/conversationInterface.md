@@ -1,3 +1,0 @@
-# Sprucebot Conversation Interface
-
-TODO

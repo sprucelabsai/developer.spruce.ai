@@ -1,3 +1,0 @@
-# Simulating events
-
-🤘🏼 

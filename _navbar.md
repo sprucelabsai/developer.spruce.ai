@@ -1,3 +1,3 @@
 - Getting started
 
-- [Spruce Skill](../packages/spruce-skill/docs/)
+- [Experiences](../packages/spruce-skill/docs/)
