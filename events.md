@@ -1,31 +1,23 @@
 # Events
 
+Listening for, reacting to, and emitting events are an extremely powerful part of building experiences.
 
+All events are handled by the [Mercury Event Engine](mercury.md), so make sure you read up on it before continuing.
 
-Listening for, reacting to, and emitting events are an extremely powerful part of how the Experience Platform works.
+## Creating a listener
+
+```bash
+sprucebot skill add listener
+```
 
 Before getting started, lets take a look at a hypothenical situation where a `Skill 1` wants to prevent the default message from being sent to the guest and instead sends its own.
 
 // TODO with event contracts, not every skill is listening
 ![Event Architecture](_images/did-enter.gif?raw=true "Event Architecture")
 
-# Types of events
-
-There are a 2 types of events in the platform and each are unique in how they are used and named.
-
-1. `Real World Events` - You want to provide other skills the chance to react to physical and digital events (like a tripping a motion sensor or rendering a form).
-    - Always start with `will` or `did`
-    - `will` events are designed to let skills stop or modify an experience and before it starts and always honor `preventDefault` (more on that below)
-    - `did` events are triggered after an event has occurred
-2. `CRUD Events` - You are exposing some CRUD (create, read, update, delete) functionality
-    - Start with `create`, `get`, `update`, `delete`
-    - Think of them as a 1 for 1 with traditional REST endpoints
-
-# Listening to events
-
 There are 2 steps to listening to an event from your skill.
 
-## Step 1: Event contracts
+### Event contract
 
 The first thing you have to do is tell the Experience Platform the events you intend to listen to. Navigate to your skills `config/default.ts` file and scroll down to the `eventContract` block.
 

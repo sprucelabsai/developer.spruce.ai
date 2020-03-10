@@ -70,7 +70,7 @@ There are 2 ways to throw errors. By throwing one manually with `ctx.throw` or t
 // server/controllers/1.0/teammate/index.ts
 module.exports = router => {
 
-    router.post('/api/1.0/teammate/save.json', async (ctx, next) {
+    router.post('/api/1.0/teammate/save.tson', async (ctx, next) {
 
         // make sure someValue was POST'ed with this request
         ctx.assert(typeof(ctx.request.body.favoriteColor) === 'string', 'MISSING_FAVORITE_COLOR')
@@ -138,7 +138,7 @@ module.exports = {
 // server/controllers/1.0/teammate/index.ts
 module.exports = router => {
 
-    router.post('/api/1.0/teammate/save.json', async (ctx, next) {
+    router.post('/api/1.0/teammate/save.tson', async (ctx, next) {
 
         // make sure someValue was POST'ed with this request
         ctx.assert(typeof(ctx.request.body.favoriteColor1) === 'string', 'MISSING_FAVORITE_COLOR', {

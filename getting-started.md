@@ -11,22 +11,8 @@ yarn global add @sprucelabs/sprucebot-cli
 sprucebot skill create
 ```
 
-## Event Architecture
-
-Whenever I say "event", I mean a thing that happens in space and time.
-
-In the diagram below you'll see some examples of events that exist in the platform and how my skills connect.
-
-![Event Architecture](../_images/Architecture.png?raw=true "Event Architecture")
-
-As a skills developer, this gives you the ability to think about the experiences you want to create based on events happening in the real world!
-
-In addition to core events, skills have the ability to introduce their own events. Then, skills can leverage those new events to create totally unique experiences!! It's super powerful! You can checkout [event docs](events.md) for more deets.
-
-// TODO: Update diagram to show skills introducing new events
-![Event Architecture](../_images/Architecture.png?raw=true "Event Architecture")
-
 ## Skill Stack
+
 
 ![Skill Architecture](../_images/skill-architecture.png?raw=true "Skill Architecture")
 
@@ -79,7 +65,7 @@ When you run `yarn local`, by default your skill will listen for a debugger on p
 -   `.gitignore` - Files we don't want included in version control.
 -   `.nvmrc` - For user with [nvm](https://github.com/creationix/nvm) so we can always be using the same version of node.
 -   `.travis.yml` - Continuous integration with [Travis CI](https://travis-ci.org).
--   `package.json` - Dependencies n' such.
+-   `package.tson` - Dependencies n' such.
 -   `README.md` - Readme about your skill.
 
 # What's Next?

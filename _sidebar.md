@@ -8,6 +8,7 @@
 -   [Core Routes](core-routes.md)
 -   [Events](events.md)
 -   [GQL](gql.md)
+-   [Mercury](mercury.md)
 -   [Orgs, Locations, Groups](orgs-locations-groups.md)
 -   [ORM](orm.md)
 -   [Roles, Jobs, Permissions](roles-jobs-perms.md)
