@@ -1,2 +1,2 @@
 -   [Builders](/builders/)
-    -   [Page Builder](/spruce-skill/upgrade.md)
+    -   [Page Builder](/builders/page.md)
