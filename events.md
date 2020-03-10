@@ -1,36 +1,30 @@
 # Events
 
-Listening for, reacting to, and emitting events are an extremely powerful part of how the Experience Platform works.
+Listening for, reacting to, and emitting events are an extremely powerful part of building experiences.
+
+All events are handled by the [Mercury Event Engine](mercury.md), so make sure you read up on it before continuing.
+
+## Creating a listener
+
+```bash
+sprucebot skill add listener
+```
 
 Before getting started, lets take a look at a hypothenical situation where a `Skill 1` wants to prevent the default message from being sent to the guest and instead sends its own.
 
 // TODO with event contracts, not every skill is listening
 ![Event Architecture](_images/did-enter.gif?raw=true "Event Architecture")
 
-# Types of events
-
-There are a 2 types of events in the platform and each are unique in how they are used and named.
-
-1. `Real World Events` - You want to provide other skills the chance to react to physical and digital events (like a tripping a motion sensor or rendering a form).
-    - Always start with `will` or `did`
-    - `will` events are designed to let skills stop or modify an experience and before it starts and always honor `preventDefault` (more on that below)
-    - `did` events are triggered after an event has occurred
-2. `CRUD Events` - You are exposing some CRUD (create, read, update, delete) functionality
-    - Start with `create`, `get`, `update`, `delete`
-    - Think of them as a 1 for 1 with traditional REST endpoints
-
-# Listening to events
-
 There are 2 steps to listening to an event from your skill.
 
-## Step 1: Event contracts
+### Event contract
 
-The first thing you have to do is tell the Experience Platform the events you intend to listen to. Navigate to your skills `config/default.js` file and scroll down to the `eventContract` block.
+The first thing you have to do is tell the Experience Platform the events you intend to listen to. Navigate to your skills `config/default.ts` file and scroll down to the `eventContract` block.
 
 ### Example
 
 ```js
-// config/default.js
+// config/default.ts
 eventContract: {
   events: {
     'did-message': { // the name of the event
@@ -57,24 +51,24 @@ eventContract: {
 
 ## Step 2: Event listeners
 
-Creating an event listener is as simple as dropping a `.js` file into `server/events` that matches the event's name.
+Creating an event listener is as simple as dropping a `.ts` file into `server/events` that matches the event's name.
 
 Here are some examples of listeners
 
--   `did-signup` -> `server/events/did-signup.js`
--   `did-enter` -> `server/events/did-enter.js`
--   `did-leave` -> `server/events/did-leave.js`
--   `did-message` -> `server/events/did-message.js`
--   `did-add-device` -> `server/events/did-add-device.js`
--   `vip-alerts:will-send-vip-alerts` -> `server/events/vip-alerts/will-send-vip-alerts.js`
--   `booking:did-book-appointment` -> `server/events/booking/did-book-appointment.js`
+-   `did-signup` -> `server/events/did-signup.ts`
+-   `did-enter` -> `server/events/did-enter.ts`
+-   `did-leave` -> `server/events/did-leave.ts`
+-   `did-message` -> `server/events/did-message.ts`
+-   `did-add-device` -> `server/events/did-add-device.ts`
+-   `vip-alerts:will-send-vip-alerts` -> `server/events/vip-alerts/will-send-vip-alerts.ts`
+-   `booking:did-book-appointment` -> `server/events/booking/did-book-appointment.ts`
 
 Once you have your `eventContract` configured and your `Event Listener` created, you can start to have some fun!
 
 ### Example
 
 ```js
-// server/events/did-enter.js
+// server/events/did-enter.ts
 module.exports = async (ctx, next) => {
     console.log("a did-enter was just fired, eff yeah!");
 
@@ -102,11 +96,11 @@ The `event` object on the `ctx` has the following properties:
 
 ## Auth Object
 
-The `auth` object on the `ctx` has the following properties by default. You can customize the GQL that is used to verify the data in `config/auth.js`:
+The `auth` object on the `ctx` has the following properties by default. You can customize the GQL that is used to verify the data in `config/auth.ts`:
 
--   `User`: `User` - (optional) The User model tied to this event. Check `server/models/User.js` for available properties.
--   `Location`: `Location` - (optional) The Location model tied to this event. Check `server/models/Location.js` for available properties.
--   `Organization`: `Organization` - The Organization model tied to this event. Check `server/models/Organization.js` for available properties.
+-   `User`: `User` - (optional) The User model tied to this event. Check `server/models/User.ts` for available properties.
+-   `Location`: `Location` - (optional) The Location model tied to this event. Check `server/models/Location.ts` for available properties.
+-   `Organization`: `Organization` - The Organization model tied to this event. Check `server/models/Organization.ts` for available properties.
 
 # Core Events
 
@@ -155,7 +149,7 @@ Just like you did for events you want to subscribe to, you have to define the sk
 ### Example
 
 ```js
-// config/default.js
+// config/default.ts
 eventContract: {
   events: {
     'my-awesome-skill:did-trigger-motion-sensor': { // the slug of your skill and then the name of your event
@@ -258,7 +252,7 @@ These are the properties you'll get on the response object from both `emit` and 
 Events, such as `did-signup`, have an expected behaviors that can be cancelled. In this case, core sends a `message` to the `user` with a link to their profile. If you wanted to stop that message and send your own, you could do this.
 
 ```js
-// server/events/did-signup.js
+// server/events/did-signup.ts
 module.exports = async (ctx, next) => {
     try {
         // send some rewards and do some error handling

@@ -18,11 +18,12 @@ Coming soon...
 
 # Permissions
 
-Coming soon...
+Setting up permissions for your skill is a matter of jumping into `./config/acls.ts` and configuring them.
 
 ## ACL service
 
 When it's time to check if a user has permission to do something, use the `acl` service!
+work
 
 -   `ctx.services.acl.getAcls({ userId, permissions, locationId, organizationId })`
 

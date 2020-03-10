@@ -26,7 +26,7 @@ You can find the core model files in the `server/models` directory.
 
 After you upload a file using the [`uploads`](uploads.md) service, you can query for the it through the `FileItem` model.
 
-Path: `/server/models/FileItem.js`
+Path: `/server/models/FileItem.ts`
 
 _Read Only_
 
@@ -82,10 +82,14 @@ You can read more about groups [here](orgs-locations-groups.md).
 When you're ready to create your own models, keep in the mind the following:
 
 -   Duplicate `server/models/.example` to get started
--   Create your file inside `server/models/ModelName.js`
--   Make sure your model's file name is `CamelCase.js`
+-   Create your file inside `server/models/ModelName.ts`
+-   Make sure your model's file name is `CamelCase.ts`
 -   When you boot your skill, your model's database table is created
 -   If you change a property on a model after first boot, your database table is out of sync and you'll need to create a [migration](#migrations)
+
+### Defining Scopes
+
+Scopes are how you can hide certain fields from certain audiences. More coming soon...
 
 ## Migrations
 

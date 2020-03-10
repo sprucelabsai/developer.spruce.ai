@@ -14,7 +14,7 @@ There are 3 was to invoke Big Search
 
 ### Step 1: Enable event contract
 
-Jump into your skill's `config/default.js` and uncomment the following section:
+Jump into your skill's `config/default.ts` and uncomment the following section:
 
 ```json
 'big-search': {
@@ -25,7 +25,7 @@ Jump into your skill's `config/default.js` and uncomment the following section:
 
 ### Step 2: Create your listener
 
-Jump into `server/events/big-search.js`, review the example, and make the changes you need to return the results you want.
+Jump into `server/events/big-search.ts`, review the example, and make the changes you need to return the results you want.
 
 In order for the example script to work,you'll need to have `DB_ENABLED=true`.
 
@@ -43,7 +43,7 @@ Big Search renders results in sections. Your skill can respond with it's own sec
 
 ![Big Search Tabs Example](../_images/big-search-tabs.png?raw=true "Big Search Tabs Example")
 
-From your `big-search` listener, you need to return an array of `BigSearchSection`s. To see the defined interface, check `server/types.js` in your skill.
+From your `big-search` listener, you need to return an array of `BigSearchSection`s. To see the defined interface, check `server/types.ts` in your skill.
 
 -   `BigSearchSection`
 
@@ -63,10 +63,9 @@ From your `big-search` listener, you need to return an array of `BigSearchSectio
 
 #### Example
 
-This is pulled from `server/events/big-search.js` when you create a new skill.
+This is pulled from `server/events/big-search.ts` when you create a new skill.
 
 ```js
-// @flow
 const { eventError } = require("../lib/errorHandler");
 
 import type {
@@ -181,7 +180,7 @@ When you return any search result with `action.type` equal to `import`, you'll n
 
 ### Step 1: Enable event contract
 
-Back to your skill's `config/default.js` and uncomment the following section:
+Back to your skill's `config/default.ts` and uncomment the following section:
 
 ```json
 'import-from-big-search': {
@@ -192,7 +191,7 @@ Back to your skill's `config/default.js` and uncomment the following section:
 
 ### Step 2: Create your listener
 
-Take a look at `server/events/import-from-big-search.js` to get started.
+Take a look at `server/events/import-from-big-search.ts` to get started.
 When your event listener is hit, here is the event payload:
 
 -   `ctx.event.payload`
@@ -223,7 +222,7 @@ Importing has 2 expected outcomes. First is succes. Second is stopped due to pos
 
 #### Example
 
-This is pulled from `server/events/import-from-big-search.js` when you create a new skill.
+This is pulled from `server/events/import-from-big-search.ts` when you create a new skill.
 
 ```js
 // @flow
@@ -310,9 +309,7 @@ module.exports = async (ctx: IImportFromBigSearchCtx, next: Function) => {
 
                     response.successfulImport = {
                         id: userLocation.User.id,
-                        title: `${userLocation.User.firstName} ${
-                            userLocation.User.lastName
-                        }`,
+                        title: `${userLocation.User.firstName} ${userLocation.User.lastName}`,
                         subtitle: "Go team!",
                         action: {
                             type: "coreRedirect",

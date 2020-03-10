@@ -14,7 +14,7 @@ When you use `sprucebot skill create` as your starting point, you'll have a ton 
 
 ### Step 1: Event contracts
 
-Uncomment the following block in `config/default.js`:
+Uncomment the following block in `config/default.ts`:
 
 ```js
 'get-views': {
@@ -144,4 +144,68 @@ class MySkillView extends React.Component<MySkillViewProps> {
         console.log(token, 'go-team')
     }
 }
+```
+
+## Error Page
+
+If an error occures inside of `getInitialProps` you can render an error page by importing `IPageInitialPropsError` and set it as possible return type.
+
+Then, by returning an object with `statusCode` and `errorMessage` keys, you will force the rendering off the error page.
+
+```js
+
+import {
+	IPageInitialPropsContext,
+	IPageInitialProps,
+	IPageInitialPropsError
+} from '@sprucelabs/spruce-next-helpers'
+
+interface ICheckoutPageProps {
+	appointmenId: string
+}
+
+class CheckoutPage extends React.Component<
+	ICheckoutPageProps & IPageInitialProps
+> {
+	public static async getInitialProps(
+		context: IPageInitialPropsContext<ISkillAuth>
+	): Promise<ICheckoutPageProps | IPageInitialPropsError> {
+		if (
+			!context.auth ||
+			!context.auth.User ||
+			!context.auth.Organization ||
+			!context.auth.Location
+		) {
+			return {
+                statusCode: 401,
+                errorMessage: 'You must be logged in to view this page'
+            }
+		}
+
+		const { query } = context
+		const { appointmentId } = query
+
+		return {
+			statusCode: 433,
+			errorMessage: 'You need to pass an appointment id'
+		}
+        
+        // do whatever you want
+        return {
+            appointmentId
+        }
+	}
+
+	async componentDidMount() {
+		this.props.skill.ready() // Show the skill
+	}
+
+	render() {...}
+}
+
+export default PageWrapper(CheckoutPage)
+
+
+
+
 ```
