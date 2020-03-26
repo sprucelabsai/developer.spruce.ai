@@ -1,18 +1,33 @@
 
 
+<!-- panels:start -->
+<!--div:title-panel-->
 # Schemas
 
+<!-- div:left-panel -->
 Schemas serve 2 purposes:
 
 1. A way to define, validate, and transform universal data structures and types
 2. A universal way to define, validate, and transform data structures and types
 
-<!-- panels:start -->
-<!--div:title-panel-->
+
 ## Define
-<!-- div:left-panel -->
 A location, a schedule, an appointment, or even a button; all these things exist outside of skill and information about them may be shared between skills. By creating and sharing definitions, we all benefit from the awareness eachother brings to the platform.
+
+## Validate
+
+A valid email is a valid email and you should never have to write `isValidEmail` code again! By having a standardized way of handling data validation, we ensure if it's been written, you don't have to rewrite it.
+
+## Transform
+
+Are you familiar with `google-libphonenumber`? No? Good. Here's my promise, you'll never have to write a phone number formatter again! In fact, if you can think of, it probably already has a transformer/formatter.
+
+
 <!-- div:right-panel -->
+<!-- tabs:start -->
+
+#### ** Define **
+
 ```js
 import { ISchemaDefinition, FieldType } from '@sprucelabs/schema'
 
@@ -41,14 +56,9 @@ const shirtDefinition: ISchemaDefinition = {
     }
 }
 ```
-<!-- panels:end -->
 
-<!-- panels:start -->
-<!--div:title-panel-->
-## Validate
-<!-- div:left-panel -->
-A valid email is a valid email and you should never have to write `isValidEmail` code again! By having a standardized way of handling data validation, we ensure if it's been written, you don't have to rewrite it.
-<!-- div:right-panel -->
+#### ** Validate **
+
 ```js
 import log from 
 import Schema from '@sprucelabs/schema'
@@ -76,16 +86,11 @@ console.log(shirtSchema.values) // { size: 'SUPERBIG' }
 const isValid = shirtSchema.isValid() // false
 const errors = shirtSchema.validate() // [{ fieldName: 'size', errors: ['invalid_phone_number']}]
 
+
+
 ```
-<!-- panels:end -->
+#### ** Transform **
 
-<!-- panels:start -->
-<!--div:title-panel-->
-## Transform
-<!-- div:left-panel -->
-Are you familial with `google-libphonenumber`? No? Good. Here's my promise, you'll never have to write a phone number formatter again! In fact, if you can think of, it probably already has a transformer/formatter.
-
-<!-- div:right-panel -->
 ```js
 const { FieldBase } from '@sprucelabs/schema'
 
@@ -102,24 +107,14 @@ console.log(phone) // +1 720-253-5250
 phoneNumberField.validate('232324234234234') // throws FieldValidationError
 
 ```
+<!-- tabs:end -->
 <!-- panels:end -->
+
+
+
 ## Importing definitions
 
-I make it really easy to import a definition from anywhere. 
-
-`import { userDefinition, jobDefinition } from 'spruce/definitions'`
+I make it really easy to import a definition from anywhere. This can come from core 
 
 
-
-```js
-import { Schema } from '@sprucelabs/schema'
-import { userDefinition } from 'spruce/definitions'
-
-// pass the definition to a schema to leverage validation and transformation
-const schema = new Schema(userDefinition)
-
-// 
-
-
-```
-
+`import { SpruceSchemas } from './.spruce/schemas'`
