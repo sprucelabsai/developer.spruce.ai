@@ -26,7 +26,7 @@ npm run lint
 
 <!-- div:right-panel -->
 ### Server side class definition example
-```ts
+```js
 // Log.ts
 
 // not the class, so exported by name
@@ -45,7 +45,7 @@ export default class Car implements IVehicle {
 
 
 ### Client side class definition example
-```ts
+```js
 // Log.ts
 
 // exported by name

@@ -1,7 +1,8 @@
 :root {
     /* base */
     --theme-color: #F7D352 !important;
-    --dark-theme-color: #F2B149;
+    --theme-color2: #F2B149;
+    --dark-theme-color: #08090B;
     --base-font-family: "Muli", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     --base-font-size: 16px;
     --base-line-height: 1.7;
@@ -22,9 +23,23 @@
 
     /* nav */
     --sidebar-nav-link-color: #000;
-    --sidebar-border-color: var(--dark-theme-color);
+    --sidebar-border-color: var(--theme-color2);
     --sidebar-border-width: 0 1px 0 0;
     --search-input-border-color: #fff;
+
+    /* code */
+    --code-font-family: Menlo, Monaco, 'Courier New', monospace;
+    --code-theme-background: var(--dark-theme-color);
+    --code-theme-text: var(--theme-color);
+    --code-theme-comment: #8BC4EE;
+    --code-theme-keyword: #C7DBF9;
+    --code-theme-class-name:var(--theme-color);
+    --code-theme-class-name-font-weight: 800;
+    --code-theme-punctuation: #F6F6F4;
+    --code-theme-function: #CCF1DF;
+    --code-theme-operator: #FEF6D8;
+    --code-theme-selector: #c6c6c6;
+    --code-inline-border-radius: 6px;
 }
 
 .cover {
@@ -74,4 +89,10 @@ body main {
 
 body aside.sidebar {
     background-color: var(--theme-color);
+}
+
+/* code samples */
+.token.class-name {
+    color: var(--code-theme-class-name);
+    font-weight: var(--code-theme-class-name-font-weight);
 }
