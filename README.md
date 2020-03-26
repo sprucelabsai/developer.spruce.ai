@@ -8,7 +8,7 @@ Together, we're going to build a skill!
 
 # What is a skill?
 
-A Skill is a "micro-app". That is, a bit of functionality hyper focused facilitating a specific experience. Technically, it consists of a `server` and an `interface`. Together, with `events` and `messaging`, skills can connect people in whole new ways.
+A Skill is a "micro-app". That is, a bit of functionality that is hyper-focused facilitating a specific experience. 
 
 # Skills manifesto
 
@@ -25,7 +25,7 @@ Lets say there is a lady named Becca. She nerds the f\*\*k out over fashion. So,
 
 # Augmentation
 
-Good augmentation is much harder to achieve than good automation. See, there are still lots of things humans can do better than machines. For instance, Becca can levarge humans' amazing ability to have engaging conversations with her guests, something a robot cannot do, to make her boutique a place people love to visit. What a robot can do, though, is enchance (augment) Becca's memory by sending a note to her about the person she is talking with... right when she needs it. Now that's teamwork! 🤓
+Good augmentation is much harder to achieve than good automation. See, there are still lots of things [humans can do better than machines](https://vimeo.com/290341746).
 
 # Un-Amazon'able
 
