@@ -1,12 +1,30 @@
 # Spruce Standards
 
+<!-- panels:start -->
+<!-- div:title-panel -->
+## Language and linting
+
+<!-- div:left-panel -->
+Everything we build is in Typescript ^3.8. Everything is strongy typed and any lint error will block a build. All the lint rules are defined already, you just need to run `lint`.
+<!-- div:right-panel -->
+```bash
+yarn lint
+npm run lint
+```
+<!-- panels:end -->
+
+<!-- panels:start -->
+<!-- div:title-panel -->
 ## Class syntax
 
+<!-- div:left-panel -->
 1. Classes are always CapitalCase
 2. Use function literals server side and arrow functions on client side when defining methods
    1. There are speed considerations when loading lots of code
 3.  Always export the class as default from the file by its name
 
+
+<!-- div:right-panel -->
 ### Server side class definition example
 ```ts
 // Log.ts
@@ -20,10 +38,11 @@ export interface IVehicle {
 export default class Car implements IVehicle {
     // define the function literal like it's 1995, no arrow
     start() {
-        console.log('starting')    
+        console.log('starting')
     }
 }
 ```
+
 
 ### Client side class definition example
 ```ts
@@ -36,18 +55,19 @@ export interface IVehicle {
 
 // export the class as default (same as server side)
 export default class Car extends Vehicle {
-    // define as arrow function so scope is bound 
+    // define as arrow function so scope is bound
     start = () => {
         console.log('starting')
     }
 }
 ```
 
+<!-- panels:end -->
 ## Singletons
 
-We use singletons for various things like logging and Mercury. 
+We use singletons for various things like logging and Mercury.
 
-1. Internally 
+1. Internally
    1. `Class -> import Log from ‘.../Log’`
    2. `Singleton -> import { log } from ‘../Log’`
 2. Externally
@@ -75,7 +95,7 @@ We use singletons for various things like logging and Mercury.
 3. `const user = this.store.user.userWithToken(valuesWithToken)`
    1. A token field is normally not on a user object, so withToken calls out it will be the user with auth information
    2. `const user = await this.store.user.userFromToken(token)`
-4. This tells us we are getting the user based on their token. 
+4. This tells us we are getting the user based on their token.
 5. A fetcher is usually async, use lint to know when to await
 6. For more than 1, name becomes plural
    1. `const users = this.store.user.users(...)`

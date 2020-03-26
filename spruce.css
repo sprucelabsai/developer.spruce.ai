@@ -1,7 +1,7 @@
 :root {
     /* base */
     --theme-color: #F7D352 !important;
-    --dark-theme-color: #08090B;
+    --dark-theme-color: #F2B149;
     --base-font-family: "Muli", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     --base-font-size: 16px;
     --base-line-height: 1.7;
@@ -19,6 +19,12 @@
     --cover-button-background--hover: #fff;
     --cover-button-color: --dark-theme-color;
     --cover-button-color--hover: var(--theme-color);
+
+    /* nav */
+    --sidebar-nav-link-color: #000;
+    --sidebar-border-color: var(--dark-theme-color);
+    --sidebar-border-width: 0 1px 0 0;
+    --search-input-border-color: #fff;
 }
 
 .cover {
@@ -40,8 +46,13 @@ body .cover .cover-main > p:first-child {
 body .cover .cover-main h1 {
     background-image: url('_images/sprucebot.svg');
     background-repeat: no-repeat;
-    background-position: left 8px;
+    background-position: left 7px;
+    padding-left:40px;
 }
+
+/* body .cover h1 a {
+   text-indent: 10px; 
+} */
 
 
 body .cover .cover-main > p a {
@@ -52,4 +63,15 @@ body .cover .cover-main > p a {
 .github-corner svg {
     fill: #fff;
     color: var(--theme-color);
+}
+
+body main {
+    background-image: url(_images/bg.png);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: contain;
+}
+
+body aside.sidebar {
+    background-color: var(--theme-color);
 }
