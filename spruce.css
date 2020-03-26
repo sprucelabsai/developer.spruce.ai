@@ -40,6 +40,10 @@
     --code-theme-operator: #FEF6D8;
     --code-theme-selector: #c6c6c6;
     --code-inline-border-radius: 6px;
+
+    /* panels */
+    --docsify-example-panels-left-panel-width: 50%;
+    --docsify-example-panels-right-panel-width: 50%;
 }
 
 .cover {
@@ -96,3 +100,5 @@ body aside.sidebar {
     color: var(--code-theme-class-name);
     font-weight: var(--code-theme-class-name-font-weight);
 }
+
+/* panels */
