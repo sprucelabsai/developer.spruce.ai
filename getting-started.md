@@ -13,8 +13,11 @@ spruce onboard
 
 ## Pillars of a skill
 
+Back again! Lets 
+
+### Events
 ### Models
 ### Builders
-### Schemas
+### Definitions
 ### Services
 ### Utilities
