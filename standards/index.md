@@ -5,7 +5,7 @@
 ## Language and linting
 
 <!-- div:left-panel -->
-Everything we build is in Typescript ^3.8. Everything is strongy typed and any lint error will block a build. All the lint rules are defined already, you just need to run `lint`.
+Everything we build is in Typescript ^3.8. Everything is strongly typed and any lint error will block a build. All the lint rules are defined already, you just need to run `lint`.
 <!-- div:right-panel -->
 ```bash
 yarn lint
@@ -111,11 +111,11 @@ We use singletons for various things like logging and Mercury.
 2. Templates must be hbs
 3. Generators live in CLI  as the source of the template (.hbs)
 4. Example, SchemaGenerator is in @sprucelabs/schemas
-5. Generators in a folder called @spruceslabs/spruce-cli /generators
+5. Generators in a folder called @sprucelabs/spruce-cli /generators
 6. Class name ends in Generator
 7. Each method starts with generator
 8. Generators must return a string (not write a file)
-9. Handling handlbar helpers
+9. Handling handlebar helpers
    1.  helpers are "addons"
 10. TODO: define event contracts for mercury for pulling types
 

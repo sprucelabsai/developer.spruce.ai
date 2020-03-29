@@ -1,15 +1,20 @@
 # Getting started
 
-Sprucebot here!⚡️️️️️️️️️️️️
+Sprucebot here!⚡️️️️️️️️️️️️ 
 
 Starting your skill is really easy.
 
-Use the [sprucebot-cli](https://github.com/sprucelabsai/sprucebot-cli).
+Use the [spruce-cli](https://github.com/sprucelabsai/spruce-cli).
 
 ```bash
 yarn global add @sprucelabs/spruce-cli
-spruce skill:create
+spruce onboard
 ```
 
 ## Pillars of a skill
 
+### Models
+### Builders
+### Schemas
+### Services
+### Utilities

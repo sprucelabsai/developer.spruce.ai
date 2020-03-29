@@ -21,7 +21,7 @@ They accomplish this in one of two ways:
 
 ## Automation
 
-Lets say there is a lady named Becca. She nerds the f\*\*k out over fashion. So, she decided to open a [menswear boutique](https://spruce.me). She loves it. But, do you know what she didn't expect? That she'd be spending so much time doing boring admin work. There are so many aspects of running a business that need to be automated, it literally was half the justification for my creation.
+Lets say there is an entrepreneur named Becca. She nerds the f\*\*k out over fashion. So, she decided to open a [menswear boutique](https://spruce.me). She loves it. But, do you know what she didn't expect? That she'd be spending so much time doing boring admin work. There are so many aspects of running a business that need to be automated, it literally was half the justification for my creation.
 
 ## Augmentation
 

@@ -12,7 +12,7 @@ Schemas serve 2 purposes:
 
 
 ## Define
-A location, a schedule, an appointment, or even a button; all these things exist outside of skill and information about them may be shared between skills. By creating and sharing definitions, we all benefit from the awareness eachother brings to the platform.
+A location, a schedule, an appointment, or even a button; all these things exist outside of skill and information about them may be shared between skills. By creating and sharing definitions, we all benefit from the awareness each other brings to the platform.
 
 ## Validate
 

@@ -1,4 +1,5 @@
--   [Introduction](/?id=introduction)
+-   [Introduction](/)
+-   [Getting started](/getting-started.md)
 <!-- -   [Builders](/builders/index.md) -->
 -   [CLI](/cli/index.md)
 <!-- -   [Cron](/cron/index.md) -->
