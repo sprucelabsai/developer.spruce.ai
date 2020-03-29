@@ -29,10 +29,12 @@ Are you familiar with `google-libphonenumber`? No? Good. Here's my promise, you'
 #### ** Define **
 
 ```js
-import { ISchemaDefinition, FieldType } from '@sprucelabs/schema'
+// schemas/shirt.definition.ts
+
+import Schema, { ISchemaDefinition, FieldType, buildSchemaDefinition } from '@sprucelabs/schema'
 
 // define your thing
-const shirtDefinition: ISchemaDefinition = {
+const shirtDefinition: ISchemaDefinition = buildSchemaDefinition({
     id: 'shirt',
     name: 'Shirt',
     description: 'Put it on your body!',
@@ -54,7 +56,20 @@ const shirtDefinition: ISchemaDefinition = {
             }
         }
     }
-}
+})
+
+// always export the definition as the default from a .definition.ts file
+export default shirtDefinition
+
+// builds a type to validate objects against the definition
+export type Shirt = SchemaDefinitionValues<
+	typeof shirtDefinition
+>
+
+// type for a schema based on this definition
+export type ShirtInstance = Schema<typeof shirtDefinition>
+
+
 ```
 
 #### ** Validate **
@@ -62,9 +77,10 @@ const shirtDefinition: ISchemaDefinition = {
 ```js
 import log from 
 import Schema from '@sprucelabs/schema'
+import shirtDefinition, { ShirtInstance, Shirt } from './shirt.definition'
 
 // create a schema from the definition
-const shirtSchema = new Schema(shirtDefinition);
+const shirtSchema: ShirtInstance = new Schema(shirtDefinition);
 
 // set a value
 shirtSchema.set('size', 's') // works
@@ -84,8 +100,13 @@ console.log(shirtSchema.values) // { size: 'SUPERBIG' }
 
 // validate entire schema
 const isValid = shirtSchema.isValid() // false
-const errors = shirtSchema.validate() // [{ fieldName: 'size', errors: ['invalid_phone_number']}]
+shirtSchema.validate() // throws FieldValidationError
 
+// a full object matching the schema definition
+const values: Shirt = schema.getValues() // throws FieldValidationError because size
+shirt.setValues({ size: 's' }) // set size to valid value
+
+console.log(schema.getValues()) // { size: 's'}
 
 
 ```

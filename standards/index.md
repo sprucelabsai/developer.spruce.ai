@@ -25,7 +25,9 @@ npm run lint
 
 
 <!-- div:right-panel -->
-### Server side class definition example
+<!-- tabs:start -->
+
+#### ** Server side class definition example **
 ```js
 // Log.ts
 
@@ -44,7 +46,7 @@ export default class Car implements IVehicle {
 ```
 
 
-### Client side class definition example
+#### ** Client side class definition example **
 ```js
 // Log.ts
 
@@ -61,6 +63,8 @@ export default class Car extends Vehicle {
     }
 }
 ```
+
+<!-- tabs:end -->
 
 <!-- panels:end -->
 ## Singletons
