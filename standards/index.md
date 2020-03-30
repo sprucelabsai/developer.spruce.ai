@@ -27,7 +27,7 @@ npm run lint
 <!-- div:right-panel -->
 <!-- tabs:start -->
 
-#### ** Server side class definition example **
+#### ** Server side class definition **
 ```js
 // Log.ts
 
@@ -46,7 +46,7 @@ export default class Car implements IVehicle {
 ```
 
 
-#### ** Client side class definition example **
+#### ** Client side class definition **
 ```js
 // Log.ts
 
@@ -126,3 +126,62 @@ An addon is a script that performs some configuration or extension of an existin
 * Goes in `/addons`
   * `./addons/handlebars`
   * Does NOT export anything
+
+<!-- panels:start -->
+<!-- div:title-panel -->
+## **Commenting your code**
+<!-- div:left-panel -->
+* All comments are sentence case. This means they start with a Capital letter (period optional).
+* When commenting on a resolving (enum) field, add an extra star and Sentence case.
+<!-- div:right-panel -->
+<!-- tabs:start -->
+#### ** Class comments **
+```js 
+/** This class comment is correct! */
+export default MyClass {
+   /** This method do something very important! */
+   public myImportantMethod() {...}
+}
+```
+#### ** Typed comments **
+Notice comment is above `code` since that is the field used for disambiguation. Also the enum is in the comment to help with hints.
+```js
+export interface ISpruceErrorUnknownError
+	extends ISpruceErrorOptions<SpruceErrorCode> {
+   /** * SpruceErrorCode.UnknownError: We aren't sure what happened */
+	code: SpruceErrorCode.UnknownError
+}
+
+export interface ISpruceErrorMissingParameters
+	extends ISpruceErrorOptions<SpruceErrorCode> {
+   /** * SpruceErrorCode.MissingParameters: Something is missing */
+	code: SpruceErrorCode.MissingParameters
+	parameters: string[]
+}
+
+export interface ISpruceErrorInvalidParameters
+	extends ISpruceErrorOptions<SpruceErrorCode> {
+   /** * SpruceErrorCode.InvalidParameters: Some parameter is bad */
+	code: SpruceErrorCode.InvalidParameters
+	parameters: string[]
+}
+
+
+```
+
+<!-- tabs:end -->
+<!-- panels:end -->
+
+## Test
+Test files should match the name of the file (*.test.ts) and be next to the file it is testing:
+
+1. `src/SpruceError.ts` -> `src/SpruceError.test.ts`
+2. `/lib/helpers.ts` -> `/lib/helpers.test.ts`
+
+
+## Abstract classes
+
+1. Start with `Abstract`
+2. File is named after the class
+3. ALWAYS EXTEND (never implement)
+4. If the abstract class doesn't need to do anything, use an interface.
