@@ -32,6 +32,7 @@ spruce.mercury.on(SpruceEvents.core.DidEnter.name, () => {
 ### Orm
 ### Builders
 ### Definitions
+### Errors
 ### Services
 ### Utilities
 
