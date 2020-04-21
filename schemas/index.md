@@ -77,10 +77,10 @@ export type ShirtInstance = Schema<typeof shirtDefinition>
 ```js
 import log from 
 import Schema from '@sprucelabs/schema'
-import shirtDefinition, { ShirtInstance, Shirt } from './shirt.definition'
+import SpruceSchemas from '#spruce/schemas/schemas.types'
 
 // create a schema from the definition
-const shirtSchema: ShirtInstance = new Schema(shirtDefinition);
+const shirtSchema: ShirtInstance = new Schema(SpruceSchemas.local.Shirt.definition);
 
 // set a value
 shirtSchema.set('size', 's') // works
@@ -103,7 +103,7 @@ const isValid = shirtSchema.isValid() // false
 shirtSchema.validate() // throws FieldValidationError
 
 // a full object matching the schema definition
-const values: Shirt = schema.getValues() // throws FieldValidationError because size
+const values: SpruceSchemas.local.IShirt = schema.getValues() // throws FieldValidationError because size
 shirt.setValues({ size: 's' }) // set size to valid value
 
 console.log(schema.getValues()) // { size: 's'}
@@ -131,11 +131,33 @@ phoneNumberField.validate('232324234234234') // throws FieldValidationError
 <!-- tabs:end -->
 <!-- panels:end -->
 
+## CLI commands
+
+* `spruce schema:create [name]` - Begin defining a schema with a name
+  * `-d, --definitionDestinationDir` - _default ./src/schemas_ - Where the definition will be created (should probably never change this)
+  * Results in `./schemas/{{camelName}}.definition.ts`
+  * Updates the `#spruce/schemas/schemas.types` to include your definition
+* `spruce schema:sync` - Updates `#spruce/schemas/schemas.types` to be in sync with your `.definition.ts`
+  * `-d, --destinationDir` - _default #spruce/schemas_ - Where the types will be created (should probably never change this)
+  * `-c, --clean` - Should I clean out the `destinationDir` before saving the new types files?
+  * `-f, --force` - Suppress confirmation on clean
+  * Runs as part of `spruce watch` to ensure all types match your definitions
 
 
-## Importing definitions
+## Using your definitions
 
-I make it really easy to import a definition from anywhere. This can come from core 
+I make it really easy to import a definition from anywhere.
 
+`import { SpruceSchemas } from '#spruce/schemas/schemas.types'`
 
-`import { SpruceSchemas } from './.spruce/schemas'`
+All your definitions will be attached under `SpruceSchemas.local`.
+
+## Field Types
+
+* `FieldType.Address` - A street address anywhere in the world
+* `FieldType.Boolean` - A simple true/false
+   *  Coerces the string `"false"` to `false`, all other strings become `true.`
+
+## Relationships
+
+The `FieldType.Schema` allows you to relate one schema to another.

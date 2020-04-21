@@ -1,10 +1,5 @@
 # Errors
 
-Errors are a big part of the Platform. More specifically, throwing helpful errors and printing them nicely.
-
-## Getting started
-The first step is defining your error.
-
 ```
 spruce error:create
 ```

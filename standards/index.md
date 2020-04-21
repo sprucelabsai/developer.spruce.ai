@@ -172,6 +172,11 @@ export interface ISpruceErrorInvalidParameters
 <!-- tabs:end -->
 <!-- panels:end -->
 
+
+## File+directory naming
+1. Class file names match class name
+2. Plural directory names (More to define)
+
 ## Test
 Test files should match the name of the file (*.test.ts) and be next to the file it is testing:
 
@@ -182,6 +187,10 @@ Test files should match the name of the file (*.test.ts) and be next to the file
 ## Abstract classes
 
 1. Start with `Abstract`
-2. File is named after the class
-3. ALWAYS EXTEND (never implement)
-4. If the abstract class doesn't need to do anything, use an interface.
+2. ALWAYS EXTEND (never implement)
+3. If the abstract class doesn't need to do anything, use an interface.
+
+## Base classes
+
+1. Meant to be extended
+2. Start with `Base`

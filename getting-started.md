@@ -34,6 +34,7 @@ spruce.mercury.on(SpruceEvents.core.DidEnter.name, () => {
 ### Definitions
 ### Errors
 ### Services
+### Tests
 ### Utilities
 
 Ok, if you're doing the onboarding, jump back to the cli now.

@@ -9,6 +9,7 @@
 -   [Schemas](/schemas/index.md)
 <!-- -   [Services/Utilities](/services/index.md) -->
 -   [Standards](/standards/index.md)
+-   [Tests](/tests/index.md)
 
 
 [Glossary](_glossary.md)
