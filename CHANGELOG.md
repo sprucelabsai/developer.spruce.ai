@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.0.28...v1.1.0) (2020-04-21)
+
+
+### Features
+
+* schema documentation ([bee6000](https://github.com/sprucelabsai/developer.spruce.ai/commit/bee6000))
+
 ## [1.0.28](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.0.27...v1.0.28) (2020-04-03)
 
 ## [1.0.27](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.0.26...v1.0.27) (2020-03-30)
