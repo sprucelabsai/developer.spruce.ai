@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.1.0...v1.2.0) (2020-05-08)
+
+
+### Features
+
+* error progress ([7c55d2b](https://github.com/sprucelabsai/developer.spruce.ai/commit/7c55d2b))
+
 # [1.1.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.0.28...v1.1.0) (2020-04-21)
 
 
