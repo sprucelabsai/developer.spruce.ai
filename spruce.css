@@ -19,7 +19,8 @@
     --cover-button-background: #fff;
     --cover-button-background--hover: #fff;
     --cover-button-color: --dark-theme-color;
-    --cover-button-color--hover: var(--theme-color);
+	--cover-button-color--hover: var(--theme-color);
+	--cover-max-width: 700px;
 
     /* nav */
     --sidebar-nav-link-color: #000;
@@ -65,7 +66,7 @@ body .cover .cover-main > p:first-child {
 body .cover .cover-main h1 {
     background-image: url('_images/sprucebot.svg');
     background-repeat: no-repeat;
-    background-position: left 7px;
+    background-position: left 9px;
     padding-left:40px;
 }
 

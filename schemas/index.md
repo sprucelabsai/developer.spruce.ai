@@ -1,14 +1,15 @@
 
 
-<!-- panels:start -->
-<!--div:title-panel-->
 # Schemas
-
+```bash
+spruce schema:create
+```
+<!-- panels:start -->
 <!-- div:left-panel -->
 Schemas serve 2 purposes:
 
-1. A way to define, validate, and transform universal data structures and types
-2. A universal way to define, validate, and transform data structures and types
+1. A way to define, validate, and normalize universal data structures and types
+2. A universal way to define, validate, and normalize data structures and types
 
 
 ## Define
@@ -18,9 +19,10 @@ A location, a schedule, an appointment, or even a button; all these things exist
 
 A valid email is a valid email and you should never have to write `isValidEmail` code again! By having a standardized way of handling data validation, we ensure if it's been written, you don't have to rewrite it.
 
-## Transform
+## Normalize
 
 Are you familiar with `google-libphonenumber`? No? Good. Here's my promise, you'll never have to write a phone number formatter again! In fact, if you can think of, it probably already has a transformer/formatter.
+
 
 
 <!-- div:right-panel -->
@@ -60,14 +62,6 @@ const shirtDefinition: ISchemaDefinition = buildSchemaDefinition({
 
 // always export the definition as the default from a .definition.ts file
 export default shirtDefinition
-
-// builds a type to validate objects against the definition
-export type Shirt = SchemaDefinitionValues<
-	typeof shirtDefinition
->
-
-// type for a schema based on this definition
-export type ShirtInstance = Schema<typeof shirtDefinition>
 
 
 ```
@@ -110,13 +104,13 @@ console.log(schema.getValues()) // { size: 's'}
 
 
 ```
-#### ** Transform **
+#### ** Normalize **
 
 ```js
-const { FieldBase } from '@sprucelabs/schema'
+const { FieldFactory } from '@sprucelabs/schema'
 
 // schemas use fields under-the-hood, but you can use them directly
-const phoneNumberField = new FieldBase.field({
+const phoneNumberField = new FieldFactory.field({
     type: FieldType.Phone
 })
 
@@ -130,6 +124,11 @@ phoneNumberField.validate('232324234234234') // throws FieldValidationError
 ```
 <!-- tabs:end -->
 <!-- panels:end -->
+
+## Building your first schema
+
+
+
 
 ## CLI commands
 
@@ -152,12 +151,28 @@ I make it really easy to import a definition from anywhere.
 
 All your definitions will be attached under `SpruceSchemas.local`.
 
+
 ## Field Types
 
-* `FieldType.Address` - A street address anywhere in the world
 * `FieldType.Boolean` - A simple true/false
-   *  Coerces the string `"false"` to `false`, all other strings become `true.`
+   *  Coerces the string `"false"` to `false`, all other strings become `true`.
+*  `FieldType.Date` - Store a date object.
+*  `FieldType.DateTime` - Store a date object, but always ignores time (setting it to beginning of day).
+*  `FieldType.Duration` - A span of time.
+*  `FieldType.File` - A file on a local or remote machine.
+*  `FieldType.Id` - Unique identifier field.
+*  `FieldType.Number` - Any type of number
+*  `FieldType.Phone` - Phone number 
+*  `FieldType.Raw` - Flexible type that allows you to explicitly define the signature
+*  `FieldType.Schema` - A way to point to other schemas
+*  `FieldType.Select` - Specify a range of possible values (think enum)
+*  `FieldType.Text` - Good ol' fashioned text field
 
 ## Relationships
 
 The `FieldType.Schema` allows you to relate one schema to another.
+
+## React component props & default props
+
+## Creating a new FieldType
+
