@@ -16,7 +16,7 @@ spruce error:sync [lookupDir]
 Options:
 	-l, --lookupDir				Where should I look for definitions files (*.definition.ts)?
 	-d, --destinationDir		   Where should I write the definitions file?
-	-td, --typesDestinationDir	 Where should I write the definitions file?
+	-td, --typesDestinationDir	 Where should I write the types file?
 	-dd, --errorDestinationDir	 Where should I write the Error class file?
 	-c, --clean					Clean output directory before generating errors, deleting old files.
 ```
@@ -27,7 +27,7 @@ Lets start by creating your first error! Run
 ```bash
 spruce error:create "You must be 18 or older"
 ```
-After the command finishes, lets take a look at the generated files.
+Lets review the generated files before we jump into the definition itself.
 
 <!-- panels:start -->
 <!--div:title-panel-->
@@ -50,7 +50,7 @@ After running `spruce error:create` up to 4 files were created for you.
 <!-- div:right-panel -->
 <!-- tabs:start -->
 #### ** 1. Definition **
-```js
+```ts
 // errors/youMustBe18OrOlder.definition.ts
 
 import { FieldType } from '@sprucelabs/schema'
@@ -73,7 +73,7 @@ export default genericDefinition
 
 #### ** 2. Error subclass **
 
-```js
+```ts
 import BaseSpruceError from '@sprucelabs/error'
 import { ErrorCode } from '../.spruce/errors/codes.types'
 import { ErrorOptions } from '../.spruce/errors/options.types'
@@ -86,10 +86,8 @@ export default class SpruceError extends BaseSpruceError<ErrorOptions> {
 		switch (options?.code) {
 			// invalid command
 			case ErrorCode.YouMustBe18OrOlder:
-				message = `You are not 18! ${options.suppliedBirthDate} is not\n`
-				message += `Try running spruce --help`
-				break
-
+				message = `You are not 18! ${options.suppliedBirthDate} is too recent!`
+				break;
 			default:
 				message = super.friendlyMessage()
 		}
@@ -102,7 +100,7 @@ export default class SpruceError extends BaseSpruceError<ErrorOptions> {
 
 #### ** 3. Options **
 
-```js
+```ts
 // the options for the YouMustBe18OrOlder error
 import {
 	SchemaDefinitionValues
@@ -112,13 +110,51 @@ import youMustBe18OrOlderDefinition from '../../src/errors/youMustBe18OrOlder.de
 import { ISpruceErrorOptions } from '@sprucelabs/error'
 import { ErrorCode } from './codes.types'
 
-type UserNotFoundDefinition = typeof userNotFoundDefinition
-export interface IUserNotFoundDefinition extends UserNotFoundDefinition {}
+type YouMustBe18OrOlderDefinition = typeof YouMustBe18OrOlderDefinition
+export interface IYouMustBe18OrOlderDefinition extends YouMustBe18OrOlderDefinition {}
 
-export interface IUserNotFoundErrorOptions extends SchemaDefinitionValues<IUserNotFoundDefinition>, ISpruceErrorOptions<ErrorCode> {
-	/** * .UserNotFound - Could not find a user */
-	code: ErrorCode.UserNotFound
+export interface IYouMustBe18OrOlderErrorOptions extends SchemaDefinitionValues<IYouMustBe18OrOlderDefinition>, ISpruceErrorOptions<ErrorCode> {
+	/** * .YouMustBe18OrOlder - You aren't old enough */
+	code: ErrorCode.YouMustBe18OrOlder
 } 
 ```
 <!-- tabs:end -->
 <!-- panels:end -->
+
+## Updating definitions
+
+Once you create your error definition, you'll want to edit it. Jump into `./errors/youMustBe18OrOlder.definition.ts` and update the fields.
+
+After you are done, you'll need to run:
+
+```bash
+# Always run after updating error definitions
+spruce error:sync
+```
+to ensure all the types are updated too.
+
+## Throwing an error
+
+```ts
+import SpruceError from '../errors/SpruceError'
+import { ErrorCode } from '#spruce/errors/codes.types'
+
+throw new SpruceError({
+	code: ErrorCode.YouMustBe18OrOlder,
+	suppliedBirthDate: someUserSuppliedInput
+})
+```
+
+## Catching an error
+```ts
+import { ErrorCode } from '#spruce/errors/codes.types'
+
+try {
+	assertOldEnough(someUserSuppliedInput)
+} catch (err) {
+	if (err instanceof SpruceError && err.options.code === ErrorCode) {
+		console.log(err.friendlyMessage()) //
+		console.log(err.options) // { code: 'YouMustBe18OrOlder', suppliedBirthDate: 1/1/10'}
+	}
+}
+```
