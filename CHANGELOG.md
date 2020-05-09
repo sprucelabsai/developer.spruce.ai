@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.3.0...v1.4.0) (2020-05-09)
+
+
+### Features
+
+* sweet terminal styling ([0ff1e37](https://github.com/sprucelabsai/developer.spruce.ai/commit/0ff1e37))
+
 # [1.3.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.2.0...v1.3.0) (2020-05-08)
 
 
