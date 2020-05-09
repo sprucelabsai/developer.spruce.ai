@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.5.0...v1.6.0) (2020-05-09)
+
+
+### Features
+
+* little more styling ([70724be](https://github.com/sprucelabsai/developer.spruce.ai/commit/70724be))
+
 # [1.5.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.4.0...v1.5.0) (2020-05-09)
 
 
