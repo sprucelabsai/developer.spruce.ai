@@ -89,7 +89,8 @@
                                 alias: "important",
                             },
                             comment: {
-                                pattern: /(^|[^"{\\])#.*/,
+                                // pattern: /(^|[^"{\\])#.*/, //original
+                                pattern: /(^|[^"{\\])#(?!spruce).*/,
                                 lookbehind: true,
                             },
                             string: [

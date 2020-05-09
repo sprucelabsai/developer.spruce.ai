@@ -1,15 +1,39 @@
 
 
 # Schemas
+Define, validate, and normalize all the data in a sharable way.
 ```bash
-spruce schema:create
+# Create a new schema definition
+spruce schema:create [name]
+
+Options: 
+	-dd, --definitionDestinationDir	Where should I write the definition file?
+									   Default: ./src/schemas
+
+	-td, --typesDestinationDir		 Where should I write the types file?
+									   Default: #spruce/schemas
+
+# Update all type files to match your schema definitions
+spruce schema:sync [lookupDir]
+
+Options:
+	-l, --lookupDir					Where should I look for definitions files (*.definition.ts)?
+								   	Default: .src/errors
+
+	-d, --destinationDir <dir>		 Where should I write the types files?
+								   	Default: #spruce/schemas
+
+	-c, --clean						Where should I clean out the destination dir?
+
+	-f, --force						If cleaning, should I suppress confirmations and warnings
+
 ```
 <!-- panels:start -->
 <!-- div:left-panel -->
-Schemas serve 2 purposes:
+## Why
 
-1. A way to define, validate, and normalize universal data structures and types
-2. A universal way to define, validate, and normalize data structures and types
+1. A way to define, validate, and normalize universal data
+2. A universal way to define, validate, and normalize data
 
 
 ## Define
@@ -21,7 +45,7 @@ A valid email is a valid email and you should never have to write `isValidEmail`
 
 ## Normalize
 
-Are you familiar with `google-libphonenumber`? No? Good. Here's my promise, you'll never have to write a phone number formatter again! In fact, if you can think of, it probably already has a transformer/formatter.
+Are you familiar with `google-libphonenumber`? No? Good. Here's my promise, you'll never have to write a phone number formatter again! 
 
 
 
@@ -129,20 +153,6 @@ phoneNumberField.validate('232324234234234') // throws FieldValidationError
 
 
 
-
-## CLI commands
-
-* `spruce schema:create [name]` - Begin defining a schema with a name
-  * `-d, --definitionDestinationDir` - _default ./src/schemas_ - Where the definition will be created (should probably never change this)
-  * Results in `./schemas/{{camelName}}.definition.ts`
-  * Updates the `#spruce/schemas/schemas.types` to include your definition
-* `spruce schema:sync` - Updates `#spruce/schemas/schemas.types` to be in sync with your `.definition.ts`
-  * `-d, --destinationDir` - _default #spruce/schemas_ - Where the types will be created (should probably never change this)
-  * `-c, --clean` - Should I clean out the `destinationDir` before saving the new types files?
-  * `-f, --force` - Suppress confirmation on clean
-  * Runs as part of `spruce watch` to ensure all types match your definitions
-
-
 ## Using your definitions
 
 I make it really easy to import a definition from anywhere.
@@ -176,3 +186,4 @@ The `FieldType.Schema` allows you to relate one schema to another.
 
 ## Creating a new FieldType
 
+## Core definitions
