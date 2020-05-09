@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.2.0...v1.3.0) (2020-05-08)
+
+
+### Features
+
+* error docs ([435b2cb](https://github.com/sprucelabsai/developer.spruce.ai/commit/435b2cb))
+
 # [1.2.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.1.0...v1.2.0) (2020-05-08)
 
 
