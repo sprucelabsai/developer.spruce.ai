@@ -54,8 +54,8 @@ Are you familiar with `google-libphonenumber`? No? Good. Here's my promise, you'
 
 #### ** Define **
 
-```js
-// schemas/shirt.definition.ts
+```ts
+// ./src/schemas/shirt.definition.ts
 
 import Schema, { ISchemaDefinition, FieldType, buildSchemaDefinition } from '@sprucelabs/schema'
 
@@ -92,7 +92,7 @@ export default shirtDefinition
 
 #### ** Validate **
 
-```js
+```ts
 import log from 
 import Schema from '@sprucelabs/schema'
 import SpruceSchemas from '#spruce/schemas/schemas.types'
@@ -130,7 +130,7 @@ console.log(schema.getValues()) // { size: 's'}
 ```
 #### ** Normalize **
 
-```js
+```ts
 const { FieldFactory } from '@sprucelabs/schema'
 
 // schemas use fields under-the-hood, but you can use them directly

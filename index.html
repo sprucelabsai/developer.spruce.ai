@@ -114,7 +114,7 @@
                                 lookbehind: true,
                             },
                             keyword: {
-                                pattern: /(^|[\s;|&])(?:let|:|\.|if|then|Options|options|else|elif|fi|break|continue|while|in|case|function|select|do|done|until|echo|exit|return|set|declare)(?=$|[\s;|&])/,
+                                pattern: /(^|[\s;|&])(?:let|:|\.|if|then|-.*?|\[.*?\]|Options|options|else|elif|fi|break|continue|while|in|case|function|select|do|done|until|echo|exit|return|set|declare)(?=$|[\s;|&])/,
                                 lookbehind: true,
                             },
                             boolean: {
