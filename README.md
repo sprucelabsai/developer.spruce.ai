@@ -43,4 +43,4 @@ Not only does your skill need to connect people, it needs to know when to back o
 
 # What's next?
 
-Alright, since you're here to actually build a skill, lets jump over to [Getting Started](https://developer.spruce.ai/getting-started.md).
+Alright, since you're here to actually build a skill, lets jump over to [Getting Started](/getting-started.md).
