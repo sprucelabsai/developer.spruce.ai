@@ -121,5 +121,10 @@ pre.language-bash:first-of-type::before {
 	height:50px;
 }
 
+pre.language-bash:first-of-type::after {
+	top:20px;
+	right:20px;
+}
+
 
 /* panels */
