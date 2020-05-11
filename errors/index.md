@@ -1,5 +1,5 @@
 # Errors
-Build errors that solve problems.
+Flexible and informative error reporting.
 
 ```bash
 # Create a new error definition
@@ -138,6 +138,8 @@ export interface IYouMustBe18OrOlderErrorOptions extends SchemaDefinitionValues<
 
 Once you create your error definition, you'll want to edit it. Jump into `./src/errors/youMustBe18OrOlder.definition.ts` and update the fields.
 
+Since errors are defined using schemas, you can learn a lot more by reading the [Schema docs](/schemas/index.md).
+
 ```ts
 // ./src/errors/youMustBe18OrOlder.definition.**ts**
 
@@ -151,7 +153,8 @@ const genericDefinition = buildErrorDefinition({
 	fields: {
 		suppliedBirthDate: {
 			type: FieldType.Date,
-            label: 'Supplied birth date'
+			label: 'Supplied birth date',
+			isRequired: true
 		},
 		ipAddress: {
 			type: FieldType.Text,
@@ -174,25 +177,52 @@ to ensure all the types are updated too.
 ## Throwing an error
 
 ```ts
+// import Error class and error codes
 import SpruceError from '../errors/SpruceError'
 import { ErrorCode } from '#spruce/errors/codes.types'
 
 throw new SpruceError({
 	code: ErrorCode.YouMustBe18OrOlder,
-	suppliedBirthDate: someUserSuppliedInput
+	suppliedBirthDate: someUserSuppliedInput // only field that is required based on definition
 })
 ```
 
 ## Catching an error
+
+Catching an error is pretty simple, but since `SpruceError` was designed to be chained, you can throw more relevant errors while passing through 
 ```ts
 import { ErrorCode } from '#spruce/errors/codes.types'
 
 try {
 	assertOldEnough(someUserSuppliedInput)
 } catch (err) {
-	if (err instanceof SpruceError && err.options.code === ErrorCode) {
-		console.log(err.friendlyMessage()) //
+	// after checking if the error is a SpruceError you can check the error code
+	if (err instanceof SpruceError && err.options.code === ErrorCode.YouMustBe18OrOlder) {
+		console.log(err.friendlyMessage())
+		console.log(err.options.suppliedBirthDate); // Typescript knows suppliedBirthDate is required
 		console.log(err.options) // { code: 'YouMustBe18OrOlder', suppliedBirthDate: 1/1/10'}
+	}
+
+	// OR you can do a switch for the code
+	if (err instanceof SpruceError) {
+		switch(err.options.code) {
+			case ErrorCode.YouMustBe18OrOlder:
+				console.log(`NOT OLD ENOUGH: ${err.options.ipAddress ? `IP Address: ${err.options.ipAddress}` : ''}`)
+
+				// chain this error with a new one with a more helpful message
+				throw new SpruceError({ 
+					code: ErrorCode.SignUpFailed, 
+					originalError: err, 
+					friendlyReason: 'Uh oh! I couldn\'t sign you up, check the following errors for more details.'
+				})
+				break
+			case ErrorCode.SomeOtherError:
+				console.log('Error!!')
+				break
+		}
 	}
 }
 ```
+## Chaining errors
+
+## Serializing errors

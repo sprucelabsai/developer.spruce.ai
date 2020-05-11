@@ -87,7 +87,6 @@ const shirtDefinition: ISchemaDefinition = buildSchemaDefinition({
 // always export the definition as the default from a .definition.ts file
 export default shirtDefinition
 
-
 ```
 
 #### ** Validate **
@@ -151,15 +150,184 @@ phoneNumberField.validate('232324234234234') // throws FieldValidationError
 
 ## Building your first schema
 
+Lets start by defining a Ball. From that, we'll create a sub-schemas and a related schema.
+
+```bash
+spruce schema:create "Ball"
+spruce schema:create "Soccer ball"
+spruce schema:create "Vendor"
+```
+
+## Updating definitions
+
+We'll start by defining our Vendor schema since it's required for the ball schemas.
+
+```ts
+// ./src/schemas/vendor.definition.ts
+
+import Schema, { FieldType, buildSchemaDefinition } from '@sprucelabs/schema'
+
+const vendorDefinition = buildSchemaDefinition({
+    id: 'vendor',
+    name: 'Vendor',
+    description: 'A vendor is a company that makes balls',
+    fields: {
+		id: {
+			type: FieldType.Id,
+			label: 'Id',
+		},
+        name: {
+            type: FieldType.Text,
+			label: 'Weight',
+			hint: 'In ounces',
+            options: {
+               min: 0
+            }
+		}
+    }
+})
+
+export default vendorDefinition
 
 
-## Using your definitions
+```
+Lets define the fields for the "base" definition that all balls will mixin.
+```ts
+// ./src/schemas/ball.definition.ts
+
+import Schema, { FieldType, buildSchemaDefinition } from '@sprucelabs/schema'
+
+// import the related definition
+import vendorDefinition from './vendor.definition'
+
+const ballDefinition = buildSchemaDefinition({
+    id: 'ball',
+    name: 'Ball',
+    description: 'All balls extend this ball',
+    fields: {
+		id: {
+			type: FieldType.Id,
+			label: 'Id',
+		},
+        weightOz: {
+            type: FieldType.Number,
+			label: 'Weight',
+			hint: 'In ounces',
+            options: {
+               min: 0
+            }
+		},
+		color: {
+			type: FieldType.Select,
+			label: 'Color',
+			options: {
+				choices: [
+					{ value: 'red', label: 'Red'}
+					{ value: 'green', label: 'Green'},
+					{ value: 'blue', label: 'Blue'}
+				]
+			}
+		},
+		vendor: {
+			type: FieldType.Schema,
+			label: 'Vendor',
+			isRequired: true,
+			options: {
+				schema: vendorDefinition
+			}
+		}
+    }
+})
+
+export default ballDefinition
+
+```
+
+Now lets define our sub-schema that will extend a Ball.
+```ts
+
+// ./src/schemas/soccerBall.definition.ts
+
+import Schema, { FieldType, buildSchemaDefinition } from '@sprucelabs/schema'
+
+// import the "parent" schema definition
+import ballDefinition from './ball.definition'
+
+const soccerBallDefinition = buildSchemaDefinition({
+    id: 'soccerBall',
+    name: 'Soccer ball',
+    description: 'A ball that is kicked.',
+    fields: {
+		// mixin all ball fields
+		...ballDefinition.fields,
+        color: {
+			// preserve color field props
+            ...ballDefinition.fields.color,
+            options: {
+				// preserve color field options
+			   ...ballDefinition.fields.color.options,
+			   choices: [
+				   // preserve color choices but add in a new one
+				   ...ballDefinition.fields.color.options.choices,
+				   { value: 'blackAndWhite', label: 'Black and white'}
+			   ]
+            }
+		}
+    }
+})
+
+export default soccerBallDefinition
+
+```
+
+After you are done editing your definitions you'll need to sync the type files.
+
+```bash
+spruce schema:sync
+```
+
+## Extending definitions
+
+There is no concept of inheritance in schemas and their definitions. Instead, as you see in the examples above, schemas use a mixin approach with the `...spread` operator.
+
+## Using your definitions (instantiating schemas)
 
 I make it really easy to import a definition from anywhere.
 
 `import { SpruceSchemas } from '#spruce/schemas/schemas.types'`
 
-All your definitions will be attached under `SpruceSchemas.local`.
+All your definitions will are located at `SpruceSchemas.Local`.
+
+```ts
+import { SpruceSchemas } from '#spruce/schemas/schemas.types'
+import Schema from '@sprucelabs/schema'
+
+// create a vendor and pass values on instantiation
+const vendor = new Schema(SpruceSchemas.Local.Vendor, { name: 'Adidas' })
+
+// create a soccer ball
+const ball = new Schema(SpruceSchemas.Local.SoccerBall)
+
+// set values
+ball.set('vendor', vendor)
+ball.set('color', 'blackAndWhite')
+
+// should pass
+if (ball.isValid()) {
+	console.log('great work')
+}
+
+```
+
+## Schema class API
+
+The `Schema` class uses definitions for data validation and normalization. Putting a `Schema` behind your REST, GQL, or Mercury events ensures world class validation and error reporting in an instant.
+
+* `constructor`	
+  * `definition`: [ISchemaDefinition](https://github.com/sprucelabsai/spruce-schema/blob/dev/src/schema.types.ts#L42) - the definition to base this schema on. You can pass it as an object literal or pull it off `SpruceSchemas`
+  * `values`: [SchemaDefinitionPartialValues<definition>]()
+
+
 
 
 ## Field Types

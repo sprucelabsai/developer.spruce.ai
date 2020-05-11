@@ -39,8 +39,12 @@
     --code-theme-punctuation: #F6F6F4;
     --code-theme-function: #CCF1DF;
     --code-theme-operator: #FEF6D8;
-    --code-theme-selector: #c6c6c6;
-    --code-inline-border-radius: 6px;
+	--code-theme-selector: #c6c6c6;
+	
+	/* inline code */
+	--code-inline-border-radius: 6px;
+	--code-inline-background: var(--theme-color) !important;
+	--code-inline-color: var(--dark-theme-color) !important;
 
     /* panels */
     --docsify-example-panels-left-panel-width: 50%;
