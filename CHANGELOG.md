@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.6.0...v1.7.0) (2020-05-09)
+
+
+### Features
+
+* link fix ([598c01c](https://github.com/sprucelabsai/developer.spruce.ai/commit/598c01c))
+
 # [1.6.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.5.0...v1.6.0) (2020-05-09)
 
 
