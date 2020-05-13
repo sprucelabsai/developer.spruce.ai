@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.8.0...v1.9.0) (2020-05-13)
+
+
+### Features
+
+* events tweak ([0066354](https://github.com/sprucelabsai/developer.spruce.ai/commit/0066354))
+
 # [1.8.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.7.0...v1.8.0) (2020-05-11)
 
 
