@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.7.0...v1.8.0) (2020-05-11)
+
+
+### Features
+
+* hard coded version of tabs, removed extra prism ([5003e95](https://github.com/sprucelabsai/developer.spruce.ai/commit/5003e95))
+
 # [1.7.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.6.0...v1.7.0) (2020-05-09)
 
 
