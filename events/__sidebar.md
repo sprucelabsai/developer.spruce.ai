@@ -1,2 +1,0 @@
--   [Events](/events/)
-    -   [Mercury](/events/mercury.md)

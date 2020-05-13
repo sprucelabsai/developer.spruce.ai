@@ -5,7 +5,7 @@ Mercury is the engine that drives the digital mapping and signaling of physical 
 
 It enables you to orchestrate complex interactions between people and things in such a way as to blend the technology so beautifully into our lives that we don’t event know it’s there.
 
-## Mecury Mindset
+## Mercury Mindset
 
 ![Mercury](../_images/mercury.png?raw=true "Mercury")
 
