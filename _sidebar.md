@@ -1,6 +1,7 @@
 -   [Introduction](/)
 -   [Getting started](/getting-started.md)
 <!-- -   [Builders](/builders/index.md) -->
+-	[Autoloader](/autoloader/index.md)
 -   [CLI](/cli/index.md)
 -   [Errors](/errors/index.md)
 <!-- -   [Cron](/cron/index.md) -->

@@ -37,7 +37,7 @@ Options:
 
 
 ## Define
-A location, a schedule, an appointment, or even a button; all these things exist outside of skill and information about them may be shared between skills. By creating and sharing definitions, we all benefit from the awareness each other brings to the platform.
+A location, a schedule, an appointment, or even a button; all these things exist outside the constructs of a platform. Schemas allow us to define things once and share those definitions with everyone else building on the platform. 
 
 ## Validate
 
@@ -45,7 +45,7 @@ A valid email is a valid email and you should never have to write `isValidEmail`
 
 ## Normalize
 
-Are you familiar with `google-libphonenumber`? No? Good. Here's my promise, you'll never have to write a phone number formatter again! 
+Are you familiar with `google-libphonenumber`? No? Good. Here's my promise, you'll never have to write a phone number formatter again!
 
 
 

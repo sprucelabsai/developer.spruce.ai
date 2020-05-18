@@ -6,8 +6,6 @@ Flexible and informative error reporting.
 spruce error:create [name]
 
 Options:
-	-n, --name					The name of the error you want to define
-
 	-dd, --destinationDir 		Where should I write the error file? 
 								  Default: .src/errors
 
@@ -16,7 +14,7 @@ Options:
 
 
 # Update all type files to match the your error definitions
-spruce error:sync [lookupDir]
+spruce error:sync
 
 Options:
 	-l, --lookupDir				Where should I look for definitions files (*.definition.ts)?
