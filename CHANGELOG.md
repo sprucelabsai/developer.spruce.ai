@@ -1,3 +1,11 @@
+# [1.10.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.9.0...v1.10.0) (2020-05-20)
+
+
+### Features
+
+* docs progress ([812ea14](https://github.com/sprucelabsai/developer.spruce.ai/commit/812ea14))
+* progress ([86a541c](https://github.com/sprucelabsai/developer.spruce.ai/commit/86a541c))
+
 # [1.9.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.8.0...v1.9.0) (2020-05-13)
 
 
