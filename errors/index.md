@@ -46,7 +46,7 @@ Now review the generated files before we jump into the definition itself.
 <!-- div:left-panel -->
 After running `spruce error:create` up to 4 files were created for you. 
 
-1. **Definition:** `./src/errors/{{camelName}}.definition.ts`
+1. **Definition:** `./src/errors/{{nameCamel}}.definition.ts`
     * Where the actual definition lives
     * Extends `ISchemaDefinition`, so you already know how it works!
     * Make your changes and run `spruce error:sync` to update the interface files

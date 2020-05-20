@@ -158,6 +158,65 @@ spruce schema:create "Soccer ball"
 spruce schema:create "Vendor"
 ```
 
+<!-- panels:start -->
+<!--div:title-panel-->
+## Generated files
+<!-- div:left-panel -->
+After running `spruce schema:create` up to 2 files were created for you.
+****
+1. **Definition:** `./src/schemas/{{nameCamel}}.definitions.ts`
+   * Where your new definition lives
+   * After making changes, run `spruce schema:sync` to update interface files
+2. **Types:** `#spruce/schemas/schemas.types.ts`
+   * Where all interfaces live
+   * Accessible through `SpruceSchemas`
+   * `const adidas: SpruceSchemas.Local.IVendor = { name: 'adidas' }`
+<!-- div:right-panel -->
+<!-- tabs:start -->
+#### ** 1. Definition **
+```ts
+// ./src/schemas/vendor.definition.ts
+
+import Schema, { FieldType, buildSchemaDefinition } from '@sprucelabs/schema'
+
+const vendorDefinition = buildSchemaDefinition({
+    id: 'vendor',
+    name: 'Vendor',
+    description: 'A vendor is a company that makes balls',
+    fields: {
+        id: {
+            type: FieldType.Id,
+            label: 'Id',
+			isRequired: true,
+        },
+        name: {
+            type: FieldType.Text,
+            label: 'Name',
+            hint: 'How they are incorporated',
+        }
+    }
+})
+
+export default vendorDefinition
+```
+#### ** 2. Types **
+Has both Core and Local types and definitions
+```ts
+// #spruce/schemas/schemas.types.ts
+
+export namespace SpruceSchemas.Local {
+	/** Profile images at various helpful sizes and resolutions. */
+	export interface IProfileImage {
+		/** Id. */
+		id: string
+		/** Name. How they are incorporated */
+		name?: string | undefined | null
+	}
+}
+```
+<!-- tabs:end -->
+<!-- panels:end -->
+
 ## Updating definitions
 
 We'll start by defining our Vendor schema since it's required for the ball schemas.

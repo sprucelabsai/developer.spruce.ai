@@ -105,19 +105,9 @@ We use singletons for various things like logging and Mercury.
    1. `const users = this.store.user.users(...)`
    2. `const users = this.store.user.usersById()`
 
-## Generators
+## Generating templates
 
-1. Code that writes to “generated” files
-2. Templates must be hbs
-3. Generators live in CLI  as the source of the template (.hbs)
-4. Example, SchemaGenerator is in @sprucelabs/schemas
-5. Generators in a folder called @sprucelabs/spruce-cli /generators
-6. Class name ends in Generator
-7. Each method starts with generator
-8. Generators must return a string (not write a file)
-9. Handling handlebar helpers
-   1.  helpers are "addons"
-10. TODO: define event contracts for mercury for pulling types
+![Generating templates](../_images/template-generation.jpeg?raw=true "Generating templates")
 
 ## **Addons**
 
