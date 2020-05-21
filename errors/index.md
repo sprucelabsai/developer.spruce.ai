@@ -7,10 +7,10 @@ spruce error:create [name]
 
 Options:
 	-dd, --destinationDir 		Where should I write the error file? 
-								  Default: .src/errors
+								  Default: `.src/errors`
 
 	-td, --typesDestinationDir	Where should I write the types file? 
-								  Default: #spruce/errors
+								  Default: `#spruce/errors`
 
 
 # Update all type files to match the your error definitions
@@ -18,16 +18,16 @@ spruce error:sync
 
 Options:
 	-l, --lookupDir				Where should I look for definitions files (*.definition.ts)?
-								   Default: .src/errors
+								   Default: `.src/errors`
 
 	-d, --destinationDir		   Where should I write the definitions file?
-								   Default: .src/errors
+								   Default: `.src/errors`
 
 	-td, --typesDestinationDir	 Where should I write the types file?
-								   Default: #spruce/errors
+								   Default: `#spruce/errors`
 
 	-dd, --errorDestinationDir	 Where should I write the Error class file?
-								   Default .src/errors
+								   Default: `.src/errors`
 
 	-c, --clean					Clean output directory before generating errors, deleting old files.
 ```
@@ -103,7 +103,22 @@ export default class SpruceError extends BaseSpruceError<ErrorOptions> {
 				message = super.friendlyMessage()
 		}
 
-		return message
+
+		// Drop on code and friendly message
+		message = `${options.code}: ${message}`
+		const fullMessage = `${message}${
+			options.friendlyMessage ? `\n\n${options.friendlyMessage}` : ''
+		}`
+
+		// Handle repeating text from original message by remove it
+		return `${fullMessage}${
+			this.originalError && this.originalError.message !== fullMessage
+				? `\n\nOriginal error: ${this.originalError.message.replace(
+						message,
+						''
+				  )}`
+				: ''
+		}`
 	}
 }
 
@@ -222,5 +237,39 @@ try {
 }
 ```
 ## Chaining errors
+Every error has an `originalError` option that accepts an `Error`. You can see how the the "Error subclass" above mixes in the original error before returning `friendlyMessage`.
 
-## Serializing errors
+Here is how you you do it:
+
+```ts
+import SpruceError from '.src/errors/SpruceError'
+import { ErrorCode } from '#spruce/errors/codes.types'
+
+try {
+	somethingThatThrows()
+} catch (err) {
+	throw new SpruceError({
+		code: ErrorCode.SignUpFailed,
+		originalError: err
+	})
+}
+
+```
+
+## Errors over the wire
+All errors can be serialized to `Json` to make sharing them easy.
+
+```ts
+const err = new SpruceError({ 
+	code: ErrorCode.SignUpFailed
+})
+
+return err.toJson()
+```
+
+You can parse the json and pass it to an error as options.
+
+```ts
+const options = JSON.parse(data)
+const err = new SpruceError(options)
+```

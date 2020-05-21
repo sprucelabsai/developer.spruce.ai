@@ -368,7 +368,7 @@ const vendor = new Schema(SpruceSchemas.Local.Vendor, { name: 'Adidas' })
 const ball = new Schema(SpruceSchemas.Local.SoccerBall)
 
 // set values
-ball.set('vendor', vendor)
+ball.set('vendor', vendor.getValues())
 ball.set('color', 'blackAndWhite')
 
 // should pass
@@ -408,6 +408,20 @@ The `Schema` class uses definitions for data validation and normalization. Putti
 ## Relationships
 
 The `FieldType.Schema` allows you to relate one schema to another.
+
+```ts
+let vendor = new Schema(SpruceSchemas.Local.Vendor, { name: 'Adidas' })
+
+// create a soccer ball
+const ball = new Schema(SpruceSchemas.Local.SoccerBall)
+
+// set the vendor
+ball.set('vendor', vendor.getValues())
+
+// get the vendor back
+vendor = ball.get('vendor')
+
+```
 
 ## React component props & default props
 
