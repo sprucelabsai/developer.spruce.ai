@@ -5,18 +5,18 @@ Build, type, and organize code for teams and scale.
 spruce autoloader:create [name]
 
 Options: 
-	-p, --pattern		 	           Any pattern you want to use for loading files
+	-p, --pattern <string>		 	  Any pattern you want to use for loading files
 							             Default: `**/!(*.test).ts`
 
-	-l, --lookupDir		              If creating based on existing dir, this is that dir.
+	-l, --lookupDir <path>	           If creating based on existing dir, this is that dir.
 
-	-d, --destination		            If supplied [name], this is where I will create the scaffolding files
+	-d, --destination <path>		     If supplied [name], this is where I will create the scaffolding files
 									     Default: `.src/{{name}}`
 
-	-ad, --autoloaderDestination		 Where should I save the new autoloader?
+	--autoloaderDestination <path>	   Where should I save the new autoloader?
 										 Default: `#spruce/autoloaders/`
 
-	-rad, --rootAutoloaderDestination	Where should I save the root autoloader?
+	--rootAutoloaderDestination <path>   Where should I save the root autoloader?
 										 Default: `#spruce/autoloaders/`
 
 # Update autoloaders based on changes (deleting or adding files)
@@ -156,43 +156,70 @@ spruce autoloader:sync
 ## Adapter pattern
 Autoloaders are perfectly suited for facilitating the creation and usage of adapters.
 
-For this example, lets say you are sending messages and want to provide an integration to many messaging and telephony services.
+For this example, lets say you connecting to a face recognition platform to trigger the `did-enter` event.
+
+You want to be able to test different face detection APIs and to be able to change at any time. And you will not be giving an organization control over the API used. Note: This is probably the wrong way to do this since you usually want to give the organization control over as much as possible (especially enterprises).
+
+Let's get started!
 
 ```bash
-spruce autoloader.create "messageAdapters"
+spruce autoloader:create faceAdapters
 ````
 
-You may create a few messaging adapters:
+You may create a few face detection adapters:
 
-* .src/messageAdapters
-	* AbstractMessageAdapter.ts
-	* TwilioMessageAdapter.ts
-	* FacebookMessageAdapter.ts
-	* AppleMessengerMessageAdapter.ts
+* .src/faceAdapters
+	* AbstractFaceAdapter.ts
+	* AwsFaceAdapter.ts
+	* MicrosoftFaceAdapter.ts
+	* WatsonFaceAdapter.ts
 
-After you create your message adapters, lets update the autoloaders
+After you create your face detection adapters, lets update the autoloaders
 ```bash
 spruce autoloader:sync
 ```
-Now lets load the selected message adapter based on a user
+We need a way to save api settings that our skill can load. So, lets create a `.env` and drop in some variables:
+
+```env
+DETECTION_ADAPTER=aws
+DETECTION_ADAPTER_OPTIONS={ "key": "3092384092834", "secret": "234234234" }
+```
+
+Next, lets hook into the boot of our skill to configure the adapter.
+
+```bash
+spruce events:handle did-boot
+```
+Now lets load the selected face detection adapter based off an environmental variable.
 ```ts
+// src/events/did-boot/handler.ts
+
 // import the autoloader
-import messageAdapters, { MessageAdapter } from '#spruce/autoloaders/messageAdapters'
+import faceAdapters, { FaceAdapter } from '#spruce/autoloaders/faceAdapters'
 
-// adapter settings
-import config from 'config'
+export default function (spruce: ISpruce) {
 
-// pull user and message preferences
-const [user, messagePreferences] = await Promise.all([
-	this.stores.user.userById(userId),
-	this.stores.messagePreferences.preferenceByUserId(userId)
-])
+	// fall back to aws if no preference is set
+	const preferredAdapter = spruce.env.DETECTION_ADAPTER ?? 'aws'
+	const adapterOptions = JSON.encode(spruce.env.DETECTION_ADAPTER_OPTIONS ?? {})
 
-// fall back to sms if no preference is set
-const preferredAdapter = messagePreferences?.messageAdapter ?? 'Twilio'
-const adapter = await messageAdapters({ 
-	constructorOptions: config.adapterSettings, 
-	only: [ MessageAdapter[preferredAdapter] ]
-})
+	// instantiate the adapter
+	const { [preferredAdapter]: adapter  } = await faceAdapters({ 
+		constructorOptions: adapterOptions, 
+		only: [ FaceAdapter[preferredAdapter] ]
+	})
+
+	// whatever work the adapter needs to do to make the platform ready
+	adapter.init(...)
+
+	// make it available in listeners
+	spruce.faceDetection = adapter
+}
 
 ```
+
+## Strategy pattern
+
+Since the strategy pattern is about choosing options at run-time, we wouldn't do our work in the did-boot event.
+
+

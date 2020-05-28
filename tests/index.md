@@ -3,6 +3,17 @@
 ```bash
 # Create a new test
 spruce test:create [targetFile]
+
+# Run tests (alias for yarn test)
+spruce test
+
+# Test a skill view on a mobile device
+spruce test:view
+
+Options:
+
+	-v, --skillViewId 		
+
 ```
 
 ## Building your first test

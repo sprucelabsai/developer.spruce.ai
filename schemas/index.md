@@ -1,31 +1,31 @@
 
 
 # Schemas
-Define, validate, and normalize all the data in a sharable way.
+Define, validate, and normalize everything.
 ```bash
 # Create a new schema definition
 spruce schema:create [name]
 
 Options: 
-	-dd, --definitionDestinationDir	Where should I write the definition file?
-									   Default: ./src/schemas
+	-dd, --definitionDestinationDir <path>	 Where should I write the definition file?
+									   		Default: `./src/schemas`
 
-	-td, --typesDestinationDir		 Where should I write the types file?
-									   Default: #spruce/schemas
+	-td, --typesDestinationDir <path>		  Where should I write the types file?
+									   		Default: `#spruce/schemas`
 
 # Update all type files to match your schema definitions
 spruce schema:sync [lookupDir]
 
 Options:
-	-l, --lookupDir					Where should I look for definitions files (*.definition.ts)?
-								   	Default: .src/errors
+	-l, --lookupDir <path>	 	            Where should I look for definitions files (*.definition.ts)?
+								   	        Default: `.src/errors`
 
-	-d, --destinationDir <dir>		 Where should I write the types files?
-								   	Default: #spruce/schemas
+	-d, --destinationDir <path>		        Where should I write the types files?
+								   	        Default: `#spruce/schemas`
 
-	-c, --clean						Where should I clean out the destination dir?
+	-c, --clean						        Where should I clean out the destination dir?
 
-	-f, --force						If cleaning, should I suppress confirmations and warnings
+	-f, --force						        If cleaning, should I suppress confirmations and warnings
 
 ```
 <!-- panels:start -->
@@ -183,8 +183,8 @@ const vendorDefinition = buildSchemaDefinition({
     id: 'vendor',
     name: 'Vendor',
     description: 'A vendor is a company that makes balls',
-    fields: {
-        id: {
+	fields: {
+		id: {
             type: FieldType.Id,
             label: 'Id',
 			isRequired: true,
@@ -428,3 +428,5 @@ vendor = ball.get('vendor')
 ## Creating a new FieldType
 
 ## Core definitions
+
+## Versioning

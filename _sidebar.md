@@ -1,16 +1,18 @@
 -   [Introduction](/)
 -   [Getting started](/getting-started.md)
-<!-- -   [Builders](/builders/index.md) -->
 -	[Autoloaders](/autoloaders/index.md)
--   [CLI](/cli/index.md)
+-   [Builders](/builders/index.md)
+-   [Deploys](/deploys/index.md)
 -   [Errors](/errors/index.md)
-<!-- -   [Cron](/cron/index.md) -->
-<!-- -   [Data Models](/dataModels/index.md) -->
 -   [Events](/events/index.md)
+-   [Internationalization](/internationalization/index.md)
+-   [Permissions](/permissions/index.md)
 -   [Schemas](/schemas/index.md)
-<!-- -   [Services/Utilities](/services/index.md) -->
+-   [Seeders](/seeders/index.md)
+-   [Skills](/skills/index.md)
 -   [Standards](/standards/index.md)
 -   [Tests](/tests/index.md)
+-   [Versioning](/versioning/index.md)
 
 
 [Glossary](_glossary.md)

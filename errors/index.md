@@ -1,6 +1,6 @@
 # Errors
 Flexible and informative error reporting.
-
+****
 ```bash
 # Create a new error definition
 spruce error:create [name]
@@ -49,7 +49,7 @@ After running `spruce error:create` up to 4 files were created for you.
 1. **Definition:** `./src/errors/{{nameCamel}}.definition.ts`
     * Where the actual definition lives
     * Extends `ISchemaDefinition`, so you already know how it works!
-    * Make your changes and run `spruce error:sync` to update the interface files
+    * Make your changes and run `spruce error:sync` to update the interface files (if not already running `spruce watch`)
 2. **Error subclass**: `./src/errors/Error.ts`
     * The error class that extends `BaseSpruceError` from `@sprucelabs/error`
     * Switch statement in `friendlyReason` to generate helpful error messages
@@ -273,3 +273,5 @@ You can parse the json and pass it to an error as options.
 const options = JSON.parse(data)
 const err = new SpruceError(options)
 ```
+
+## Error failures

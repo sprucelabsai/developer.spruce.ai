@@ -1,2 +1,0 @@
--   [CLI](/cli/)
-    -   [Creating your skill](/cli/index.md)
