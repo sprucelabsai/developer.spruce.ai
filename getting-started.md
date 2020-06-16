@@ -30,9 +30,10 @@ spruce.mercury.on(SpruceEvents.core.DidEnter, () => {
 <!-- panels:end -->
 
 ### Orm
-### Builders
+
 ### Definitions
 ### Errors
+### Heartwood
 ### Services
 ### Tests
 ### Utilities

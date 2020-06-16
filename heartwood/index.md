@@ -4,7 +4,7 @@ Build rich digital experiences for every device.
 
 ```bash
 # Build a skill view
-spruce build:view
+spruce heartwood:view
 
 Options: 
 
@@ -24,7 +24,7 @@ Options:
 
 
 # Build a card
-spruce build:card
+spruce heartwood:card
 
 Options:
 
@@ -44,7 +44,7 @@ Options:
 
 
 # Build a form to collect input
-spruce build:form
+spruce heartwood:form
 
 Options:
 
@@ -66,7 +66,7 @@ Options:
 
 
 # Build a list of items
-spruce build:list
+spruce heartwood:list
 
 Options:
 
@@ -85,26 +85,26 @@ Options:
 	-s, --selectable <json>		            JSON of the checkbox or radio that'll be used in each list item
 
 # Build a layout
-spruce build:layout
+spruce heartwood:layout
 
 	-i, --items <json>			             JSON of the items that compose this layout
 
 # Emit changes to definitions to the world
-spruce build:sync
+spruce heartwood:sync
 ```
 
 ## Building your first component
 Lets create a [card](/builders/index?id=cards) that allows a person to see their schedule for the day.
 
 ```bash
-spruce build:card upcomingAppointments
+spruce heartwood:card upcomingAppointments
 ```
 
 <!-- panels:start -->
 <!--div:title-panel-->
 ## Generated files
 <!-- div:left-panel -->
-After running `spruce build:card` up to 2 files were created for you.
+After running `spruce heartwood:card` up to 2 files were created for you.
 
 1. **Handler:** `.src/events/{{version}}/get-cards/get-cards.handler.ts`
 	* Only applies to cards & views 
