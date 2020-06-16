@@ -11,7 +11,7 @@ yarn global add @sprucelabs/spruce-cli
 spruce onboard
 ```
 
-## Pillars of a skill
+## Makeup of a skill
 
 Back again! Lets review the parts that make up a skill. 
 
@@ -23,7 +23,7 @@ Back again! Lets review the parts that make up a skill.
 All communication in the platform is powered by Mercury. 
 <!-- div:right-panel -->
 ```js
-spruce.mercury.on(SpruceEvents.core.DidEnter.name, () => {
+spruce.mercury.on(SpruceEvents.core.DidEnter, () => {
     console.log('someone just entered')
 })
 ```

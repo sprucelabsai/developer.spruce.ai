@@ -8,7 +8,7 @@ Options:
 	-p, --pattern <string>		 	  Any pattern you want to use for loading files
 							             Default: `**/!(*.test).ts`
 
-	-l, --lookupDir <path>	           If creating based on existing dir, this is that dir.
+	-l, --lookupDir <path>	           If creating based on existing dir, this is that dir
 
 	-d, --destination <path>		     If supplied [name], this is where I will create the scaffolding files
 									     Default: `.src/{{name}}`
@@ -40,13 +40,13 @@ spruce autoloader:create utilities
 <!-- div:left-panel -->
 After running `spruce autoloader:create` up to 4 files were created for you.
 
-1. **Abstract boilerplate:** `.src/{{nameCamelPlural}}/Abstract{{nameCamel}}.ts`
+1. **Abstract boilerplate:** `.src/utilities/AbstractUtility.ts`
    1. The start of an abstract class that others will extend
    2. Extends `IAutoloadable`
-2. **Class boilerplate:**: `.src/{{nameCamelPlural}}/Example{{nameCamel}}.ts` 
+2. **Class boilerplate:**: `.src/utilities/ExampleUtility.ts` 
    1. Gets you started with a class that extends the abstract class
 3. **Autoloader**
-   1. Exports async function from `#spruce/autoloaders/{{nameCamelPlural}}.ts`
+   1. Exports async function from `#spruce/autoloaders/utilities.ts`
 4. **Root autoloader**
    1. Exports async function from `#spruce/autoloaders/index.ts`
    2. Autoloader of autoloaders

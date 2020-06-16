@@ -27,14 +27,12 @@ Options:
 
 	-f, --force						        If cleaning, should I suppress confirmations and warnings
 
+# Extend an existing model
+spruce schema:extend [namespace] [name]
+
 ```
 <!-- panels:start -->
 <!-- div:left-panel -->
-## Why
-
-1. A way to define, validate, and normalize universal data
-2. A universal way to define, validate, and normalize data
-
 
 ## Define
 A location, a schedule, an appointment, or even a button; all these things exist outside the constructs of a platform. Schemas allow us to define things once and share those definitions with everyone else building on the platform. 
@@ -162,7 +160,7 @@ spruce schema:create "Vendor"
 <!--div:title-panel-->
 ## Generated files
 <!-- div:left-panel -->
-After running `spruce schema:create` up to 2 files were created for you.
+After running `spruce schema:create` up to 3 files were created for you.
 ****
 1. **Definition:** `./src/schemas/{{nameCamel}}.definitions.ts`
    * Where your new definition lives
@@ -171,6 +169,9 @@ After running `spruce schema:create` up to 2 files were created for you.
    * Where all interfaces live
    * Accessible through `SpruceSchemas`
    * `const adidas: SpruceSchemas.Local.IVendor = { name: 'adidas' }`
+3. **Normalized Definition:** `#spruce/schemas/local/{{nameCamel}}.definition.ts`
+   * Strictly typed
+   * This is the version of your definition that is shared across skills
 <!-- div:right-panel -->
 <!-- tabs:start -->
 #### ** 1. Definition **

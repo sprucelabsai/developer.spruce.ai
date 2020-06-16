@@ -184,3 +184,17 @@ Test files should match the name of the file (*.test.ts) and be next to the file
 
 1. Meant to be extended
 2. Start with `Base`
+
+## Documentation rules
+
+1. developer.spruce is focused on the tools and how to use them
+2. Education (curriculum) is done through `spruce onboard`
+
+
+## Cli interface standards
+
+1. spruce {{feature}}:{{verb}}
+2. bracket [] optional args
+3. Chevron <> required args
+4. All args on top level are optional
+5. If required args are not supplied, use `formBuilder` to acquire them
