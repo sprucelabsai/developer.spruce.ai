@@ -2,6 +2,6 @@
 
 # Build experiences, connect people. (WIP)
 
-[Github](https://github.com/sprucelabsai/spruce-cli)
+[Github](https://github.com/sprucelabsai/spruce-cli-workspace)
 [Lets go already!!!](/?id=introduction)
 
