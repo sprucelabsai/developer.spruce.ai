@@ -57,7 +57,7 @@
 
 body .cover .cover-main {
     position: static;
-    padding-top:50px;
+    padding:50px 15px;
 }
 
 body .cover .cover-main > p:first-child {
