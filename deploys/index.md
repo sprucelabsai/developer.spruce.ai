@@ -3,7 +3,7 @@ Share your work with the world in an instant.
 
 ```bash
 # Create a new deploy configuration
-spruce deploy:create [platform]
+spruce deploy.create [platform]
 
 Options:
 	-p, --platform 		aws|heroku|awslambda

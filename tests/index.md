@@ -2,13 +2,13 @@
 
 ```bash
 # Create a new test
-spruce test:create [targetFile]
+spruce test.create [targetFile]
 
-# Run tests (alias for yarn test)
+# Run tests (alias for yarn test)r
 spruce test
 
 # Test a skill view on a mobile device
-spruce test:view
+spruce test.view
 
 Options:
 
@@ -19,7 +19,7 @@ Options:
 ## Building your first test
 
 ```bash
-spruce test:create
+spruce test.create
 ```
 
 

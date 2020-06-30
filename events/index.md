@@ -2,14 +2,14 @@
 Situational awareness.
 
 ```bash
-spruce event:create [name]
+spruce event.create [name]
 
-spruce event:handle [name]
+spruce event.handle [name]
 
-spruce event:sync
+spruce event.sync
 
 # Tell the organization that you provide a valid response to this event
-spruce event:provide [namespace] [name]
+spruce event.provide [namespace] [name]
 
 ```
 

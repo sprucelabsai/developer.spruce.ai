@@ -4,7 +4,7 @@
 Define, validate, and normalize everything.
 ```bash
 # Create a new schema definition
-spruce schema:create [name]
+spruce schema.create [name]
 
 Options: 
 	-dd, --definitionDestinationDir <path>	 Where should I write the definition file?
@@ -14,7 +14,7 @@ Options:
 									   		Default: `#spruce/schemas`
 
 # Update all type files to match your schema definitions
-spruce schema:sync [lookupDir]
+spruce schema.sync [lookupDir]
 
 Options:
 	-l, --lookupDir <path>	 	            Where should I look for definitions files (*.definition.ts)?
@@ -28,7 +28,7 @@ Options:
 	-f, --force						        If cleaning, should I suppress confirmations and warnings
 
 # Extend an existing model
-spruce schema:extend [namespace] [name]
+spruce schema.extend [namespace] [name]
 
 ```
 <!-- panels:start -->
@@ -53,7 +53,7 @@ Are you familiar with `google-libphonenumber`? No? Good. Here's my promise, you'
 #### ** Define **
 
 ```ts
-// ./src/schemas/shirt.definition.ts
+// ./src/schemas/shirt.builder.ts
 
 import Schema, { ISchemaDefinition, FieldType, buildSchemaDefinition } from '@sprucelabs/schema'
 
@@ -82,7 +82,7 @@ const shirtDefinition: ISchemaDefinition = buildSchemaDefinition({
     }
 })
 
-// always export the definition as the default from a .definition.ts file
+// always export the built definition as the default from a .builder.ts file
 export default shirtDefinition
 
 ```
@@ -95,7 +95,7 @@ import Schema from '@sprucelabs/schema'
 import SpruceSchemas from '#spruce/schemas/schemas.types'
 
 // create a schema from the definition
-const shirtSchema: ShirtInstance = new Schema(SpruceSchemas.local.Shirt.definition);
+const shirtSchema. ShirtInstance = new Schema(SpruceSchemas.local.Shirt.definition);
 
 // set a value
 shirtSchema.set('size', 's') // works
@@ -151,32 +151,33 @@ phoneNumberField.validate('232324234234234') // throws FieldValidationError
 Lets start by defining a Ball. From that, we'll create a sub-schemas and a related schema.
 
 ```bash
-spruce schema:create "Ball"
-spruce schema:create "Soccer ball"
-spruce schema:create "Vendor"
+spruce schema.create "Ball"
+spruce schema.create "Soccer ball"
+spruce schema.create "Vendor"
 ```
 
 <!-- panels:start -->
 <!--div:title-panel-->
 ## Generated files
 <!-- div:left-panel -->
-After running `spruce schema:create` up to 3 files were created for you.
+After running `spruce schema.create` up to 3 files were created for you.
 ****
-1. **Definition:** `./src/schemas/{{nameCamel}}.definitions.ts`
-   * Where your new definition lives
-   * After making changes, run `spruce schema:sync` to update interface files
+1. **Builder:** `./src/schemas/{{nameCamel}}.builder.ts`
+   * The source of truth from which all types are generated
+   * After making changes, run `spruce schema.sync` to update interface files
 2. **Types:** `#spruce/schemas/schemas.types.ts`
    * Where all interfaces live
    * Accessible through `SpruceSchemas`
    * `const adidas: SpruceSchemas.Local.IVendor = { name: 'adidas' }`
-3. **Normalized Definition:** `#spruce/schemas/local/{{nameCamel}}.definition.ts`
+3. **Definition:** `#spruce/schemas/local/{{nameCamel}}.definition.ts`
+   * Where your newly built definition lives
    * Strictly typed
-   * This is the version of your definition that is shared across skills
+   * This is the version of your definition that is shared across skills and that you want to import locally
 <!-- div:right-panel -->
 <!-- tabs:start -->
-#### ** 1. Definition **
-```ts
-// ./src/schemas/vendor.definition.ts
+#### ** 1. Builder **
+```ts.
+// ./src/schemas/vendor.builder.ts
 
 import Schema, { FieldType, buildSchemaDefinition } from '@sprucelabs/schema'
 
@@ -223,7 +224,7 @@ export namespace SpruceSchemas.Local {
 We'll start by defining our Vendor schema since it's required for the ball schemas.
 
 ```ts
-// ./src/schemas/vendor.definition.ts
+// ./src/schemas/vendor.builder.ts
 
 import Schema, { FieldType, buildSchemaDefinition } from '@sprucelabs/schema'
 
@@ -253,7 +254,7 @@ export default vendorDefinition
 ```
 Lets define the fields for the "base" definition that all balls will mixin.
 ```ts
-// ./src/schemas/ball.definition.ts
+// ./src/schemas/ball.builder.ts
 
 import Schema, { FieldType, buildSchemaDefinition } from '@sprucelabs/schema'
 
@@ -293,7 +294,7 @@ const ballDefinition = buildSchemaDefinition({
 			label: 'Vendor',
 			isRequired: true,
 			options: {
-				schema: vendorDefinition
+				schema. vendorDefinition
 			}
 		}
     }
@@ -306,7 +307,7 @@ export default ballDefinition
 Now lets define our sub-schema that will extend a Ball.
 ```ts
 
-// ./src/schemas/soccerBall.definition.ts
+// ./src/schemas/soccerBall.builder.ts
 
 import Schema, { FieldType, buildSchemaDefinition } from '@sprucelabs/schema'
 
@@ -343,7 +344,7 @@ export default soccerBallDefinition
 After you are done editing your definitions you'll need to sync the type files.
 
 ```bash
-spruce schema:sync
+spruce schema.sync
 ```
 
 ## Extending definitions

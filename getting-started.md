@@ -11,9 +11,9 @@ yarn global add @sprucelabs/spruce-cli
 spruce onboard
 ```
 
-## Makeup of a skill
+## Components of a skill
 
-Back again! Lets review the parts that make up a skill. 
+Back again! Lets review the components that make up a skill. 
 
 <!-- panels:start -->
 <!-- div:title-panel -->

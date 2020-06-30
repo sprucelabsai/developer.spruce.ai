@@ -3,7 +3,7 @@ Flexible and informative error reporting.
 ****
 ```bash
 # Create a new error definition
-spruce error:create [name]
+spruce error.create [name]
 
 Options:
 	-dd, --destinationDir 		Where should I write the error file? 
@@ -14,7 +14,7 @@ Options:
 
 
 # Update all type files to match the your error definitions
-spruce error:sync
+spruce error.sync
 
 Options:
 	-l, --lookupDir				Where should I look for definitions files (*.definition.ts)?
@@ -36,7 +36,7 @@ Options:
 
 Lets start by creating your first error!
 ```bash
-spruce error:create "You must be 18 or older"
+spruce error.create "You must be 18 or older"
 ```
 Now review the generated files before we jump into the definition itself.
 
@@ -44,12 +44,12 @@ Now review the generated files before we jump into the definition itself.
 <!--div:title-panel-->
 ## Generated files
 <!-- div:left-panel -->
-After running `spruce error:create` up to 4 files were created for you. 
+After running `spruce error.create` up to 4 files were created for you. 
 
-1. **Definition:** `./src/errors/{{nameCamel}}.definition.ts`
+1. **Builder:** `./src/errors/{{nameCamel}}.builder.ts`
     * Where the actual definition lives
     * Extends `ISchemaDefinition`, so you already know how it works!
-    * Make your changes and run `spruce error:sync` to update the interface files (if not already running `spruce watch`)
+    * Make your changes and run `spruce.sync` to update the interface files (if not already running `spruce watch`)
 2. **Error subclass**: `./src/errors/Error.ts`
     * The error class that extends `BaseSpruceError` from `@sprucelabs/error`
     * Switch statement in `friendlyReason` to generate helpful error messages
@@ -60,11 +60,11 @@ After running `spruce error:create` up to 4 files were created for you.
     * All the error code enums (`ErrorCode.{{PascalName}}`)
 <!-- div:right-panel -->
 <!-- tabs:start -->
-#### ** 1. Definition **
+#### ** 1. Builder **
 ```ts
-// errors/youMustBe18OrOlder.definition.ts
+// errors/youMustBe18OrOlder.builder.ts
 
-import { FieldType } from '@sprucelabs/schema'
+import FieldType from '#spruce/schemas/fields/fieldType'
 import { buildErrorDefinition } from '@sprucelabs/error'
 
 const genericDefinition = buildErrorDefinition({
@@ -113,7 +113,7 @@ export default class SpruceError extends BaseSpruceError<ErrorOptions> {
 		// Handle repeating text from original message by remove it
 		return `${fullMessage}${
 			this.originalError && this.originalError.message !== fullMessage
-				? `\n\nOriginal error: ${this.originalError.message.replace(
+				? `\n\nOriginal. ${this.originalError.message.replace(
 						message,
 						''
 				  )}`
@@ -149,12 +149,12 @@ export interface IYouMustBe18OrOlderErrorOptions extends SchemaDefinitionValues<
 
 ## Updating definitions
 
-Once you create your error definition, you'll want to edit it. Jump into `./src/errors/youMustBe18OrOlder.definition.ts` and update the fields.
+Once you create your error builder, you'll want to edit it. Jump into `./src/errors/youMustBe18OrOlder.builder.ts` and update the fields.
 
 Since errors are defined using schemas, you can learn a lot more by reading the [Schema docs](/schemas/index.md).
 
 ```ts
-// ./src/errors/youMustBe18OrOlder.definition.**ts**
+// ./src/errors/youMustBe18OrOlder.builder.**ts**
 
 import { FieldType } from '@sprucelabs/schema'
 import { buildErrorDefinition } from '@sprucelabs/error'
@@ -183,7 +183,7 @@ After you are done, you'll need to run:
 
 ```bash
 # Always run after updating error definitions
-spruce error:sync
+spruce.sync
 ```
 to ensure all the types are updated too.
 

@@ -1,7 +1,7 @@
 # Internationalization
 ```bash
 # Add support for a new language
-spruce language:add [name]
+spruce language.add [name]
 
 ```
 

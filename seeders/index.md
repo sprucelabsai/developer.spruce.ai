@@ -13,7 +13,7 @@ Options:
 								if empty, creates new locations
 
 # Define a new seed
-spruce seed:create [name]
+spruce seed.create [name]
 
 Options:
 	

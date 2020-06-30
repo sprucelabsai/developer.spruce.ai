@@ -2,7 +2,7 @@
 Build, type, and organize code for teams and scale.
 ```bash
 # Create a new autoloader based on a name, like services or adapters
-spruce autoloader:create [name]
+spruce autoloader.create [name]
 
 Options: 
 	-p, --pattern <string>		 	  Any pattern you want to use for loading files
@@ -20,10 +20,10 @@ Options:
 										 Default: `#spruce/autoloaders/`
 
 # Update autoloaders based on changes (deleting or adding files)
-spruce autoloader:sync
+spruce autoloader.sync
 
 # Create new root autoloader based on all autoloaders
-spruce autoloader:root [destination]
+spruce autoloader.root [destination]
 
 ```
 
@@ -31,14 +31,14 @@ spruce autoloader:root [destination]
 You need utilities, admit it!
 
 ```bash
-spruce autoloader:create utilities
+spruce autoloader.create utilities
 ```
 
 <!-- panels:start -->
 <!--div:title-panel-->
 ## Generated files
 <!-- div:left-panel -->
-After running `spruce autoloader:create` up to 4 files were created for you.
+After running `spruce autoloader.create` up to 4 files were created for you.
 
 1. **Abstract boilerplate:** `.src/utilities/AbstractUtility.ts`
    1. The start of an abstract class that others will extend
@@ -150,7 +150,7 @@ You will use create autoloaders for all types of things:
 ## Adding/deleting files
 Any time you add or delete a file, you gotta run sync:
 ```bash
-spruce autoloader:sync
+spruce autoloader.sync
 ```
 
 ## Adapter pattern
@@ -163,7 +163,7 @@ You want to be able to test different face detection APIs and to be able to chan
 Let's get started!
 
 ```bash
-spruce autoloader:create faceAdapters
+spruce autoloader.create faceAdapters
 ````
 
 You may create a few face detection adapters:
@@ -176,7 +176,7 @@ You may create a few face detection adapters:
 
 After you create your face detection adapters, lets update the autoloaders
 ```bash
-spruce autoloader:sync
+spruce autoloader.sync
 ```
 We need a way to save api settings that our skill can load. So, lets create a `.env` and drop in some variables:
 

@@ -27,26 +27,7 @@ npm run lint
 <!-- div:right-panel -->
 <!-- tabs:start -->
 
-#### ** Server side class definition **
-```js
-// Log.ts
-
-// not the class, so exported by name
-export interface IVehicle {
-    start(): void
-}
-
-// export the class as default
-export default class Car implements IVehicle {
-    // define the function literal like it's 1995, no arrow
-    start() {
-        console.log('starting')
-    }
-}
-```
-
-
-#### ** Client side class definition **
+#### ** Class definition **
 ```js
 // Log.ts
 
@@ -55,7 +36,7 @@ export interface IVehicle {
     start(): void
 }
 
-// export the class as default (same as server side)
+// export the class as default
 export default class Car extends Vehicle {
     // define as arrow function so scope is bound
     start = () => {
@@ -90,20 +71,26 @@ We use singletons for various things like logging and Mercury.
 2. `Y watch` / `y build --silent` does not throw errors
 
 
-## Factories + Fetchers
+## Getting/Fetching
 
-1. Create a method by the name of the object being created or fetched
-   1. `const formBuilder = this.formBuilder(definition, values)`
-   2. `const user = this.store.user.user(values)`
+1. Create a method by the name of the object being fetched (`get` for sync, `fetch` for async)
+   1. `const formComponent = this.getFormComponent(definition, values)`
+   2. `const user = await this.store.user.fetchUser(values)`
 2. Variations on factories and fetchers start with object name followed by ‘by’ or ‘with’ or ‘from’ and a description
-3. `const user = this.store.user.userWithToken(valuesWithToken)`
+3. `const user = await this.store.user.fetchUserWithToken(valuesWithToken)`
    1. A token field is normally not on a user object, so withToken calls out it will be the user with auth information
-   2. `const user = await this.store.user.userFromToken(token)`
+   2. `const user = await this.store.user.fetchUserFromToken(token)`
 4. This tells us we are getting the user based on their token.
 5. A fetcher is usually async, use lint to know when to await
 6. For more than 1, name becomes plural
-   1. `const users = this.store.user.users(...)`
-   2. `const users = this.store.user.usersById()`
+   1. `const users = this.store.user.getUsers(...)`
+   2. `const users = await this.store.user.fetchUsersById()`
+
+# Factories
+
+1. Methods that are decorators for factories are capitalized
+   1. `this.LintService()`
+
 
 ## Generating templates
 
