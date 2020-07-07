@@ -1,7 +1,8 @@
 
 
 # Schemas
-Define, validate, and normalize everything.
+Runtime and static type checking working together to elevate code quality and data validity.
+
 ```bash
 # Create a new schema definition
 spruce schema.create [name]
@@ -261,7 +262,7 @@ import Schema, { FieldType, buildSchemaDefinition } from '@sprucelabs/schema'
 // import the related definition
 import vendorDefinition from './vendor.definition'
 
-const ballDefinition = buildSchemaDefinition({
+export default ballDefinition = buildSchemaDefinition({
     id: 'ball',
     name: 'Ball',
     description: 'All balls extend this ball',
@@ -300,7 +301,6 @@ const ballDefinition = buildSchemaDefinition({
     }
 })
 
-export default ballDefinition
 
 ```
 
@@ -314,7 +314,7 @@ import Schema, { FieldType, buildSchemaDefinition } from '@sprucelabs/schema'
 // import the "parent" schema definition
 import ballDefinition from './ball.definition'
 
-const soccerBallDefinition = buildSchemaDefinition({
+export default buildSchemaDefinition({
     id: 'soccerBall',
     name: 'Soccer ball',
     description: 'A ball that is kicked.',
@@ -337,7 +337,6 @@ const soccerBallDefinition = buildSchemaDefinition({
     }
 })
 
-export default soccerBallDefinition
 
 ```
 
@@ -389,8 +388,6 @@ The `Schema` class uses definitions for data validation and normalization. Putti
   * `values`: [SchemaDefinitionPartialValues<definition>]()
 
 
-
-
 ## Field Types
 
 * `FieldType.Boolean` - A simple true/false
@@ -427,8 +424,26 @@ vendor = ball.get('vendor')
 
 ## React component props & default props
 
+...
+
 ## Creating a new FieldType
+
+...
 
 ## Core definitions
 
+...
+
 ## Versioning
+
+...
+
+## Why?
+
+The humans back at home <strikethrough>base</strikethrough> had learned quite a few lessons about ith important data integrity across many system and teams at an enterprise scale.
+
+APIs change fast at an early stage company and the best time to find out your client or integration is broken is before deploy.
+
+1. Schemas must be sharable over the wire
+2. They must be the source static type generation so our IDE tells of if a contract changed (interfaces, enums, etc.)
+3. They must provide runtime checks that are on parity with the static typing
