@@ -1,7 +1,16 @@
 :root {
+
+	/* header logo */
+	--header-logo-mark-fill: #fff;
+	--header-logo-name-fill: #000;
+	--sprucebot-avatar-color: #000;
+	--left-nav-logo-mark: #fff;
+	--left-nav-logo-text: #000;
+	
+
     /* base */
-    --theme-color: #F7D352 !important;
-    --theme-color2: #F2B149;
+    --theme-color: transparent !important;
+    --theme-color2: transparent;
     --dark-theme-color: #08090B;
     --base-font-family: "Muli", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     --base-font-size: 16px;
@@ -51,6 +60,30 @@
     --docsify-example-panels-right-panel-width: 50%;
 }
 
+#header-logo-mark {
+	fill: var(--header-logo-mark-fill);
+}
+
+.header-logo-name {
+	fill: var(--header-logo-name-fill);
+}
+
+.sprucebot-avatar {
+	fill: var(--sprucebot-avatar-color);
+}
+
+.sprucebot-avatar-mouth {
+	stroke: var(--sprucebot-avatar-color);
+}
+
+.app-name-link .logo {
+	fill: var(--left-nav-logo-mark);
+}
+
+.app-name-link .logo-text-wrapper {
+	fill: var(--left-nav-logo-text);
+}
+
 .cover {
     background-color: var(--theme-color);
 }
@@ -67,17 +100,15 @@ body .cover .cover-main > p:first-child {
     transform: translate(-50%);
 }
 
-body .cover .cover-main h1 {
-    background-image: url('_images/sprucebot.svg');
-    background-repeat: no-repeat;
-    background-position: left 9px;
-    padding-left:40px;
+body .cover .cover-main h1 svg {
+	margin-right:10px;
+	position: relative;
+	top:3px;
 }
 
 /* body .cover h1 a {
    text-indent: 10px; 
 } */
-
 
 body .cover .cover-main > p a {
     background-color: #fff !important;
@@ -90,7 +121,6 @@ body .cover .cover-main > p a {
 }
 
 body main {
-    background-image: url(_images/bg.png);
     background-repeat: no-repeat;
     background-position: center bottom;
     background-size: contain;
@@ -101,6 +131,16 @@ body aside.sidebar {
 }
 
 /* code samples */
+pre {
+	transition: opacity 500ms;
+	translate: translate(100px, 0px);
+	opacity: 0;
+}
+
+.loaded pre[class] {
+	opacity: 1;
+}
+
 .token.class-name {
     color: var(--code-theme-class-name);
     font-weight: var(--code-theme-class-name-font-weight);
@@ -131,4 +171,7 @@ pre.language-bash:first-of-type::after {
 }
 
 
-/* panels */
+/* Left col */
+.sidebar-nav p:first-child {
+	color: var(--sidebar-nav-link-color);
+}

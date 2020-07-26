@@ -27,7 +27,7 @@
 
         <link rel="stylesheet" href="spruce.css" />
     </head>
-    <body>
+    <body class="loading">
         <div id="app"></div>
         <script>
             window.$docsify = {
@@ -185,7 +185,10 @@
                         })(Prism);
                     },
                 },
-            };
+			};
+			
+
+
         </script>
         <!-- <script src="//unpkg.com/docsify/lib/docsify.min.js"></script> -->
         <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
@@ -196,6 +199,40 @@
         <script src="//cdn.jsdelivr.net/npm/docsify-tabs@1.1.2"></script>
 
         <script src="//cdn.jsdelivr.net/npm/docsify-prism@latest/dist/docsify-prism.min.js"></script>
-        <script src="//unpkg.com/prismjs@1.17.1/components/prism-javascript.min.js"></script>
+		<script src="//unpkg.com/prismjs@1.17.1/components/prism-javascript.min.js"></script> 
+		
+		<script>
+			window.addEventListener('load', function () {
+				var root = document.documentElement;
+				var whiteRules = {'search-result-heading-color': 'white', 'search-clear-icon-color1': 'white', 'search-result-item-color': 'white', 'search-input-placeholder-color': 'rgba(255,255,255,0.3)', 'search-input-color': 'white', 'cover-heading-color':'white', 'sidebar-nav-link-color': 'white', 'code-inline-color': 'white', 'header-logo-name-fill': 'white', 'sprucebot-avatar-color': 'white', 'left-nav-logo-text': 'white'}
+
+				var mint = { 'theme-color': '#7CD7AB'}
+				var yellow = { 'theme-color': '#F7D352', 'theme-color2': '#F2B149'}
+				var black = Object.assign({}, whiteRules, { 'theme-color': '#000000'})
+				var green = Object.assign({}, whiteRules, { 'theme-color': '#259760', 'search-clear-icon-color2':'#259760'})
+				var blue = Object.assign({}, whiteRules, { 'theme-color': '#0855CA', 'search-clear-icon-color2': '#0855CA'})
+
+				var colors = [blue, yellow, mint, green, black]
+				var selected = colors[Math.floor(Math.random() * colors.length)]
+
+				Object.keys(selected).forEach(function (prop) {
+					root.style.setProperty('--' + prop, selected[prop], 'important')
+					console.log(prop, selected[prop])
+				})
+
+				window.document.body.classList.add('loaded')
+
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET","_images/lockup-cover.svg",false);
+				// Following line is just to be on the safe side;
+				// not needed if your server delivers SVG with correct MIME type
+				xhr.overrideMimeType("image/svg+xml");
+				xhr.onload = function(e) {
+					const container = window.document.querySelector('.app-name .app-name-link')
+					container.innerHTML = xhr.responseText
+				}
+				xhr.send("");
+			})
+		</script>
     </body>
 </html>
