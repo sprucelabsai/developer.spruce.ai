@@ -6,7 +6,6 @@
 	--sprucebot-avatar-color: #000;
 	--left-nav-logo-mark: #fff;
 	--left-nav-logo-text: #000;
-	
 
     /* base */
     --theme-color: transparent !important;
@@ -16,9 +15,9 @@
     --base-font-size: 16px;
     --base-line-height: 1.7;
 
-    /* cover */
-    --cover-background-color: var(--theme-color);
-    --cover-color: --dark-theme-color;
+	/* cover */;
+    --cover-background-color: transparent;
+    --cover-color: var(--dark-theme-color);
     --cover-heading-color: var(--dark-theme-color);
     --cover-heading-font-size: 2rem;
     --cover-heading-font-weight:normal;
@@ -30,6 +29,9 @@
     --cover-button-color: --dark-theme-color;
 	--cover-button-color--hover: var(--theme-color);
 	--cover-max-width: 700px;
+
+	/* cover section */
+	--cover-background: var(--theme-color) !important;
 
     /* nav */
     --sidebar-nav-link-color: #000;
@@ -84,13 +86,17 @@
 	fill: var(--left-nav-logo-text);
 }
 
-.cover {
-    background-color: var(--theme-color);
+body .cover {
+	background: var(--cover-background) !important;
 }
 
 body .cover .cover-main {
-    position: static;
+	position: static;
     padding:50px 15px;
+}
+
+body .cover .mask {
+	background: var(--cover-mask-background, transparent);
 }
 
 body .cover .cover-main > p:first-child {
@@ -130,12 +136,16 @@ body aside.sidebar {
     background-color: var(--theme-color);
 }
 
+
 /* code samples */
-pre {
+body pre {
 	transition: opacity 500ms;
 	translate: translate(100px, 0px);
 	opacity: 0;
+	background: var(--code-background, rgb(39, 40, 34)) !important;
+	color: var(--code-theme-text) !important;
 }
+
 
 .loaded pre[class] {
 	opacity: 1;
@@ -168,6 +178,18 @@ pre.language-bash:first-of-type::before {
 pre.language-bash:first-of-type::after {
 	top:20px;
 	right:20px;
+}
+
+pre .token.comment {
+	color: var(--code-comment-color,slategray);
+}
+
+pre .token.function {
+	color: var(--code-function-color,#e6db74);
+}
+
+pre .token.keyword {
+	color: var(--code-keyword-color,#66d9ef);
 }
 
 
