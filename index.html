@@ -217,7 +217,6 @@
 
 				Object.keys(selected).forEach(function (prop) {
 					root.style.setProperty('--' + prop, selected[prop], 'important')
-					console.log(prop, selected[prop])
 				})
 
 				window.document.body.classList.add('loaded')
