@@ -146,15 +146,16 @@ body pre {
 	color: var(--code-theme-text) !important;
 }
 
+body code[class*="language-"], pre[class*="language-"] {
+	color:var(--code-theme-text);
+}
+
 
 .loaded pre[class] {
 	opacity: 1;
 }
 
-.token.class-name {
-    color: var(--code-theme-class-name);
-    font-weight: var(--code-theme-class-name-font-weight);
-}
+
 
 pre.language-bash:first-of-type {
 	box-shadow: 0 22px 70px 4px rgba(0, 0, 0, 0.56);  
@@ -191,6 +192,17 @@ pre .token.function {
 pre .token.keyword {
 	color: var(--code-keyword-color,#66d9ef);
 }
+
+pre .token.string {
+	color: var(--code-string-color,#a6e22e );
+}
+
+pre .token.class-name {
+    color: var(--code-theme-class-name);
+    font-weight: var(--code-theme-class-name-font-weight);
+}
+
+
 
 
 /* Left col */

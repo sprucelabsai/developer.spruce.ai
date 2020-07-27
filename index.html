@@ -216,37 +216,46 @@
                 };
 
                 var coverGradientRules = {
-					'cover-background-mask-opacity': '1',
+                    "cover-background-mask-opacity": "1",
                     "cover-background-mask-visibility": "visible",
                     "cover-mask-background":
                         "linear-gradient(146deg, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0) 100%)",
                 };
 
-                var mint = { "theme-color": "#7CD7AB" };
-                var yellow = Object.assign({}, {
-                    "theme-color": "#F7D352",
-                    "theme-color2": "#F2B149",
-                });
+                var mint = { "theme-color": "#7CD7AB" , "code-keyword-color": "#7CD7AB"};
+                var yellow = Object.assign(
+                    {},
+                    {
+                        "theme-color": "#F7D352",
+                        "theme-color2": "#F2B149",
+                        "code-comment-color": "#bb660f",
+                        "code-function-color": "#fbcd55",
+                        "code-keyword-color": "#fbcd55",
+                        "code-string-color": "#fbcd55",
+                        "code-background":
+                            "radial-gradient(circle, #423220 0%, #20160c 100%)",
+                    }
+                );
                 var black = Object.assign({}, whiteRules, {
                     "theme-color": "#000000",
                 });
                 var green = Object.assign({}, coverGradientRules, whiteRules, {
                     "theme-color": "#259760",
                     "search-clear-icon-color2": "#259760",
-                    "code-comment-color": "#349d67",
-                    "code-function-color": "#17d372",
-                    "code-keyword-color": "#8cd4af",
-                    "code-background":
-                        "radial-gradient(circle, rgba(46,73,60,1) 0%, rgba(35,61,47,1) 100%)",
                 });
 
                 var blue = Object.assign({}, coverGradientRules, whiteRules, {
                     "theme-color": "#0855CA",
                     "search-clear-icon-color2": "#0855CA",
-				});
-				
+                    "code-theme-text": "#38d1fc",
+                    "code-comment-color": "white",
+                    "code-function-color": "rgba(56, 209, 252, 1)",
+                    "code-keyword-color": "white",
+                    "code-string-color": "white",
+                    "code-background": "black",
+                });
 
-                var colors = [yellow,blue, yellow, mint, green, black]
+                var colors = [blue, yellow,blue, yellow, mint, green]
                 var selected =
                     colors[Math.floor(Math.random() * colors.length)];
 
