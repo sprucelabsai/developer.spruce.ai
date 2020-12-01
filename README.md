@@ -34,7 +34,7 @@ Good augmentation is much harder to achieve than good automation. See, there are
 
 Amazon rocks, doesn't it? Pretty much everything you need delivered right to your door. If Becca tried to compete with Amazon, she'd get smoked. She's gotta focus on the things that make brick-and-mortar unique. This means she needs to be building human-to-human relationships.
 
-Luckily, Becca has huge a advantage. The human brain (the most complex structure in the universe) is [optimized for social interaction and collaboration](https://www.amazon.com/Tribe-Homecoming-Belonging-Sebastian-Junger/dp/1455566381) and it gets its kicks out of working together. Machines can't compete. There is a gotchya, though; the collaboration has to be face-to-face (or hand-in-hand) to get the full effect and no, [social media doesn't cut it](https://www.youtube.com/watch?v=YPmNf362_K0).
+Luckily, Becca has huge a advantage. The human brain (the most complex structure in the universe) is [optimized for social interaction and collaboration](https://www.amazon.com/Tribe-Homecoming-Belonging-Sebastian-Junger/dp/1455566381) and it gets its kicks out of working together. Machines can't compete. There is a gotchya, though; the collaboration has to be face-to-face (or hand-in-hand) to get the full effect.
 
 ## Promote human-to-human connection
 
