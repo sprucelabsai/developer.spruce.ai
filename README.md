@@ -20,7 +20,7 @@ Skills are programs with a purpose: [human-to-human connection](https://vimeo.co
 They accomplish this in one of two ways:
 
 1. Automation - tech runs the show with oversight from humans
-2. Augmentation - humans run the show using technology as force multiplier
+2. Augmentation - humans run the show using technology as a force multiplier
 
 ## Automation
 
