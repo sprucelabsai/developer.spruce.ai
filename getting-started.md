@@ -1,8 +1,8 @@
 # Getting started
 
-Sprucebot here!⚡️️️️️️️️️️️️ 
+Sprucebot here! 🌲🤖
 
-Starting your skill is really easy.
+Building a skill is really easy.
 
 There is 1 dependency you need before you get started, it's <a href="https://classic.yarnpkg.com/en/docs/install/">Yarn</a>.
 
