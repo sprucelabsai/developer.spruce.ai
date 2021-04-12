@@ -9,13 +9,15 @@ My name is Sprucebot 🌲🤖 and I'll be your robot co-pilot on the mission to 
 
 Together, we're going to build a skill!
 
+<iframe class="video" src="https://player.vimeo.com/video/196923365?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="100%" height="150" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Vignette 1 - Human Connection"></iframe>
+
 ## What is a skill?
 
-A Skill is a "micro-app". That is, a bit of functionality that is hyper-focused facilitating a specific real world experience. 
+A Skill is a "micro-app" or a "macro-service". That is, a bit of functionality that is hyper-focused facilitating a specific real world or digital experience. 
 
 ## Skills manifesto
 
-Skills are programs with a purpose: [human-to-human connection](https://vimeo.com/204933933).
+Skills are programs with a purpose: human-to-human connection.
 
 They accomplish this in one of two ways:
 

@@ -15,6 +15,8 @@
         "@sprucelabs/semantic-release": "^1.0.1",
         "conventional-changelog-sprucelabs": "^1.1.0",
         "docsify": "^4.8.6",
+        "eslint": "^7.24.0",
+        "eslint-config-spruce": "^10.9.136",
         "semantic-release": "^15.10.6"
     }
 }

@@ -1,22 +1,25 @@
-:root {
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@200;600;700&display=swap");
 
+:root {
 	/* header logo */
 	--header-logo-mark-fill: #fff;
-	--header-logo-name-fill: #000;
-	--sprucebot-avatar-color: #000;
-	--left-nav-logo-mark: #fff;
-	--left-nav-logo-text: #000;
+	--header-logo-name-fill: white;
+	--sprucebot-avatar-color: white;
+	--left-nav-logo-mark: #514a9d;
+	--left-nav-logo-text: #514a9d;
+
+	--code-function-color:  #24c6dc;
 
     /* base */
     --theme-color: transparent !important;
     --theme-color2: transparent;
-    --dark-theme-color: #08090B;
-    --base-font-family: "Muli", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --dark-theme-color:white;
+    --base-font-family: Mulish;
     --base-font-size: 16px;
     --base-line-height: 1.7;
 
 	/* cover */;
-    --cover-background-color: transparent;
+    /* --cover-background-color: linear-gradient(to left, #24c6dc, #514a9d) !important; */
     --cover-color: var(--dark-theme-color);
     --cover-heading-color: var(--dark-theme-color);
     --cover-heading-font-size: 2rem;
@@ -26,12 +29,11 @@
     --cover-button-border-radius: 20px;
     --cover-button-background: #fff;
     --cover-button-background--hover: #fff;
-    --cover-button-color: --dark-theme-color;
-	--cover-button-color--hover: var(--theme-color);
+    --cover-button-color: black;
+    --cover-button-primary-color: black;
+	--cover-button-color--hover: #514a9d;
 	--cover-max-width: 700px;
 
-	/* cover section */
-	--cover-background: var(--theme-color) !important;
 
     /* nav */
     --sidebar-nav-link-color: #000;
@@ -41,11 +43,11 @@
 
     /* code */
     --code-font-family: Menlo, Monaco, 'Courier New', monospace;
-    --code-theme-background: var(--dark-theme-color);
-    --code-theme-text: var(--theme-color);
+    --code-theme-background: linear-gradient(to left, #24c6dc, #514a9d);
+    --code-theme-text: white;
     --code-theme-comment: #8BC4EE;
     --code-theme-keyword: #C7DBF9;
-    --code-theme-class-name:var(--theme-color);
+    --code-theme-class-name: white;
     --code-theme-class-name-font-weight: 800;
     --code-theme-punctuation: #F6F6F4;
     --code-theme-function: #CCF1DF;
@@ -54,8 +56,9 @@
 	
 	/* inline code */
 	--code-inline-border-radius: 6px;
-	--code-inline-background: var(--theme-color) !important;
+	--code-inline-background: linear-gradient(to left, #24c6dc, #514a9d) !important;
 	--code-inline-color: var(--dark-theme-color) !important;
+
 
     /* panels */
     --docsify-example-panels-left-panel-width: 50%;
@@ -86,8 +89,13 @@
 	fill: var(--left-nav-logo-text);
 }
 
+body .cover::after,
+body .cover::before {
+	display: none;
+}
+
 body .cover {
-	background: var(--cover-background) !important;
+	background: linear-gradient(to left, #24c6dc, #514a9d) !important;
 }
 
 body .cover .cover-main {
@@ -116,9 +124,8 @@ body .cover .cover-main h1 svg {
    text-indent: 10px; 
 } */
 
-body .cover .cover-main > p a {
+body .cover .cover-main > p:not(:first-of-type) a {
     background-color: #fff !important;
-    color: var(--dark-theme-color) !important;
 }
 
 .github-corner svg {
@@ -208,4 +215,8 @@ pre .token.class-name {
 /* Left col */
 .sidebar-nav p:first-child {
 	color: var(--sidebar-nav-link-color);
+}
+
+.video {
+	transition: all 1s;
 }

@@ -1,6 +1,6 @@
 # Getting started
 
-Sprucebot here! 🌲🤖
+Sprucebot again! 🌲🤖
 
 Building a skill is really easy.
 
