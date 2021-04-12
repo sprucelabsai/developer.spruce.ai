@@ -17,6 +17,6 @@
         "docsify": "^4.8.6",
         "eslint": "^7.24.0",
         "eslint-config-spruce": "^10.9.136",
-        "semantic-release": "^15.10.6"
+        "semantic-release": "^17.2.3"
     }
 }
