@@ -1,3 +1,10 @@
+# [2.0.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.10.20...v2.0.0) (2021-04-12)
+
+
+### Breaking Changes
+
+* prepped for first release ([318e643](https://github.com/sprucelabsai/developer.spruce.ai/commit/318e643))
+
 ## [1.10.20](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.10.19...v1.10.20) (2020-12-01)
 
 ## [1.10.19](https://github.com/sprucelabsai/developer.spruce.ai/compare/v1.10.18...v1.10.19) (2020-12-01)
