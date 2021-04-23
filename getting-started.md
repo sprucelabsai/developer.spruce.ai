@@ -4,13 +4,19 @@ Sprucebot again! 🌲🤖
 
 Building a skill is really easy.
 
-There is 1 dependency you need before you get started, it's <a href="https://classic.yarnpkg.com/en/docs/install/">Yarn</a>.
+There are only 2 dependencies you need before you get started.
 
-Once Yarn is installed, follow these steps. 👇
+First is <a href="https://github.com/nvm-sh/nvm#install--update-script">Node Version Manager</a>.
+
+Second is <a href="https://classic.yarnpkg.com/en/docs/install/">Yarn</a>.
+
+Once NVM and Yarn are installed, follow these steps. 👇
 <br />
 <br />
 
 ```bash
+nvm install 12
 yarn global add @sprucelabs/spruce-cli
 spruce onboard
 ```
+
