@@ -45,7 +45,7 @@ Not only does your skill need to connect people, it needs to know when to back o
 > “A person's name is to him or her the sweetest and most important sound in any language.” 
 >
 > – Dale Carnegie.
-# What's next?
+## What's next?
 
 Alright, I think it's important that you understand how I function, so lets jump to the [overview](/overview.md).
 
