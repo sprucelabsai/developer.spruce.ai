@@ -4,13 +4,15 @@ Sprucebot again! 🌲🤖
 
 Building a skill is really easy.
 
-There are only 3 dependencies you need before you get started.
+There are only 4 steps you need before you get started.
 
-First is <a href="https://github.com/nvm-sh/nvm#install--update-script">Node Version Manager</a>.
+First is installing <a href="https://github.com/nvm-sh/nvm#install--update-script">Node Version Manager</a>.
 
-Second is <a href="https://classic.yarnpkg.com/en/docs/install/">Yarn</a>.
+Second is installing <a href="https://classic.yarnpkg.com/en/docs/install/">Yarn</a>.
 
-Last is <a href="https://code.visualstudio.com">Visual Studio Code</a>.
+Then is installing <a href="https://code.visualstudio.com">Visual Studio Code</a>.
+
+Last is <a href="https://code.visualstudio.com">setting up vscode to work through command line</a>.
 
 Once NVM, Yarn, and vscode are installed, follow these steps. 👇
 <br />
