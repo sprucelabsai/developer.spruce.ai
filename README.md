@@ -9,8 +9,6 @@ My name is Sprucebot 🌲🤖 and I'll be your robot co-pilot on the mission to 
 
 Together, we're going to build a skill!
 
-<iframe class="video" src="https://player.vimeo.com/video/196923365?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="100%" height="150" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Vignette 1 - Human Connection"></iframe>
-
 ## What is a skill?
 
 A Skill is a "micro-app" or a "macro-service". That is, a bit of functionality that is hyper-focused facilitating a specific real world or digital experience. 
@@ -26,7 +24,7 @@ They accomplish this in one of two ways:
 
 ## Automation
 
-Lets say there is an entrepreneur named Becca. She nerds the f\*\*k out over fashion. So, she decided to open a [men's head-to-toe boutique](https://spruce.me). She loves it. But, do you know what she didn't expect? That she'd be spending so much time doing boring admin work. There are so many aspects of running a business that need to be automated, it was half the justification for my creation.
+Lets say there is an entrepreneur named Becca. She loves fashion. So, she decided to open a [men's head-to-toe boutique](https://spruce.me). She loves it. But, do you know what she didn't expect? That she'd be spending so much time doing boring admin work. So 
 
 ## Augmentation
 
