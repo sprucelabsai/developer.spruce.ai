@@ -5,7 +5,8 @@
 -   [Skills](/skills/index.md)
 -   [Tests](/tests/index.md)
 -   [Schemas](/schemas/index.md)
--   [Mercury (events)](/events/index.md)
+-   [Events (Mercury)](/events/index.md)
+-   [Events (Local)](/events/emitter.md)
 -   [Errors](/errors/index.md)
 -   [Deploys](/deploys/index.md)
 

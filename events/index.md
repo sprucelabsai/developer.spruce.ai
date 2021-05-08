@@ -12,9 +12,4 @@ spruce listen.event
 spruce sync.events
 
 ```
-## Events
-
-<br />
-<br />
-<img src="../_images/event-types.png">
 
