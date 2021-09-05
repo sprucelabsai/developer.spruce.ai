@@ -24,7 +24,7 @@ They accomplish this in one of two ways:
 
 ## Automation
 
-Lets say there is an entrepreneur named Becca. She loves fashion. So, she decided to open a [men's head-to-toe boutique](https://spruce.me). She loves it. But, do you know what she didn't expect? That she'd be spending so much time doing boring admin work. So 
+Lets say there is an entrepreneur named Becca. She loves fashion. So, she decided to open a [men's head-to-toe boutique](https://spruce.me). She loves it. But, do you know what she didn't expect? That she'd be spending so much time doing boring admin work. Automation is a way to take the things a machine can do better and deligate them to a machine! These are things like checkout, reports, schedule management, etc.
 
 ## Augmentation
 
