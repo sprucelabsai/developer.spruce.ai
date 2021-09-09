@@ -16,7 +16,7 @@ Once NVM, Yarn, and vscode are ready, follow these steps. 👇
 <br />
 
 ```bash
-nvm install 12
+nvm install 16
 yarn global add @sprucelabs/spruce-cli
 spruce onboard
 ```
