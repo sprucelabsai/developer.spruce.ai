@@ -1,22 +1,55 @@
 {
-    "version": "2.2.0",
-    "name": "developer.spruce.ai",
-    "description": "Spruce Experience Platform Documentation. https://developer.spruce.ai",
-    "scripts": {
-        "docs": "docsify serve -p 3100 ./",
-        "release": "semantic-release"
-    },
-    "dependencies": {
-        "docsify-cli": "^4.3.0"
-    },
-    "devDependencies": {
-        "@semantic-release/changelog": "^3.0.0",
-        "@semantic-release/git": "^7.0.1",
-        "@sprucelabs/semantic-release": "^1.0.1",
-        "conventional-changelog-sprucelabs": "^1.1.0",
-        "docsify": "^4.8.6",
-        "eslint": "^7.24.0",
-        "eslint-config-spruce": "^10.9.136",
-        "semantic-release": "^15.10.6"
-    }
+  "version": "2.2.0",
+  "name": "developer.spruce.ai",
+  "description": "Spruce Experience Platform Documentation. https://developer.spruce.ai",
+  "skill": {
+    "upgradeIgnoreList": [
+      "@sprucelabs/resolve-path-aliases",
+      "@types/node",
+      "chokidar-cli",
+      "concurrently",
+      "prettier",
+      "ts-node",
+      "tsc-watch",
+      "typescript"
+    ]
+  },
+  "scripts": {
+    "clean": "yarn clean.build",
+    "clean.all": "yarn clean.dependencies && yarn clean.build",
+    "clean.build": "rm -rf build/",
+    "clean.dependencies": "rm -rf node_modules/ package-lock.json yarn.lock",
+    "docs": "docsify serve -p 3100 ./",
+    "rebuild": "yarn clean.all && yarn && yarn build.dev",
+    "release": "semantic-release",
+    "update.dependencies": "yarn clean.dependencies && yarn",
+    "build.ci": "true",
+    "build.dev": "true",
+    "build.copy-files": "true",
+    "build.resolve-paths": "true",
+    "build.tsc": "true",
+    "fix.lint": "true",
+    "lint": "true",
+    "lint.tsc": "true",
+    "post.watch.build": "true",
+    "resolve-paths.lint": "true",
+    "test": "true",
+    "watch.build.dev": "true",
+    "watch.lint": "true",
+    "watch.rebuild": "true",
+    "watch.tsc": "true"
+  },
+  "dependencies": {
+    "docsify-cli": "^4.4.3"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.0",
+    "@semantic-release/git": "^10.0.0",
+    "@sprucelabs/semantic-release": "^4.0.7",
+    "conventional-changelog-sprucelabs": "^1.1.2",
+    "docsify": "^4.12.1",
+    "eslint": "^8.0.0",
+    "eslint-config-spruce": "^10.10.15",
+    "semantic-release": "^18.0.0"
+  }
 }
