@@ -2,6 +2,7 @@
 -   [Introduction](/)
 -   [Overview](/overview.md)
 -   [Getting started](/getting-started.md)
+-   [CLI](/cli.md)
 -   [Skills](/skills/index.md)
 -   [Tests](/tests/index.md)
 -   [Schemas](/schemas/index.md)

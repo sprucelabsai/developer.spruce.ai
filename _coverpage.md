@@ -12,5 +12,6 @@
 Build experiences, connect people. (WIP)
 </h1>
 
-[Lets go already!!! 👇](/?id=introduction)
+[Let's go already!!! 👇](/?id=introduction)
+[Skip intro ⚡️](/getting-started)
 

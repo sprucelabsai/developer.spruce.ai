@@ -21,3 +21,6 @@ yarn global add @sprucelabs/spruce-cli
 spruce onboard
 ```
 
+## What's next?
+
+It's time to familiarize yourselve with the [Command Line Interface](/cli).
