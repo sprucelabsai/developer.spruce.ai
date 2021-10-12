@@ -232,6 +232,10 @@ body .sidebar .search input[type="search"] {
 	border: 1px solid rgb(77,77,77);
 }
 
+#architecture {
+	width:100%;
+}
+
 @media screen and (max-width: 500px) {
 	.markdown-section {
 		padding-right: 0px;

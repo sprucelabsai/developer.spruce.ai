@@ -1,4 +1,4 @@
-<img src="../_images/infographic.png">
+<img src="../_images/infographic.svg" id="architecture">
 
 ## What's next?
 
