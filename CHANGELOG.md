@@ -1,3 +1,11 @@
+## [2.2.1](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.2.0...v2.2.1) (2021-10-12)
+
+
+### Bug Fixes
+
+* don't try to publish to npm ([de591c4](https://github.com/sprucelabsai/developer.spruce.ai/commit/de591c4))
+* update release.config.js for [@sprucelabs](https://github.com/sprucelabs)/semantic-release ([2fdfe13](https://github.com/sprucelabsai/developer.spruce.ai/commit/2fdfe13))
+
 # [2.2.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.1.1...v2.2.0) (2021-10-12)
 
 
