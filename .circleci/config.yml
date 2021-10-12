@@ -67,6 +67,7 @@ workflows:
   do_build:
     jobs:
       - release_prod:
+          context: public_package_publish
           filters:
             branches:
               only:
