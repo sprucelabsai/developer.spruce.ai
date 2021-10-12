@@ -209,9 +209,6 @@ pre .token.class-name {
     font-weight: var(--code-theme-class-name-font-weight);
 }
 
-
-
-
 /* Left col */
 .sidebar-nav p:first-child {
 	color: var(--sidebar-nav-link-color);
@@ -219,4 +216,11 @@ pre .token.class-name {
 
 .video {
 	transition: all 1s;
+}
+
+@media screen and (max-width: 500px) {
+	.markdown-section {
+		padding-right: 0px;
+		padding-left: 24px;
+	}
 }
