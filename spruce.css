@@ -218,6 +218,14 @@ pre .token.class-name {
 	transition: all 1s;
 }
 
+body .sidebar>h1 {
+	text-align: left;
+}
+
+body .sidebar>h1 img {
+	height: 60px;
+}
+
 @media screen and (max-width: 500px) {
 	.markdown-section {
 		padding-right: 0px;
