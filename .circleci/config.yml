@@ -1,4 +1,6 @@
-version: 1
+version: 2.1
+orbs:
+  hub: yasuhiroki/hub@0.0.2
 jobs:
   release_prod:
     docker:
