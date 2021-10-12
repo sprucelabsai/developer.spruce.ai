@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.0.19...v2.1.0) (2021-10-12)
+
+
+### Features
+
+* cli configuration options ([83c3f29](https://github.com/sprucelabsai/developer.spruce.ai/commit/83c3f29))
+
 ## [2.0.19](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.0.18...v2.0.19) (2021-09-15)
 
 ## [2.0.18](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.0.17...v2.0.18) (2021-09-09)
