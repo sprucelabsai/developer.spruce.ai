@@ -2,10 +2,33 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "type": "npm",
-            "script": "docs",
+            "label": "problem.watcher",
+            "command": "yarn",
             "group": "build",
-            "label": "docs",
+            "args": [
+                "watch.tsc",
+                "--noEmit",
+                "--project",
+                "tsconfig.json"
+            ],
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+            "isBackground": true,
+            "presentation": {
+                "reveal": "never",
+                "focus": false
+            },
+            "problemMatcher": {
+                "base": "$tsc-watch",
+                "applyTo": "allDocuments"
+            }
+        },
+        {
+            "type": "npm",
+            "script": "watch.build.dev",
+            "group": "build",
+            "label": "watch.build.dev",
             "isBackground": true,
             "runOptions": {
                 "runOn": "folderOpen"
@@ -15,6 +38,50 @@
                 "panel": "dedicated",
                 "focus": false,
                 "reveal": "silent"
+            }
+        },
+        {
+            "label": "test.file",
+            "command": "spruce",
+            "args": [
+                "test",
+                "--inspect",
+                "5200",
+                "--pattern",
+                "${fileBasenameNoExtension}",
+                "--watchMode",
+                "standard"
+            ],
+            "promptOnClose": false,
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "test.reporter",
+            "command": "spruce",
+            "args": [
+                "test",
+                "--shouldHoldAtStart",
+                "true",
+                "--watchMode",
+                "smart"
+            ],
+            "promptOnClose": false,
+            "group": "test",
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+            "presentation": {
+                "panel": "shared",
+                "focus": true,
+                "reveal": "always"
             }
         },
         {

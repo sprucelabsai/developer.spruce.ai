@@ -11,16 +11,15 @@ There are only 4 steps you need before you get started.
 3. Install <a href="https://code.visualstudio.com">Visual Studio Code (vscode)</a>.
 4. Setup vscode <a href="https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line">vscode to work through command line</a>.
 
-Once NVM, Yarn, and vscode are ready, follow these steps. 👇
+Once Node, Yarn, and vscode are ready, follow these steps. 👇
 <br />
 <br />
 
 ```bash
-nvm install 16
 yarn global add @sprucelabs/spruce-cli
 spruce onboard
 ```
 
 ## What's next?
 
-It's time to familiarize yourselve with the [Command Line Interface](/cli).
+Ready to work how the gang at Spruce works? Let's get vscode setup for [optimal development](/vscode/index).
