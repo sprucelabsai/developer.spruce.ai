@@ -107,9 +107,13 @@ body .cover .mask {
 	background: var(--cover-mask-background, transparent);
 }
 
+body .sidebar-toggle .sidebar-toggle-button {
+	background-color: rgba(255,255,255,0.7);
+}
+
 body .cover .cover-main > p:first-child {
     position: absolute;
-    top: 0px;
+    top: 10px;
     left: 50%;
     transform: translate(-50%);
 }
@@ -238,7 +242,8 @@ body .sidebar .search input[type="search"] {
 
 @media screen and (max-width: 500px) {
 	.markdown-section {
+		padding-top: 50px;
 		padding-right: 0px;
-		padding-left: 24px;
+		padding-left: 0px;
 	}
 }

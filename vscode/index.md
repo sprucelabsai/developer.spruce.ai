@@ -9,7 +9,6 @@ spruce setup.vscode
 ```
 
 
-
 ## What's next?
 
 It's time to familiarize yourself with the [Command Line Interface](/cli).
