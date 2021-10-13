@@ -24,17 +24,17 @@ They accomplish this in one of two ways:
 
 ## Automation
 
-Lets say there is an entrepreneur named Becca. She loves fashion. So, she decided to open a [men's head-to-toe boutique](https://spruce.me). She loves it. But, do you know what she didn't expect? That she'd be spending so much time doing boring admin work. Automation is a way to take the things a machine can do better and deligate them to a machine! These are things like checkout, reports, schedule management, etc.
+Lets say there is an entrepreneur named Becca. She loves fashion. So, she decided to open a [men's head-to-toe boutique](https://spruce.me). She loves it. But, do you know what she didn't expect? That she'd be spending so much time doing boring admin work. Automation is a way to take the things a machine can do better and deligate them to a machine! These are things like checkout, reports, schedule management, etc. Automation done right allows Becca to focus on the things she loves and the people that are part of it.
 
 ## Augmentation
 
-Good augmentation is much harder to achieve than good automation. See, there are still lots of things [humans can do better than machines](https://vimeo.com/290341746). Good augmentation does not replace, but supports those things. Things like memory, or the volume of your voice.
+Becca may greet hundreds of guests a day. How in the world is she supposed to personalize the experience for each of them when it's impossible to even remember their names? Good augmentation is much harder to achieve than good automation. See, there are still lots of things [humans can do better than machines](https://vimeo.com/290341746). Good augmentation does not replace, but supports those things. Things like memory, or the volume of your voice.
 
 ## Un-Amazon'able
 
 Amazon rocks, doesn't it? Pretty much everything you need delivered right to your door. If Becca tried to compete with Amazon, she'd get smoked. She's gotta focus on the things that make brick-and-mortar unique. This means she needs to be building human-to-human relationships.
 
-Luckily, Becca has huge a advantage. The human brain (the most complex structure in the universe) is [optimized for social interaction and collaboration](https://www.amazon.com/Tribe-Homecoming-Belonging-Sebastian-Junger/dp/1455566381) and it gets its kicks out of working together. Machines can't compete. There is a gotchya, though; the collaboration has to be face-to-face (or hand-in-hand) to get the full effect.
+Luckily, Becca has huge a advantage. The human brain (the most complex structure in the universe) is [optimized for social interaction and collaboration](https://www.amazon.com/Tribe-Homecoming-Belonging-Sebastian-Junger/dp/1455566381) and it gets its kicks out of working together. Machines can't compete. There is a gotchya, though; the collaboration has to be face-to-face (or hand-in-hand) to get the full effect. [Zoom does not count](https://news.stanford.edu/2021/02/23/four-causes-zoom-fatigue-solutions/).
 
 ## Promote human-to-human connection
 
