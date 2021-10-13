@@ -28,7 +28,7 @@ Lets say there is an entrepreneur named Becca. She loves fashion. So, she decide
 
 ## Augmentation
 
-Becca may greet hundreds of guests a day. How in the world is she supposed to personalize the experience for each of them when it's impossible to even remember their names? Good augmentation is much harder to achieve than good automation. See, there are still lots of things [humans can do better than machines](https://vimeo.com/290341746). Good augmentation does not replace, but supports those things. Things like memory, or the volume of your voice.
+Becca may greet hundreds of guests a day. How in the world is she supposed to personalize the experience for each of them when it's impossible to even remember their names? Good augmentation is much harder to achieve than good automation. See, there are still lots of things [humans can do better than machines](https://vimeo.com/196923365/eb9c76f29b). Good augmentation does not replace, but supports those things. Things like memory, or the volume of your voice.
 
 ## Un-Amazon'able
 
