@@ -1,7 +1,7 @@
 # Visual Studio Code
 
 
-If you didn't follow the Getting Started guide, you can run the following from any node project to setup vscode.
+If you didn't follow the [Getting Started](/getting-started) guide, you can run the following from any node project to setup vscode.
 
 ```bash
 spruce setup.vscode

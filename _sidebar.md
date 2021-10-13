@@ -1,6 +1,7 @@
 -   [Introduction](/)
 -   [Overview](/overview.md)
 -   [Getting started](/getting-started.md)
+-   [Visual Studio Code](/vscode/index.md)
 -   [CLI](/cli.md)
 -   [Skills](/skills/index.md)
 -   [Tests](/tests/index.md)
