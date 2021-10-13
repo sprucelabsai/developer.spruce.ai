@@ -1,3 +1,5 @@
+## [2.2.11](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.2.10...v2.2.11) (2021-10-13)
+
 ## [2.2.10](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.2.9...v2.2.10) (2021-10-13)
 
 ## [2.2.9](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.2.8...v2.2.9) (2021-10-13)
