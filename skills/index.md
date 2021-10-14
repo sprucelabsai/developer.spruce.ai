@@ -1,8 +1,11 @@
 # Skills
 ****
 ```bash
-# Creating your new skill (in the current directory)
-spruce create.skill
+# Creating your new skill
+spruce create.skill [directory]
+
+# Register your skill
+spruce register
 
 ```
 

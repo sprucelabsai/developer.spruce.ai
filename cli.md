@@ -41,3 +41,7 @@ You can override the options passed to any `spruce` command by setting `skill.co
     }
 }
 ```
+
+## What's next?
+
+Let's get building your first [Skill View](/views/index)!
