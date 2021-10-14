@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.2.11...v2.3.0) (2021-10-14)
+
+
+### Features
+
+* skill views ([a9d0970](https://github.com/sprucelabsai/developer.spruce.ai/commit/a9d0970))
+
 ## [2.2.11](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.2.10...v2.2.11) (2021-10-13)
 
 ## [2.2.10](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.2.9...v2.2.10) (2021-10-13)
