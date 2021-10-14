@@ -37,7 +37,7 @@ This is your primary view accessible by your Skill's slug. For example, the `Adv
 @test()
 protected static async canRenderRootSkillView() {
     const vc = this.Controller('adventure.root', {})
-}
+}1
 
 ```
 
@@ -61,3 +61,90 @@ protected static async canRenderRootSkillView() {
 Your RootViewController should always successfully render. If this test ever fails, you have problems.
 
 ## View Controller Assertions
+
+The [`vcAssertUtil`](https://github.com/sprucelabsai/heartwood-view-controllers/blob/master/src/tests/utilities/vcAssert.utility.ts) is the primary mechanism for building failing tests. For example, you may want to ensure your `RootViewController` renders 2 `Cards`.
+
+### 1. Failing test
+
+This will involve moving the instantiation of your vc to the `beforeEach` and then using `vcAssertUtil` to assert that your vc renders 2 cards. 
+
+```ts
+import { vcAssertUtil } from '@sprucelabs/heartwood-view-controllers'
+import { AbstractViewControllerTest } from '@sprucelabs/spruce-view-plugin'
+import RootSkillViewController from '../../skillViewControllers/Root.svc'
+
+export default class RootViewControllerTest extends AbstractViewControllerTest {
+
+    private static vc: RootSkillViewController
+
+    protected static async beforeEach() {
+		await super.beforeEach()
+		this.vc = this.Controller('adventure.root', {})
+	}
+
+    @test()
+    protected static async canRenderRootSkillView() {
+        const model = this.vc.render()
+        assert.isTruthy(model)
+    }
+
+	@test()
+	protected static async renders2Cards() {
+		vcAssertUtil.assertSkillViewRendersCards(this.vc, 2)
+	}
+}
+
+```
+
+### 1. Passing the test
+
+Instantiate 2 `Cards` in the constructor of your vc and render them in your vc's `render`.
+
+```ts
+import {
+	AbstractSkillViewController,
+	CardViewController,
+	ViewControllerOptions,
+} from '@sprucelabs/heartwood-view-controllers'
+
+export default class RootSkillViewController extends AbstractSkillViewController {
+    public static id = 'root'
+    private card1Vc: CardViewController
+    private card2Vc: CardViewController
+
+    public constructor(options: ViewControllerOptions) {
+		super(options)
+
+		this.card1Vc = this.vcFactory.Controller('card', {
+			header: {
+				title: 'My great card!',
+			},
+			body: {
+				isLoading: true
+			},
+		})
+		
+        this.card2Vc = this.vcFactory.Controller('card', {
+			header: {
+				title: 'My great card 2!',
+			},
+			body: {
+				isLoading: true
+			},
+		})
+	}
+
+    public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView {
+		return {
+			layouts: [
+				{
+					cards: [this.formsCardVc.render()],
+				},
+				{
+					cards: [this.completedCardVc.render()],
+				},
+			],
+		}
+	}
+}
+```

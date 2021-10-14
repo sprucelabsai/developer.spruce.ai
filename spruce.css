@@ -10,6 +10,9 @@
 
 	--code-function-color:  #24c6dc;
 
+	--heading-h2-font-weight: 500;
+	--heading-font-weight: 500;
+
     /* base */
     --theme-color: transparent !important;
     --theme-color2: transparent;
