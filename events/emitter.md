@@ -1,4 +1,5 @@
 # Event emitter
+***
 
 A strictly typed, payload validating event emitter for use in any project.
 

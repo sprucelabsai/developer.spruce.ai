@@ -1,4 +1,5 @@
 # Skill Views
+***
 
 Skill Views are top level views, comprised of Views, and controlled by `SkillViewControllers`. Every skill gets a `RootSkillViewController` that is loaded by the Skill's slug. A Skill can have as many Skill Views (and Views) as desired.
 
