@@ -1,6 +1,7 @@
 # Errors
 Flexible, typed, and informative error reporting.
 ****
+
 ```bash
 # Creating a new error
 spruce create error

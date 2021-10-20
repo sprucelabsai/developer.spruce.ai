@@ -1,6 +1,7 @@
 # Versioning
 
 Selectively roll out and test the newest versions of experiences.
+****
 
 ```bash
 spruce version.create [date]

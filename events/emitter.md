@@ -1,7 +1,7 @@
 # Event emitter
+A strictly typed, payload validating event emitter for use in any project.
 ***
 
-A strictly typed, payload validating event emitter for use in any project.
 
 ## Step 1: Dependencies
 

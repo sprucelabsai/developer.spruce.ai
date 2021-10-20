@@ -1,6 +1,6 @@
 # Mercury
-****
 The event engine that facilitates the communication between Skills.
+****
 
 ```bash
 # Introducing new events to Mercury

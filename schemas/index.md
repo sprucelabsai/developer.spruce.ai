@@ -1,6 +1,6 @@
 # Schemas
-****
 Runtime and static type checking working together to elevate code quality and data validity.
+***
 
 ```bash
 # Create a new schema builder
