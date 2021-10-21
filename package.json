@@ -43,7 +43,7 @@
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.0",
     "@semantic-release/git": "^10.0.0",
-    "@sprucelabs/semantic-release": "^4.0.7",
+    "@sprucelabs/semantic-release": "^4.0.8",
     "conventional-changelog-sprucelabs": "^1.1.2",
     "docsify": "^4.12.1",
     "docsify-cli": "^4.4.3",
