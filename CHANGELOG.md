@@ -1,3 +1,10 @@
+# [2.5.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.4.2...v2.5.0) (2021-10-23)
+
+
+### Features
+
+* redirec to real test page ([d32cc18](https://github.com/sprucelabsai/developer.spruce.ai/commit/d32cc18))
+
 ## [2.4.2](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.4.1...v2.4.2) (2021-10-21)
 
 ## [2.4.1](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.4.0...v2.4.1) (2021-10-20)
