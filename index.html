@@ -18,6 +18,10 @@
     <div id="app"></div>
     <script>
 
+        if (window.location.hash.includes('views/heartwood.watch')) {
+            window.location.replace('https://dev.spruce.bot/#views/heartwood.watch')
+        }
+
         window.$docsify = {
             name: "Sprucebot Guide",
             coverpage: true,
