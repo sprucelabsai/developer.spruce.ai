@@ -84,15 +84,48 @@ export default class RootViewControllerTest extends AbstractViewControllerTest {
 	}
 
     @test()
-    protected static async canRenderRootSkillView() {
+    protected static canRenderRootSkillView() {
         const model = this.vc.render()
         assert.isTruthy(model)
     }
 
 	@test()
-	protected static async renders2Cards() {
-		vcAssertUtil.assertSkillViewRendersCards(this.vc, 2)
+	protected static renders2Cards() {
+		vcAssertUtil.assertSkillViewRendersCards(this.vc, ['profile','equip'])
 	}
+
+	@test()
+	protected static async requiresLogin() {
+		await vcAssertUtil.assertRequiresLogin(this.vc)
+	}
+
+	@test()
+	protected static canGetPofileCard() {
+		const cardVc = vcAssertUtil.assertSkillViewRendersCard(this.vc, 'profile')
+		assert.isEqual(cardVc, this.vc.getProfileCardVc())
+	}
+	
+	@test()
+	protected static canGetEquipCard() {
+		const cardVc = vcAssertUtil.assertSkillViewRendersCard(this.vc, 'equip')
+		assert.isEqual(cardVc, this.vc.getEquipCardVc())
+	}
+
+	@test()
+	protected static async redirectsToAddOrganizationOnLoadIfNoCurrentOrganization() {
+		let wasHit = false
+
+		await this.Fixture('view')
+				.getRouter()
+				.on('did-redirect', () => {
+
+			wasHit = true
+		})
+
+		await this.load(this.vc)
+
+		assert.isTrue(wasHit)
+	} 
 }
 
 ```
@@ -110,13 +143,14 @@ import {
 
 export default class RootSkillViewController extends AbstractSkillViewController {
     public static id = 'root'
-    private card1Vc: CardViewController
-    private card2Vc: CardViewController
+    private profileCardVc: CardViewController
+    private equipCardVc: CardViewController
 
     public constructor(options: ViewControllerOptions) {
 		super(options)
 
-		this.card1Vc = this.vcFactory.Controller('card', {
+		this.profileCardVc = this.Controller('card', {
+			id: 'profile',
 			header: {
 				title: 'My great card!',
 			},
@@ -125,7 +159,8 @@ export default class RootSkillViewController extends AbstractSkillViewController
 			},
 		})
 		
-        this.card2Vc = this.vcFactory.Controller('card', {
+        this.equipCardVc = this.Controller('card', {
+			id: 'equip',
 			header: {
 				title: 'My great card 2!',
 			},
@@ -135,17 +170,105 @@ export default class RootSkillViewController extends AbstractSkillViewController
 		})
 	}
 
+	public getProfileCardVc() {
+		return this.profileCardVc
+	}
+
+	public getEquipCardVc() {
+		return this.equipCardVc
+	}
+
     public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView {
 		return {
 			layouts: [
 				{
-					cards: [this.formsCardVc.render()],
+					cards: [this.profileCardVc.render()],
 				},
 				{
-					cards: [this.completedCardVc.render()],
+					cards: [this.equipCardVc.render()],
 				},
 			],
 		}
 	}
 }
 ```
+
+## Testing lists
+```ts
+
+//test
+export default class RootViewControllerTest extends AbstractViewControllerTest {
+	@test()
+	protected static async rendersList() {
+		const vc = vcAssertUtil.assertCardRendersList(this.vc.getEquipCardVc())
+		await interactionUtil.clickInRow(vc, 2, 'edit')
+	}
+}
+
+//production
+class RootSkillviewController extends AbstractSkillViewController {
+	public constructor(options: ViewControllerOptions) {
+		super(options)
+
+		this.equipmentList = this.Controller('list', {...})
+
+	}
+}
+```
+
+## Testing Scope
+Scoping experience to a specific organization or location.
+
+```ts
+//test
+export default class RootViewControllerTest extends AbstractViewControllerTest {
+	@test()
+	protected static async doesNotRedirectWhenCurrentOrg() {
+		const organization = await this.Fixture(
+			'organization'
+		).seedDemoOrganization({
+			name: 'Root view controller',
+			phone: DEMO_NUMBER_ROOT_SVC,
+		})
+
+		const viewFixture = this.Fixture('view')
+
+		await viewFixture.loginAsDemoPerson(DEMO_NUMBER_ROOT_SVC)
+
+		viewFixture.getScope().setCurrentOrganization(organization.id)
+
+		let wasHit = false
+
+		await viewFixture.getRouter().on('did-redirect', () => {
+			wasHit = true
+		})
+
+		await this.load(this.vc)
+
+		assert.isFalse(wasHit)
+	}
+}
+
+//production
+class RootSkillviewController extends AbstractSkillViewController {
+	public async load(options: SkillViewControllerLoadOptions) {
+		const company = await options.scope.getCurrentOrganization()
+
+		if (!company) {
+			await options.router.redirect('organization.add' as any)
+			return
+		}
+
+		this.profileCardVc.setRouter(options.router)
+		this.profileCardVc.setIsBusy(false)
+	}
+}
+```
+
+
+
+## Test Hints
+
+1. Look at locations skill
+2. Use `spruce watch.views` and then visit the `https://developer.spruce.bot/#views/{{namespace}}.root`
+3. Checkout the `VcAssertUtil.test.ts` in `heartwood-view-controllers`
