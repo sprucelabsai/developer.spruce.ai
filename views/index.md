@@ -285,7 +285,8 @@ class RootSkillviewController extends AbstractSkillViewController {
 		super(options)
 
 		this.formVc = this.Controller('form', buildForm({
-			...
+			...,
+			onSubmit: this.handleSubmit.bind(this)
 		}))
 	}
 }
