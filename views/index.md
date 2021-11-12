@@ -296,6 +296,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 ## Test Hints
 
 1. Look at locations skill
+1. Look at forms skill
 2. Use `spruce watch.views` and then visit the `https://developer.spruce.bot/#views/{{namespace}}.root`
 3. Checkout the `VcAssertUtil.test.ts` in `heartwood-view-controllers`
 4. Give your buttons, list rows, and cards ids and assert against them
