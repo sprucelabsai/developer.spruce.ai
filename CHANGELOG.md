@@ -1,3 +1,11 @@
+# [2.6.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.5.3...v2.6.0) (2021-11-12)
+
+
+### Features
+
+* updates ([5b4a9cc](https://github.com/sprucelabsai/developer.spruce.ai/commit/5b4a9cc))
+* view doc updates ([36d9383](https://github.com/sprucelabsai/developer.spruce.ai/commit/36d9383))
+
 ## [2.5.3](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.5.2...v2.5.3) (2021-11-11)
 
 ## [2.5.2](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.5.1...v2.5.2) (2021-11-03)
