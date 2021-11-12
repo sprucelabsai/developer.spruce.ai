@@ -54,8 +54,8 @@ Your first test should be passing minus a type issue. Lets bring it home!
 ```ts
 @test()
 protected static async canRenderRootSkillView() {
-    const model = this.Controller('adventure.root', {}).render()
-    assert.isTruthy(model)
+    const vc = this.Controller('adventure.root', {}).render()
+    assert.isTruthy(vc)
 }
 ```
 
@@ -96,7 +96,7 @@ export default class RootViewControllerTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async requiresLogin() {
-		await vcAssertUtil.assertRequiresLogin(this.vc)
+		await vcAssertUtil.assertLoginIsRequired(this.vc)
 	}
 
 	@test()
@@ -155,7 +155,7 @@ export default class RootSkillViewController extends AbstractSkillViewController
 				title: 'My great card!',
 			},
 			body: {
-				isLoading: true
+				isBusy: true
 			},
 		})
 		
@@ -165,7 +165,7 @@ export default class RootSkillViewController extends AbstractSkillViewController
 				title: 'My great card 2!',
 			},
 			body: {
-				isLoading: true
+				isBusy: true
 			},
 		})
 	}
