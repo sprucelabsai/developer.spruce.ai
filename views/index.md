@@ -216,7 +216,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 }
 ```
 
-## Testing Scope
+## Testing scope
 Scoping experience to a specific organization or location.
 
 ```ts
@@ -265,6 +265,31 @@ class RootSkillviewController extends AbstractSkillViewController {
 }
 ```
 
+## Testing forms
+
+```ts
+//test
+export default class RootViewControllerTest extends AbstractViewControllerTest {
+	@test()
+	protected static async savesOrgWhenSubmittingForm() {
+		const formVc = this.vc.getFormVc()
+		formVc.setValues({...})
+
+		await interactionUtil.submitForm(formVc)
+	}
+}
+
+//production
+class RootSkillviewController extends AbstractSkillViewController {
+	public constructor(options: SkillViewControllerOptions) {
+		super(options)
+
+		this.formVc = this.Controller('form', buildForm({
+			...
+		}))
+	}
+}
+```
 
 
 ## Test Hints
@@ -275,3 +300,4 @@ class RootSkillviewController extends AbstractSkillViewController {
 4. Give your buttons, list rows, and cards ids and assert against them
 	* vcAssertUtil.assertListRendersRow(rowVc, service.id)
 	* interactionUtil.clickButtonInFooter(cardVc, 'edit')
+
