@@ -232,9 +232,17 @@ class RootSkillviewController extends AbstractSkillViewController {
 export default class RootViewControllerTest extends AbstractViewControllerTest {
 	@test()
 	protected static async rendersList() {
-		const vc = vcAssertUtil.assertCardRendersList(this.vc.getEquipCardVc())
+		const listVc = vcAssertUtil.assertCardRendersList(this.vc.getEquipCardVc())
+
+		vcAssertUtil.assertListRendersRow(vc, 'no-entries')
+
+
+		listVc.addRow({...})
+		listVc.addRow({...})
+		listVc.addRow({ id: location.id, ...})
 
 		await interactionUtil.clickInRow(vc, 2, 'edit')
+		await interactionUtil.clickInRow(vc, location.id, 'edit')
 	}
 }
 
@@ -255,20 +263,38 @@ Scoping experience to a specific organization or location.
 ```ts
 //test
 export default class RootViewControllerTest extends AbstractViewControllerTest {
+
+	protected static async beforeEach() {
+		await super.beforeEach() 
+
+		this.viewFixture = this.Fixture('view')
+		
+		const { client } = this.viewFixture.loginAsDemoPerson(DEMO_NUMBER_ROOT_SVC)
+
+		MercuryFixture.setDefaultClient(client)
+	}
+
+
 	@test()
-	protected static async doesNotRedirectWhenCurrentOrg() {
-		const organization = await this.Fixture(
-			'organization'
-		).seedDemoOrganization({
-			name: 'Root view controller',
-			phone: DEMO_NUMBER_ROOT_SVC,
+	protected static async redirectsWhenNoCurrentOrg() {
+		let wasHit = false
+
+		await viewFixture.getRouter().on('did-redirect', () => {
+			wasHit = true
 		})
 
-		const viewFixture = this.Fixture('view')
+		await this.load(this.vc)
 
-		await viewFixture.loginAsDemoPerson(DEMO_NUMBER_ROOT_SVC)
+		assert.isTrue(wasHit)
+	}
 
-		viewFixture.getScope().setCurrentOrganization(organization.id)
+
+	@test()
+	protected static async doesNotRedirectWhenCurrentOrg() {
+		const organization = await this.Organization()
+	
+		//this is optional, the current org defaults to the newest added
+		//this.viewFixture.getScope().setCurrentOrganization(organization.id)
 
 		let wasHit = false
 
@@ -279,6 +305,35 @@ export default class RootViewControllerTest extends AbstractViewControllerTest {
 		await this.load(this.vc)
 
 		assert.isFalse(wasHit)
+	}
+
+	@test()
+	protected static async usesOrgFromScope() {
+		const organization = await this.Organization()
+		await this.Organization()
+		await this.Organization()
+	
+		this.viewFixture.getScope().setCurrentOrganization(organization.id)
+
+		let wasHit = false
+
+		await viewFixture.getRouter().on('did-redirect', () => {
+			wasHit = true
+		})
+
+		await this.load(this.vc)
+
+		assert.isFalse(wasHit)
+	}
+
+
+	public static async Organization() {
+		return this.Fixture(
+			'organization'
+		).seedDemoOrganization({
+			name: 'Root view controller',
+			phone: DEMO_NUMBER_ROOT_SVC,
+		})
 	}
 }
 
@@ -303,6 +358,25 @@ class RootSkillviewController extends AbstractSkillViewController {
 ```ts
 //test
 export default class RootViewControllerTest extends AbstractViewControllerTest {
+
+	@test()
+	protected static async showsErrorWhenSavingFails() {
+		const formVc = this.vc.getFormVc()
+		const client = this.Fixture('mercury').connectToApi()
+
+		await client.on('create-organization::v2020_01_01', () => {
+			throw new SchemaError({
+				code: 'NOT_IMPLEMENTED',
+				instructions: 'implement error handling'
+			})
+		})
+
+		formVc.setValues({...})
+
+		await vcAssertUtil.assertDoesRenderAlert(this.vc, () => interactionUtil.submitForm(formVc))
+	}
+
+
 	@test()
 	protected static async savesOrgWhenSubmittingForm() {
 		const formVc = this.vc.getFormVc()
@@ -322,6 +396,19 @@ class RootSkillviewController extends AbstractSkillViewController {
 			...,
 			onSubmit: this.handleSubmit.bind(this)
 		}))
+	}
+
+	private async handleSubmit() {
+		const values = this.formVc.getValues()
+
+		try {
+			const client = await this.connectToApi() 
+			const results = await client.emit('create-organization::v2020_01_01', {
+				payload: values
+			})
+		} catch (err:any) {
+			await this.alert({ message: err.message })
+		}
 	}
 }
 ```
