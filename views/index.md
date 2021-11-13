@@ -193,6 +193,38 @@ export default class RootSkillViewController extends AbstractSkillViewController
 }
 ```
 
+## Authentication
+Using `MercuryFixture.setDefaultClient()` you can set a client all fixtures will share that make api request. This will also be the client returned from `this.connectToApi()` in your views.
+
+```ts
+
+//test
+export default class RootViewControllerTest extends AbstractViewControllerTest {
+	protected static async beforeEach() {
+		await super.beforeEach()
+
+		const { client } = await this.Fixture('view').loginAsDemoPerson(DEMO_NUMBER_ROOT_SVC)
+		
+		MercuryFixture.setDefaultClient(client)
+
+		this.vc = this.Controller('adventure.root')
+	}
+}
+
+//production
+class RootSkillviewController extends AbstractSkillViewController {
+	public async load(options: SkillViewControllerLoadOptions) {
+		const client = await this.connectToApi()
+
+		const results = await client.emit('whoami::v2020_01_10')
+		const { person } = eventResponseUtil.getFirstResponseOrThrow(results)
+
+	}
+}
+
+
+```
+
 ## Testing lists
 ```ts
 
@@ -201,6 +233,7 @@ export default class RootViewControllerTest extends AbstractViewControllerTest {
 	@test()
 	protected static async rendersList() {
 		const vc = vcAssertUtil.assertCardRendersList(this.vc.getEquipCardVc())
+
 		await interactionUtil.clickInRow(vc, 2, 'edit')
 	}
 }
@@ -273,6 +306,7 @@ export default class RootViewControllerTest extends AbstractViewControllerTest {
 	@test()
 	protected static async savesOrgWhenSubmittingForm() {
 		const formVc = this.vc.getFormVc()
+
 		formVc.setValues({...})
 
 		await interactionUtil.submitForm(formVc)
@@ -288,6 +322,32 @@ class RootSkillviewController extends AbstractSkillViewController {
 			...,
 			onSubmit: this.handleSubmit.bind(this)
 		}))
+	}
+}
+```
+
+## Testing toolbelt
+```ts
+//test
+export default class RootViewControllerTest extends AbstractViewControllerTest {
+	@test()
+	protected static rendersToolbelt() {
+		vcAssertUtil.assertRendersToolbelt(this.vc)
+	}
+}
+
+//production
+class RootSkillviewController extends AbstractSkillViewController {
+	public constructor(options: SkillViewControllerOptions) {
+		super(options)
+
+		this.toolBeltVc = this.Controller('toolBelt', {
+			...,
+		})
+	}
+
+	public renderToolBelt() {
+		return this.toolBeltVc.render()
 	}
 }
 ```
