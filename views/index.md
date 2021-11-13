@@ -361,9 +361,7 @@ export default class RootViewControllerTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async showsErrorWhenSavingFails() {
-		const formVc = this.vc.getFormVc()
 		const client = this.Fixture('mercury').connectToApi()
-
 		await client.on('create-organization::v2020_01_01', () => {
 			throw new SchemaError({
 				code: 'NOT_IMPLEMENTED',
@@ -371,6 +369,7 @@ export default class RootViewControllerTest extends AbstractViewControllerTest {
 			})
 		})
 
+		const formVc = this.vc.getFormVc()
 		formVc.setValues({...})
 
 		await vcAssertUtil.assertDoesRenderAlert(this.vc, () => interactionUtil.submitForm(formVc))
