@@ -332,6 +332,10 @@ class RootSkillviewController extends AbstractSkillViewController {
 export default class RootViewControllerTest extends AbstractViewControllerTest {
 	@test()
 	protected static rendersToolbelt() {
+		vcAssertUtil.assertDoesNotRenderToolbelt(this.vc)
+		
+		await this.load(this.vc)
+
 		vcAssertUtil.assertRendersToolbelt(this.vc)
 	}
 }
@@ -343,6 +347,14 @@ class RootSkillviewController extends AbstractSkillViewController {
 
 		this.toolBeltVc = this.Controller('toolBelt', {
 			...,
+		})
+	}
+
+	public async load(options: SkillViewControllerLoadOptions) {
+		this.toolBeltVc.addTool({
+			id: 'edit',
+			lineIcon: 'globe',
+			card: this.Controller('card', { ... })
 		})
 	}
 
