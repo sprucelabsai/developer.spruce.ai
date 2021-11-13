@@ -414,12 +414,17 @@ class RootSkillviewController extends AbstractSkillViewController {
 //test
 export default class RootViewControllerTest extends AbstractViewControllerTest {
 	@test()
-	protected static rendersToolbelt() {
-		vcAssertUtil.assertDoesNotRenderToolbelt(this.vc)
+	protected static rendersToolBelt() {
+		vcAssertUtil.assertDoesNotRenderToolBelt(this.vc)
 		
 		await this.load(this.vc)
 
-		vcAssertUtil.assertRendersToolbelt(this.vc)
+		const toolBeltVc = vcAssertUtil.assertRendersToolBelt(this.vc)
+		
+		const { tool, toolBeltVc: toolBeltVc2, cardVc} = vcAssertUtil.assertToolBeltRendersTool(this.vc, 'edit')
+
+		assert.isEqual(toolBeltVc, toolBeltVc2)
+		assert.isEqual(tool.lineIcon, 'glob')
 	}
 }
 
