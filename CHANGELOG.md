@@ -1,3 +1,10 @@
+# [2.7.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.6.4...v2.7.0) (2021-11-13)
+
+
+### Features
+
+* toolbelt and authentication docs ([eb460bb](https://github.com/sprucelabsai/developer.spruce.ai/commit/eb460bb))
+
 ## [2.6.4](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.6.3...v2.6.4) (2021-11-12)
 
 ## [2.6.3](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.6.2...v2.6.3) (2021-11-12)
