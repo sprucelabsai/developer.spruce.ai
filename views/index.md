@@ -317,13 +317,9 @@ export default class RootViewControllerTest extends AbstractViewControllerTest {
 
 		let wasHit = false
 
-		await viewFixture.getRouter().on('did-redirect', () => {
-			wasHit = true
-		})
-
 		await this.load(this.vc)
 
-		assert.isFalse(wasHit)
+		assert.isEqualDeep(this.vc.currentOrg, organization)
 	}
 
 
@@ -340,13 +336,14 @@ export default class RootViewControllerTest extends AbstractViewControllerTest {
 //production
 class RootSkillviewController extends AbstractSkillViewController {
 	public async load(options: SkillViewControllerLoadOptions) {
-		const company = await options.scope.getCurrentOrganization()
+		const organization = await options.scope.getCurrentOrganization()
 
-		if (!company) {
+		if (!organization) {
 			await options.router.redirect('organization.add' as any)
 			return
 		}
 
+		this.currentOrganization = organization
 		this.profileCardVc.setRouter(options.router)
 		this.profileCardVc.setIsBusy(false)
 	}
