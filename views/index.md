@@ -423,6 +423,7 @@ export default class RootViewControllerTest extends AbstractViewControllerTest {
 		
 		const { tool, toolBeltVc: toolBeltVc2, cardVc} = vcAssertUtil.assertToolBeltRendersTool(this.vc, 'edit')
 
+		assert.isTruthy(cardVc, 'Your ToolBelt does not render a tool with a properly rendered CardVc.')
 		assert.isEqual(toolBeltVc, toolBeltVc2)
 		assert.isEqual(tool.lineIcon, 'glob')
 	}
