@@ -1,3 +1,10 @@
+# [2.8.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.7.1...v2.8.0) (2021-11-13)
+
+
+### Features
+
+* form code samples ([ca098d6](https://github.com/sprucelabsai/developer.spruce.ai/commit/ca098d6))
+
 ## [2.7.1](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.7.0...v2.7.1) (2021-11-13)
 
 # [2.7.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.6.4...v2.7.0) (2021-11-13)
