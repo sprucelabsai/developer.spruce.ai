@@ -257,6 +257,101 @@ class RootSkillviewController extends AbstractSkillViewController {
 }
 ```
 
+## Testing confirmation dialogs
+```ts
+
+//test
+export default class RootViewControllerTest extends AbstractViewControllerTest {
+
+	@test()
+	protected static async confirmsBeforeSaving() {
+		const formVc = this.vc.getFormVc()
+
+		formVc.setValue('name', 'Haircut')
+
+		const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+			interactionUtil.submitForm(formVc)
+		)
+
+		await confirmVc.accept()
+
+		const match = await this.Store('services').findOne({})
+
+		assert.isEqual(match.name, 'Haircut')
+	}
+	
+	@test()
+	protected static async rejectingConfirmDoesNotSave() {
+		const formVc = this.vc.getFormVc()
+
+		formVc.setValue('name', 'Haircut')
+
+		const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+			interactionUtil.submitForm(formVc)
+		)
+
+		await confirmVc.reject()
+
+		const match = await this.Store('services').findOne({})
+
+		assert.isNotEqual(match.name, 'Haircut')
+	}
+}
+
+//production
+class RootSkillviewController extends AbstractSkillViewController {
+	public constructor(options: ViewControllerOptions) {
+		super(options)
+
+		this.formVc = this.Controller(
+			'form',
+			buildForm({
+				id: 'service',
+				schema: serviceSchema,
+				onSubmit: this.handleSubmit.bind(this),
+				sections: [
+					{
+						fields: [
+							{
+								name: 'name',
+								hint: 'Give it something good!'
+							},
+							'duration',
+						],
+					},
+				],
+			})
+		)
+
+		this.cardVc = this.Controller('card', {
+			id: 'service',
+			header: {
+				title: 'Create your service!',
+			},
+			body: {
+				sections: [
+					{
+						form: this.formVc.render(),
+					},
+				],
+			},
+		})
+	}
+
+	private async handleSubmit({ values }: SubmitHandler<ServiceSchema>) {
+		const confirm = await this.confirm({ message: 'You ready to do this?' })
+		if (confirm) {
+			await this.createService(values)
+		}
+	}
+
+	public getFormVc() {
+		return this.formVc
+	}
+}
+
+```
+
 ## Testing scope
 Scoping experience to a specific organization or location.
 
@@ -454,7 +549,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 ```
 
 
-## Test Hints
+## Test hints
 
 1. Look at locations skill
 1. Look at forms skill
