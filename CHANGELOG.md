@@ -1,3 +1,10 @@
+# [2.13.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.12.0...v2.13.0) (2021-11-22)
+
+
+### Features
+
+* active record docs! ([7f547df](https://github.com/sprucelabsai/developer.spruce.ai/commit/7f547df))
+
 # [2.12.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.11.0...v2.12.0) (2021-11-22)
 
 
