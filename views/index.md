@@ -38,7 +38,7 @@ This is your primary view accessible by your Skill's slug. For example, the `Adv
 @test()
 protected static async canRenderRootSkillView() {
     const vc = this.Controller('adventure.root', {})
-}1
+}
 
 ```
 
@@ -74,7 +74,7 @@ import { vcAssertUtil } from '@sprucelabs/heartwood-view-controllers'
 import { AbstractViewControllerTest } from '@sprucelabs/spruce-view-plugin'
 import RootSkillViewController from '../../skillViewControllers/Root.svc'
 
-export default class RootViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
 
     private static vc: RootSkillViewController
 
@@ -199,7 +199,7 @@ Using `MercuryFixture.setDefaultClient()` you can set a client all fixtures will
 ```ts
 
 //test
-export default class RootViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
 	protected static async beforeEach() {
 		await super.beforeEach()
 
@@ -229,7 +229,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 ```ts
 
 //test
-export default class RootViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
 	@test()
 	protected static async rendersList() {
 		const listVc = vcAssertUtil.assertCardRendersList(this.vc.getEquipCardVc())
@@ -261,7 +261,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 ```ts
 
 //test
-export default class RootViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async confirmsBeforeSaving() {
@@ -352,6 +352,66 @@ class RootSkillviewController extends AbstractSkillViewController {
 
 ```
 
+## Testing active record cards
+A card with a list that is wicked easy to use and cuts out a ton of reduntant work!
+
+Make sure you `load` your Active Record Card for it to show any results!
+
+```ts
+//test
+export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+
+	@test()
+	protected static async rendersActiveRecordCard() {
+		const vc = this.Controller('my-skill.root', {})
+
+		await this.load(vc)
+
+		const activeVc = vcAssertUtil.assertSkillViewRendersActiveRecordCard(vc)
+	
+		assert.isEqual(vc.getActiveRecordCard(), activeVc)
+		assert.isTrue(activeVc.getIsLoaded())
+	
+	}
+}
+
+//production
+
+export default class RootSkillViewController extends AbstractViewController<Card> {
+
+	public load(options: SkillViewControllerLoadOptions) {
+		const organization = await options.scope.getCurrentOrganization()
+
+		this.activeRecordCardVc = this.Controller(
+			'activeRecordCard',
+			buildActiveRecordCard({
+				header: {
+					title: 'Your locations',
+				},
+				eventName: 'list-locations::v2020_12_25',
+				target: {
+					organizationId: organization.id,
+				},
+				payload: {
+					includePrivateLocations: true,
+				},
+				responseKey: 'locations',
+				rowTransformer: (location) => ({ id: location.id, cells: [] })
+			})
+		)
+
+
+		this.triggerRender()
+	}
+
+	public getActiveRecordCardVc() {
+		return this.activeRecordCardVc
+	}
+	
+}
+
+```
+
 ## Testing scope
 Scoping experience to a specific organization or location.
 
@@ -361,7 +421,7 @@ Learn more [here](views/scope.md).
 
 ```ts
 //test
-export default class RootViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
 
 	protected static async beforeEach() {
 		await super.beforeEach() 
@@ -377,14 +437,14 @@ export default class RootViewControllerTest extends AbstractViewControllerTest {
 	@test()
 	protected static async redirectsWhenNoCurrentOrg() {
 		let wasHit = false
-
-		await viewFixture.getRouter().on('did-redirect', () => {
-			wasHit = true
+		
+		await vcAssertUtil.assertActionRedirects({
+			router: this.viewFixture.getRouter(),
+			action: () => this.load(this.vc),
+			destination: {
+				id: 'organization.add',
+			},
 		})
-
-		await this.load(this.vc)
-
-		assert.isTrue(wasHit)
 	}
 
 
@@ -395,23 +455,21 @@ export default class RootViewControllerTest extends AbstractViewControllerTest {
 		//this is optional, the current org defaults to the newest added
 		//this.viewFixture.getScope().setCurrentOrganization(organization.id)
 
-		let wasHit = false
-
-		await viewFixture.getRouter().on('did-redirect', () => {
-			wasHit = true
+		await vcAssertUtil.assertActionDidNotRedirect({
+			router: this.viewFixture.getRouter(),
+			action: () => this.load(this.vc),
 		})
 
-		await this.load(this.vc)
-
-		assert.isFalse(wasHit)
 		assert.isEqualDeep(this.vc.currentOrg, organization)
 	}
 
 	@test()
 	protected static async usesOrgFromScope() {
-		await this.Organization()
-		await this.Organization()
+		// since scope loads the last org by default, we can set 
+		// it back to the first org to test our productions code
 		const organization = await this.Organization()
+		await this.Organization()
+		await this.Organization()
 	
 		this.viewFixture.getScope().setCurrentOrganization(organization.id)
 
@@ -454,7 +512,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 
 ```ts
 //test
-export default class RootViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async showsErrorWhenSavingFails() {
@@ -512,7 +570,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 ## Testing toolbelt
 ```ts
 //test
-export default class RootViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
 	@test()
 	protected static rendersToolBelt() {
 		vcAssertUtil.assertDoesNotRenderToolBelt(this.vc)
