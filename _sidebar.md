@@ -3,6 +3,7 @@
 -   [Getting started](/getting-started.md)
 -   [CLI](/cli.md)
 -   [Skill Views](/views/index.md)
+    -   [Scope](/views/scope.md)
 -   [Skills](/skills/index.md)
 -   [Tests](/tests/index.md)
 -   [Schemas](/schemas/index.md)

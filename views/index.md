@@ -130,7 +130,7 @@ export default class RootViewControllerTest extends AbstractViewControllerTest {
 
 ```
 
-### 1. Passing the test
+### 2. Passing the test
 
 Instantiate 2 `Cards` in the constructor of your vc and render them in your vc's `render`.
 
@@ -355,6 +355,10 @@ class RootSkillviewController extends AbstractSkillViewController {
 ## Testing scope
 Scoping experience to a specific organization or location.
 
+By default, you will be scoped to your latest organization and location. 
+
+Learn more [here](views/scope.md).
+
 ```ts
 //test
 export default class RootViewControllerTest extends AbstractViewControllerTest {
@@ -400,13 +404,14 @@ export default class RootViewControllerTest extends AbstractViewControllerTest {
 		await this.load(this.vc)
 
 		assert.isFalse(wasHit)
+		assert.isEqualDeep(this.vc.currentOrg, organization)
 	}
 
 	@test()
 	protected static async usesOrgFromScope() {
+		await this.Organization()
+		await this.Organization()
 		const organization = await this.Organization()
-		await this.Organization()
-		await this.Organization()
 	
 		this.viewFixture.getScope().setCurrentOrganization(organization.id)
 
