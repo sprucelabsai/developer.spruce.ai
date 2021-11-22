@@ -1,3 +1,10 @@
+# [2.11.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.10.1...v2.11.0) (2021-11-15)
+
+
+### Features
+
+* Testing confirmation documentation ([c9df3ac](https://github.com/sprucelabsai/developer.spruce.ai/commit/c9df3ac))
+
 ## [2.10.1](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.10.0...v2.10.1) (2021-11-13)
 
 # [2.10.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.9.0...v2.10.0) (2021-11-13)
