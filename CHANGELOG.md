@@ -1,3 +1,10 @@
+# [2.12.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.11.0...v2.12.0) (2021-11-22)
+
+
+### Features
+
+* Documentation on scope and seeding data ([85648f1](https://github.com/sprucelabsai/developer.spruce.ai/commit/85648f1))
+
 # [2.11.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.10.1...v2.11.0) (2021-11-15)
 
 
