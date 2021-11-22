@@ -37,6 +37,22 @@ export default class RenderingRootViewControllerTest extends AbstractSpruceFixtu
 }
 ```
 
+## Authentication
+```ts
+export default class MySkillViewControllerTest extends AbstractSpruceFixtureTest {
+
+    @test()
+    protected static async beforeEach() {
+        await super.beforeEach()
+
+        const { client } = await this.Fixture('mercury').loginAsDemoPerson(DEMO_NUMBER_ROOT)
+
+        //all fixtures use the mercury fixture to connect home, now they all share this client
+        MercurcyFixture.setDefaultClient(client)
+
+    }
+}
+```
 ## Seeding data
 Seeders for core data (people, locations, roles, etc.) are provided through their cooresponding fixture.
 
@@ -47,11 +63,19 @@ export default class RenderingRootViewControllerTest extends AbstractSpruceFixtu
     protected static async beforeEach() {
         await super.beforeEach()
 
+        const { client } = await this.Fixture('mercury').loginAsDemoPerson(DEMO_NUMBER_ROOT)
+        MercurcyFixture.setDefaultClient(client)
+
+        const organizationFixture = this.Fixture('organization')
+
+        //always start by cleaning your account if you are scoping by org or location
+        await organizationFixture.deleteAllOrganizations()
+
         //check each fixture for all methods starting with `seed`
-        this.organization = this.Fixture('organization').seedDemoOrganization()
+        this.organization = organizationFixture.seedDemoOrganization()
 
         //seed a location can take an optional organization, otherwise it'll create an organization
-        const locationFixture = this.Fixture('locatino')
+        const locationFixture = this.Fixture('location')
 
         const locationWithNewOrg = await locationFixture.seedDemoLocation()
         const locationAtSameOrg = await locationFixture.seedDemoOrganization({
