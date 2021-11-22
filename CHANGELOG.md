@@ -1,3 +1,10 @@
+# [2.15.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.14.0...v2.15.0) (2021-11-22)
+
+
+### Features
+
+* redirect examples ([327f9cf](https://github.com/sprucelabsai/developer.spruce.ai/commit/327f9cf))
+
 # [2.14.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.13.0...v2.14.0) (2021-11-22)
 
 
