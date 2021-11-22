@@ -611,6 +611,75 @@ class RootSkillviewController extends AbstractSkillViewController {
 }
 ```
 
+## Testing redirects
+```ts
+//test
+export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+	@test()
+	protected static redirectsOnSelectLocation() {
+		const locationsCardVc = this.vc.getLocationsCardVc()
+		const location = await this.viewFixture.getScope().getCurrentLocation()
+
+		await vcAssertUtil.assertActionRedirects({
+			router: this.viewFixture.getRouter(),
+			action: () =>
+				interactionUtil.clickButtonInRow(
+					locationsCardVc.getListVc(),
+					location.id,
+					'edit'
+				),
+			destination: {
+				id: 'locations.root',
+				args: {
+					locationId: location.id,
+				},
+			},
+		})
+	}
+}
+
+//production
+class RootSkillviewController extends AbstractSkillViewController {
+	public constructor(options: SkillViewControllerOptions) {
+		super(options)
+
+		
+	}
+
+	public async load(options: SkillViewControllerLoadOptions) {
+		this.router = options.router
+
+		this.locationsCardVc = this.Controller('activeRecordCard', {
+			...,
+			rowTransformer: (location) => ({
+				id: location.id
+				cells: [
+					{
+						text: {
+							content: location.name
+						},
+					},
+					{
+						button: {
+							id: 'edit',
+							onClick: async () => {
+								await this.router?.redirect('locations.root', {
+									locationId: location.id
+								})
+							}
+						}
+					}
+				]
+			})
+		})
+	}
+
+	public getLocationsCardVc() {
+		return this.locationsCardVc
+	}
+}
+```
+
 
 ## Test hints
 
