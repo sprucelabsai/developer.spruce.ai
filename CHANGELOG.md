@@ -1,3 +1,10 @@
+# [2.14.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.13.0...v2.14.0) (2021-11-22)
+
+
+### Features
+
+* auth and more seeding examples ([8b590c5](https://github.com/sprucelabsai/developer.spruce.ai/commit/8b590c5))
+
 # [2.13.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.12.0...v2.13.0) (2021-11-22)
 
 
