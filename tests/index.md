@@ -20,6 +20,7 @@ Fixtures are utility classes to help you setup your environment for testing.
 5. Location Fixture
 6. Organization Fixture
 7. Role Fixture
+8. Seed Fixture
 
 ## Testing
 Fixtures are available when extending `AbstractSpruceFixtureTest` and anything that extends it (all abstract tests that come with the sdk extend this class).
@@ -66,20 +67,24 @@ export default class RenderingRootViewControllerTest extends AbstractSpruceFixtu
         const { client } = await this.Fixture('mercury').loginAsDemoPerson(DEMO_NUMBER_ROOT)
         MercurcyFixture.setDefaultClient(client)
 
-        const organizationFixture = this.Fixture('organization')
+
+        const seed = this.Fixture('seed')
 
         //always start by cleaning your account if you are scoping by org or location
-        await organizationFixture.deleteAllOrganizations()
+        await seed.resetAccount()
 
-        //check each fixture for all methods starting with `seed`
-        this.organization = organizationFixture.seedDemoOrganization()
+        //seed an org
+        const organizations = await seed.seedOrganizations({ totalOrganizations: 10 })
 
-        //seed a location can take an optional organization, otherwise it'll create an organization
-        const locationFixture = this.Fixture('location')
+        //seed locations with an org
+        const locations = await seed.seedLocations({
+            organizationId: organizations[0].organizationId,
+            totalLocations: 100
+        })
 
-        const locationWithNewOrg = await locationFixture.seedDemoLocation()
-        const locationAtSameOrg = await locationFixture.seedDemoOrganization({
-            organizationId: locationWithNewOrg.organizationId
+        //or seed locations and have an org created for you
+        const locationsUnderNewOrg = await seed.seedLocations({
+            totalLocations: 100
         })
     }
 }
