@@ -1,3 +1,10 @@
+# [3.0.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.15.0...v3.0.0) (2021-11-23)
+
+
+### Breaking Changes
+
+* Seeding docs updated for seed fixture ([61b4de6](https://github.com/sprucelabsai/developer.spruce.ai/commit/61b4de6))
+
 # [2.15.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v2.14.0...v2.15.0) (2021-11-22)
 
 
