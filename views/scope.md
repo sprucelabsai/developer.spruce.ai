@@ -43,8 +43,8 @@ export default class RenderingRootViewControllerTest extends AbstractLocationsVi
 		const location = await scope.getCurrentLocation()
 
         //setting scope
-        scope.setCurrentOrganizationId(organization.id)
-        scope.setCurrentLocationId(organization.id)
+        scope.setCurrentOrganization(organization.id)
+        scope.setCurrentLocation(organization.id)
 
 	}
 }
