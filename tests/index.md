@@ -40,16 +40,26 @@ export default class RenderingRootViewControllerTest extends AbstractSpruceFixtu
 
 ## Authentication
 ```ts
+@login(DEMO_NUMBER_ROOT)
 export default class MySkillViewControllerTest extends AbstractSpruceFixtureTest {
 
     @test()
     protected static async beforeEach() {
         await super.beforeEach()
 
-        const { client } = await this.Fixture('mercury').loginAsDemoPerson(DEMO_NUMBER_ROOT)
+        /**
+		* Is the exact same as @login decorator, don't bother doing this manually
+		* const { client } = await this.Fixture('view').loginAsDemoPerson(DEMO_NUMBER_ROOT_SVC)
+		* MercuryFixture.setDefaultClient(client)
+		**/
 
-        //all fixtures use the mercury fixture to connect home, now they all share this client
-        MercurcyFixture.setDefaultClient(client)
+        const client = MercuryFixture.getDefaultClient()
+        const { client: client2 } = await this.Fixture('view').loginAsDemoPerson()
+
+        assert.isEqual(client, client2) //once default client is set, unless you pass a new number, the client is reused
+
+        const { client: client3 } = await this.Fixture('view').loginAsDemoPerson(DEMO_NUMBER_ROOT_2)
+        assert.isNotEqual(client,client3)
 
     }
 }
