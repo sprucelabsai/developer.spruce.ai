@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v3.0.3...v3.1.0) (2021-11-27)
+
+
+### Features
+
+* docs for logging in and seeding using decorators ([21265d9](https://github.com/sprucelabsai/developer.spruce.ai/commit/21265d9))
+
 ## [3.0.3](https://github.com/sprucelabsai/developer.spruce.ai/compare/v3.0.2...v3.0.3) (2021-11-26)
 
 ## [3.0.2](https://github.com/sprucelabsai/developer.spruce.ai/compare/v3.0.1...v3.0.2) (2021-11-25)
