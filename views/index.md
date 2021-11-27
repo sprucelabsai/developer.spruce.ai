@@ -199,14 +199,18 @@ Using `MercuryFixture.setDefaultClient()` you can set a client all fixtures will
 ```ts
 
 //test
+@login(DEMO_NUMBER_ROOT_SVC)
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
 	protected static async beforeEach() {
 		await super.beforeEach()
 
-		const { client } = await this.Fixture('view').loginAsDemoPerson(DEMO_NUMBER_ROOT_SVC)
-		
-		MercuryFixture.setDefaultClient(client)
+		/**
+		* Is the exact same as @login decorator, don't bother doing this manually
+		* const { client } = await this.Fixture('view').loginAsDemoPerson(DEMO_NUMBER_ROOT_SVC)
+		* MercuryFixture.setDefaultClient(client)
+		**/
 
+		const client = MercuryFixture.getDefaultClient()
 		this.vc = this.Controller('adventure.root')
 	}
 }
@@ -421,16 +425,13 @@ Learn more [here](views/scope.md).
 
 ```ts
 //test
+@login(DEMO_NUMBER_ROOT_SVC)
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
 
 	protected static async beforeEach() {
 		await super.beforeEach() 
-
 		this.viewFixture = this.Fixture('view')
-		
-		const { client } = this.viewFixture.loginAsDemoPerson(DEMO_NUMBER_ROOT_SVC)
-
-		MercuryFixture.setDefaultClient(client)
+		this.orgFixture = this.Fixture('organization')
 	}
 
 
@@ -449,8 +450,9 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
 
 	@test()
+	@seed('organization', 1)
 	protected static async doesNotRedirectWhenCurrentOrg() {
-		const organization = await this.Organization()
+		const organization = await this.orgFixture.getNewestOrganization()
 	
 		//this is optional, the current org defaults to the newest added
 		//this.viewFixture.getScope().setCurrentOrganization(organization.id)
@@ -465,7 +467,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
 	@test()
 	protected static async usesOrgFromScope() {
-		// since scope loads the last org by default, we can set 
+		// since scope loads the newest org by default, we can set 
 		// it back to the first org to test our productions code
 		const organization = await this.Organization()
 		await this.Organization()
@@ -482,9 +484,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
 
 	public static async Organization() {
-		return this.Fixture(
-			'organization'
-		).seedDemoOrganization({
+		return this.orgFixture.seedDemoOrganization({
 			name: 'Root view controller',
 			phone: DEMO_NUMBER_ROOT_SVC,
 		})

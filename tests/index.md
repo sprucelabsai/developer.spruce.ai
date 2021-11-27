@@ -55,37 +55,23 @@ export default class MySkillViewControllerTest extends AbstractSpruceFixtureTest
 }
 ```
 ## Seeding data
-Seeders for core data (people, locations, roles, etc.) are provided through their cooresponding fixture.
+Seeders for core data (people, locations, roles, etc.) are provided through some killer decorators.
+
+You can also `@seed` from any of your local stores.
 
 ```ts
+//@login sets the default client for all fixtures and seeders going forward
+@login(DEMO_NUMBER)
 export default class RenderingRootViewControllerTest extends AbstractSpruceFixtureTest {
 
     @test()
+    @seed('organizations', 2)
     protected static async beforeEach() {
         await super.beforeEach()
 
-        const { client } = await this.Fixture('mercury').loginAsDemoPerson(DEMO_NUMBER_ROOT)
-        MercurcyFixture.setDefaultClient(client)
-
-
-        const seed = this.Fixture('seed')
-
-        //always start by cleaning your account if you are scoping by org or location
-        await seed.resetAccount()
-
-        //seed an org
-        const organizations = await seed.seedOrganizations({ totalOrganizations: 10 })
-
-        //seed locations with an org
-        const locations = await seed.seedLocations({
-            organizationId: organizations[0].organizationId,
-            totalLocations: 100
-        })
-
-        //or seed locations and have an org created for you
-        const locationsUnderNewOrg = await seed.seedLocations({
-            totalLocations: 100
-        })
+        const totalOrgs = await this.Fixture('organization').listOrganizations()
+        assert.isLength(totalOrgs, 2)
     }
 }
 ```
+
