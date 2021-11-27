@@ -74,14 +74,25 @@ You can also `@seed` from any of your local stores.
 @login(DEMO_NUMBER)
 export default class RenderingRootViewControllerTest extends AbstractSpruceFixtureTest {
 
-    @test()
     @seed('organizations', 2)
     protected static async beforeEach() {
         await super.beforeEach()
 
         const totalOrgs = await this.Fixture('organization').listOrganizations()
         assert.isLength(totalOrgs, 2)
+
+        //since this is in the beforeEach(), every test will come with 2 organizations
     }
+
+    @test()
+    @seed('locations',10)
+    protected static async locaitionsShouldSeed() {
+        const currentOrg = await this.Fixture('organization').getNewestOrganization()
+        const locations = await this.Fixture('locations').listLocations({ organizationId: currentOrg?.id })
+        assert.isLength(locations, 10)
+    }
+
+
 }
 ```
 
