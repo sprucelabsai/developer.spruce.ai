@@ -53,7 +53,7 @@ export default class MySkillViewControllerTest extends AbstractSpruceFixtureTest
 		* MercuryFixture.setDefaultClient(client)
 		**/
 
-        const client = MercuryFixture.getDefaultClient()
+        const client = login.getClient()
         const { client: client2 } = await this.Fixture('view').loginAsDemoPerson()
 
         assert.isEqual(client, client2) //once default client is set, unless you pass a new number, the client is reused

@@ -210,7 +210,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 		* MercuryFixture.setDefaultClient(client)
 		**/
 
-		const client = MercuryFixture.getDefaultClient()
+		const client = login.getClient()
 		this.vc = this.Controller('adventure.root')
 	}
 }
