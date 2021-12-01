@@ -1,3 +1,10 @@
+# [4.0.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v3.1.2...v4.0.0) (2021-12-01)
+
+
+### Breaking Changes
+
+* new best practice on how to get the default mercury client in tests ([bc309e0](https://github.com/sprucelabsai/developer.spruce.ai/commit/bc309e0))
+
 ## [3.1.2](https://github.com/sprucelabsai/developer.spruce.ai/compare/v3.1.1...v3.1.2) (2021-11-27)
 
 ## [3.1.1](https://github.com/sprucelabsai/developer.spruce.ai/compare/v3.1.0...v3.1.1) (2021-11-27)
