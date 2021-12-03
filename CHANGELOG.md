@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v4.1.1...v4.2.0) (2021-12-03)
+
+
+### Features
+
+* installing skills ([4ac42ea](https://github.com/sprucelabsai/developer.spruce.ai/commit/4ac42ea))
+
 ## [4.1.1](https://github.com/sprucelabsai/developer.spruce.ai/compare/v4.1.0...v4.1.1) (2021-12-03)
 
 # [4.1.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v4.0.0...v4.1.0) (2021-12-03)
