@@ -86,13 +86,30 @@ export default class RenderingRootViewControllerTest extends AbstractSpruceFixtu
 
     @test()
     @seed('locations',10)
-    protected static async locaitionsShouldSeed() {
+    protected static async locationsShouldSeed() {
         const currentOrg = await this.Fixture('organization').getNewestOrganization()
         const locations = await this.Fixture('locations').listLocations({ organizationId: currentOrg?.id })
         assert.isLength(locations, 10)
     }
-
-
 }
 ```
+
+## Installing your skill
+```ts
+@login(DEMO_NUMBER)
+export default class RenderingRootViewControllerTest extends AbstractSpruceFixtureTest {
+
+    @test()
+    @seed('organization',1)
+    @install.skills('skill-namespace-1', 'skill-namespace-2')
+    protected static async skillsArInstalled() {
+        //the skill is only installed at the newest organizatios
+        //now your skill can emit events to skills that are installed at the newest org
+    }
+}
+```
+
+
+## Skill Views
+Everything you need to know is under the [Views](/views/index.md?id=testing-view-controllers) section!
 
