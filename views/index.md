@@ -509,19 +509,17 @@ class RootSkillviewController extends AbstractSkillViewController {
 ```
 
 ## Testing forms
+It is important that you test the graceful handling of failed requests on save. Always set a listener and throw an error!
 
 ```ts
 //test
+@login(DEMO_PHONE)
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static async showsErrorWhenSavingFails() {
-		const client = this.Fixture('mercury').connectToApi()
-		await client.on('create-organization::v2020_01_01', () => {
-			throw new SchemaError({
-				code: 'NOT_IMPLEMENTED',
-				instructions: 'implement error handling'
-			})
+		await login.getClient().on('create-organization::v2020_01_01', () => {
+			throw new Error('broken!')
 		})
 
 		const formVc = this.vc.getFormVc()
@@ -538,6 +536,8 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 		formVc.setValues({...})
 
 		await interactionUtil.submitForm(formVc)
+
+		...
 	}
 }
 
