@@ -2,7 +2,7 @@
 Build Better
 ****
 
-It will take every to make implement these standards across the platform. Anytime we see something that needs to be refactored to follow best practices, we do it. We do this because we are proud of what we create and have lived thourgh the pain of not doing it.
+It will take everyone to hold the line on these standards across the platform. Anytime we see something that needs to be refactored to follow best practices, we do it. We do this because we are proud of what we build and have lived through the pain of not doing it.
 
 ## CRUD Events
 
