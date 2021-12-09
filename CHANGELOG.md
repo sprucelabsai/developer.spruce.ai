@@ -1,3 +1,10 @@
+# [4.3.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v4.2.0...v4.3.0) (2021-12-09)
+
+
+### Features
+
+* best practices updase ([f657fb3](https://github.com/sprucelabsai/developer.spruce.ai/commit/f657fb3))
+
 # [4.2.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v4.1.1...v4.2.0) (2021-12-03)
 
 
