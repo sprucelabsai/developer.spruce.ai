@@ -50,3 +50,8 @@ export default class AddServiceSkillViewController extends AbstractSkillViewCont
 ## Schemas
 
 1. Your builders should not import anything from `#spruce`. 
+
+## Tests
+
+Testing is so important to us, there is a [section](../tests/index.md?id=best-practices) dedicated to it.
+

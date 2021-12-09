@@ -113,3 +113,50 @@ export default class RenderingRootViewControllerTest extends AbstractSpruceFixtu
 ## Skill Views
 Everything you need to know is under the [Views](/views/index.md?id=testing-view-controllers) section!
 
+## Best Practices
+
+1. Create an abstract test for your skill on your second test.
+    * E.g. `AbstractProfileTest`
+    * All your future tests should extend this test.
+2. Don't create fixtures over and over, save them as protected properties on your Abstract Test.
+3. Create helpful getters for things you fetch over and over, e.g. `this.getNewestOrganization()`.
+    * Use assertions and helpful error messages to guide future you through proper test setup.
+
+### Example Abstract Skill Test
+This is an example of what your skill's test file may look like after a few tests.
+
+```ts
+export default class AbstractProfileTest extends AbstractViewControllerTest {
+	protected static viewFixture: ViewFixture
+	protected static profileStore: ProfilesStore
+	protected static router: Router
+
+	protected static async beforeEach() {
+		await super.beforeEach()
+
+		this.viewFixture = this.Fixture('view')
+		this.profileStore = await this.Fixture('store').Store('profiles')
+		this.router = this.Fixture('view').getRouter()
+	}
+
+	protected static async getNewestProfile() {
+		const profile = await this.profileStore.findOne({})
+
+		assert.isTruthy(profile, `You gotta @seed('profiles',1) to continue.`)
+		return profile
+	}
+
+	protected static async getNewestOrg() {
+		const org = await this.Fixture('organization').getNewestOrganization()
+		assert.isTruthy(org, `You gotta @seed('organizations',1) to continue.`)
+		return org
+	}
+
+    protected static async listProfiles () {
+        const profiles = await this.profileStore.findOne({})
+        assert.isAbove(profiles.length, 0, `You gotta @seed('profiles',1) to continue.`)
+        return profiles
+    }
+}
+
+```
