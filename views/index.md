@@ -1,5 +1,5 @@
 # Skill Views
-Skill Views are top level views, comprised of Views, and controlled by `SkillViewControllers`. Every skill gets a `RootSkillViewController` that is loaded by the Skill's slug. A Skill can have as many Skill Views (and Views) as desired.
+Skill Views are top level views, comprised of Views, and controlled by `SkillViewControllers`. Every skill gets a `RootSkillViewController` that is loaded by the Skill's namespace. A Skill can have as many Skill Views (and Views) as desired.
 ***
 
 
@@ -18,7 +18,7 @@ Note: You must [register](/skills/index) your skill before being able to publish
 
 ## Root View Controller
 
-This is your primary view accessible by your Skill's slug. For example, the `Adventure` skill is accessible via [https://adventure.spruce.bot](https://adventure.spruce.bot). You should start each skill by creating your RootViewController.
+This is your primary view accessible by your Skill's namespace. For example, the `Adventure` skill is accessible via [https://adventure.spruce.bot](https://adventure.spruce.bot). You should start each skill by creating your RootViewController.
 
 ## Testing View Controllers
 
@@ -26,13 +26,14 @@ This is your primary view accessible by your Skill's slug. For example, the `Adv
 
 * Run `spruce create.test`
 * Select `AbstractViewControllerTest`
+	* Or select your Skill's primary AbstractTest if this is your third test
 
 ### 2. Write your first failing test
 
 * Clear out the existing tests
 * Add your first failing test
-    * Make sure your slug is correct
-    * Change `adventure` to whatever your slug is.
+    * Make sure your namespace is correct
+    * Change `adventure` to whatever your namespace is.
 
 ```ts
 @test()
@@ -54,8 +55,8 @@ Your first test should be passing minus a type issue. Lets bring it home!
 ```ts
 @test()
 protected static async canRenderRootSkillView() {
-    const vc = this.Controller('adventure.root', {}).render()
-    assert.isTruthy(vc)
+    const vc = this.Controller('adventure.root', {})
+    this.render(vc)
 }
 ```
 
