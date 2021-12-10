@@ -150,20 +150,27 @@ export default class RootSkillViewController extends AbstractSkillViewController
     public constructor(options: ViewControllerOptions) {
 		super(options)
 
-		this.profileCardVc = this.Controller('card', {
-			id: 'profile',
+		this.profileCardVc = this.ProfileCardVc()
+        this.equipCardVc = this.EquipCardVc()
+	}
+
+	private EquipCardVc() {
+		return this.Controller('card', {
+			id: 'equip',
 			header: {
-				title: 'My great card!',
+				title: 'My great card 2!',
 			},
 			body: {
 				isBusy: true
 			},
 		})
-		
-        this.equipCardVc = this.Controller('card', {
-			id: 'equip',
+	}
+
+	private ProfileCardVc() {
+		return this.Controller('card', {
+			id: 'profile',
 			header: {
-				title: 'My great card 2!',
+				title: 'My great card!',
 			},
 			body: {
 				isBusy: true
@@ -308,7 +315,12 @@ class RootSkillviewController extends AbstractSkillViewController {
 	public constructor(options: ViewControllerOptions) {
 		super(options)
 
-		this.formVc = this.Controller(
+		this.formVc = this.FormVc()
+		this.formCardVc = this.FormCardVc()
+	}
+
+	private FormVc() {
+		return this.Controller(
 			'form',
 			buildForm({
 				id: 'service',
@@ -327,8 +339,10 @@ class RootSkillviewController extends AbstractSkillViewController {
 				],
 			})
 		)
+	}
 
-		this.cardVc = this.Controller('card', {
+	private FormCardVc() {
+		return this.Controller('card', {
 			id: 'service',
 			header: {
 				title: 'Create your service!',
@@ -369,12 +383,11 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 	@test()
 	protected static async rendersActiveRecordCard() {
 		const vc = this.Controller('my-skill.root', {})
+		const activeVc = vcAssertUtil.assertSkillViewRendersActiveRecordCard(vc)
+		assert.isEqual(vc.getActiveRecordCard(), activeVc)
 
 		await this.load(vc)
 
-		const activeVc = vcAssertUtil.assertSkillViewRendersActiveRecordCard(vc)
-	
-		assert.isEqual(vc.getActiveRecordCard(), activeVc)
 		assert.isTrue(activeVc.getIsLoaded())
 	
 	}
@@ -384,19 +397,19 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
 export default class RootSkillViewController extends AbstractViewController<Card> {
 
-	public load(options: SkillViewControllerLoadOptions) {
-		const organization = await options.scope.getCurrentOrganization()
+	public constructor(options: ViewControllerOptions) {
+		super(options)
+		this.activeRecrodCardVc = this.ActiveRecordVc()
+	}
 
-		this.activeRecordCardVc = this.Controller(
+	private ActiveRecordVc() {
+		return this.Controller(
 			'activeRecordCard',
 			buildActiveRecordCard({
 				header: {
 					title: 'Your locations',
 				},
 				eventName: 'list-locations::v2020_12_25',
-				target: {
-					organizationId: organization.id,
-				},
 				payload: {
 					includePrivateLocations: true,
 				},
@@ -404,9 +417,11 @@ export default class RootSkillViewController extends AbstractViewController<Card
 				rowTransformer: (location) => ({ id: location.id, cells: [] })
 			})
 		)
+	}
 
-
-		this.triggerRender()
+	public load(options: SkillViewControllerLoadOptions) {
+		const organization = await options.scope.getCurrentOrganization()
+		this.activeRecordCardVc.setTarget({ organizationId: organization.id })
 	}
 
 	public getActiveRecordCardVc() {
@@ -467,12 +482,11 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 	}
 
 	@test()
+	@seed('organizations',3)
 	protected static async usesOrgFromScope() {
 		// since scope loads the newest org by default, we can set 
 		// it back to the first org to test our productions code
-		const organization = await this.Organization()
-		await this.Organization()
-		await this.Organization()
+		const [organizations] = await this.orgFixture.listOrganizations()
 	
 		this.viewFixture.getScope().setCurrentOrganization(organization.id)
 
@@ -484,12 +498,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 	}
 
 
-	public static async Organization() {
-		return this.orgFixture.seedDemoOrganization({
-			name: 'Root view controller',
-			phone: DEMO_NUMBER_ROOT_SVC,
-		})
-	}
+	
 }
 
 //production
@@ -505,6 +514,48 @@ class RootSkillviewController extends AbstractSkillViewController {
 		this.currentOrganization = organization
 		this.profileCardVc.setRouter(options.router)
 		this.profileCardVc.setIsBusy(false)
+	}
+}
+```
+
+## Testing Stats
+
+
+```ts
+//test
+@login(DEMO_NUMBER_ROOT_SVC)
+export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+
+	@test()
+	protected static rendersStats() {
+		vcAssertUtil.assertRendersStats(this.vc.getCardVc())
+	}
+
+
+	@test()
+	@seed('organization', 1)
+	protected static async rendersExpectedStatsAfterLoad() {
+		await this.bootAndLoad()
+	}
+
+	private static async bootAndLoad() {
+		await this.bootSkill()
+		await this.load(this.vc)
+	}
+	
+}
+
+//production
+class RootSkillviewController extends AbstractSkillViewController {
+
+	public constructor(options: ViewControllerOptions) {
+		super(options)
+		
+		this.cardVc = this.CardVc()
+	}
+
+	public async load(options: SkillViewControllerLoadOptions) {
+		
 	}
 }
 ```
@@ -547,7 +598,11 @@ class RootSkillviewController extends AbstractSkillViewController {
 	public constructor(options: SkillViewControllerOptions) {
 		super(options)
 
-		this.formVc = this.Controller('form', buildForm({
+		this.formVc = this.FormVc()
+	}
+
+	private FormVc() {
+		return this.Controller('form', buildForm({
 			...,
 			onSubmit: this.handleSubmit.bind(this)
 		}))
@@ -593,7 +648,11 @@ class RootSkillviewController extends AbstractSkillViewController {
 	public constructor(options: SkillViewControllerOptions) {
 		super(options)
 
-		this.toolBeltVc = this.Controller('toolBelt', {
+		this.toolBeltVc = this.ToolBelt()
+	}
+
+	private ToolBelt() {
+		return this.Controller('toolBelt', {
 			...,
 		})
 	}
@@ -643,14 +702,16 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 class RootSkillviewController extends AbstractSkillViewController {
 	public constructor(options: SkillViewControllerOptions) {
 		super(options)
-
-		
+		this.locationsCardVc = this.ActiveRecordCardVc()
 	}
 
 	public async load(options: SkillViewControllerLoadOptions) {
 		this.router = options.router
+		await this.locationsCardVc.load()
+	}
 
-		this.locationsCardVc = this.Controller('activeRecordCard', {
+	private activeRecordCardVc() {
+		return this.Controller('activeRecordCard', buildActiveRecordCard({
 			...,
 			rowTransformer: (location) => ({
 				id: location.id
@@ -672,7 +733,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 					}
 				]
 			})
-		})
+		}))
 	}
 
 	public getLocationsCardVc() {
