@@ -1,3 +1,10 @@
+# [4.4.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v4.3.2...v4.4.0) (2021-12-11)
+
+
+### Features
+
+* docs for mocking events and making them throw ([e781d9d](https://github.com/sprucelabsai/developer.spruce.ai/commit/e781d9d))
+
 ## [4.3.2](https://github.com/sprucelabsai/developer.spruce.ai/compare/v4.3.1...v4.3.2) (2021-12-10)
 
 ## [4.3.1](https://github.com/sprucelabsai/developer.spruce.ai/compare/v4.3.0...v4.3.1) (2021-12-09)
