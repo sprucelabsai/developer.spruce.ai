@@ -570,10 +570,9 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
 	@test()
 	protected static async showsErrorWhenSavingFails() {
-		await login.getClient().on('create-organization::v2020_01_01', () => {
-			throw new Error('broken!')
-		})
 
+		await eventMocker.makeEventThrow(this.Fixture('mercury'), 'create-organization::v2020_01_01')
+	
 		const formVc = this.vc.getFormVc()
 		formVc.setValues({...})
 
