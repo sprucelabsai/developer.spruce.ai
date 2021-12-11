@@ -561,7 +561,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 ```
 
 ## Testing forms
-It is important that you test the graceful handling of failed requests on save. Always set a listener and throw an error!
+It is important that you test the graceful handling of failed requests on save. Use the `eventMocker` to make events throw so you can gracefully handle them!
 
 ```ts
 //test
