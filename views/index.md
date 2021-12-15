@@ -1,10 +1,8 @@
 # Skill Views
+
 Skill Views are top level views, comprised of Views, and controlled by `SkillViewControllers`. Every skill gets a `RootSkillViewController` that is loaded by the Skill's namespace. A Skill can have as many Skill Views (and Views) as desired.
-***
 
-
-
-
+---
 
 ```bash
 # Create a new Skill View or View
@@ -14,6 +12,7 @@ spruce create.view
 spruce watch.views
 
 ```
+
 Note: You must [register](/skills/index) your skill before being able to publish your Skill Views.
 
 ## Root View Controller
@@ -24,16 +23,16 @@ This is your primary view accessible by your Skill's namespace. For example, the
 
 ### 1. Create your test file
 
-* Run `spruce create.test`
-* Select `AbstractViewControllerTest`
-	* Or select your Skill's primary AbstractTest if this is your third test
+- Run `spruce create.test`
+- Select `AbstractViewControllerTest`
+  - Or select your Skill's primary AbstractTest if this is your third test
 
 ### 2. Write your first failing test
 
-* Clear out the existing tests
-* Add your first failing test
-    * Make sure your namespace is correct
-    * Change `adventure` to whatever your namespace is.
+- Clear out the existing tests
+- Add your first failing test
+  - Make sure your namespace is correct
+  - Change `adventure` to whatever your namespace is.
 
 ```ts
 @test()
@@ -45,8 +44,8 @@ protected static async canRenderRootSkillView() {
 
 ### 3. Create your root view controller
 
-* Run `spruce create.view`
-* Create your `RootViewController`
+- Run `spruce create.view`
+- Create your `RootViewController`
 
 Your first test should be passing minus a type issue. Lets bring it home!
 
@@ -68,67 +67,64 @@ The [`vcAssertUtil`](https://github.com/sprucelabsai/heartwood-view-controllers/
 
 ### 1. Failing test
 
-This will involve moving the instantiation of your vc to the `beforeEach` and then using `vcAssertUtil` to assert that your vc renders 2 cards. 
+This will involve moving the instantiation of your vc to the `beforeEach` and then using `vcAssertUtil` to assert that your vc renders 2 cards.
 
 ```ts
-import { vcAssertUtil } from '@sprucelabs/heartwood-view-controllers'
-import { AbstractViewControllerTest } from '@sprucelabs/spruce-view-plugin'
-import RootSkillViewController from '../../skillViewControllers/Root.svc'
+import { vcAssertUtil } from "@sprucelabs/heartwood-view-controllers";
+import { AbstractViewControllerTest } from "@sprucelabs/spruce-view-plugin";
+import RootSkillViewController from "../../skillViewControllers/Root.svc";
 
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+  private static vc: RootSkillViewController;
 
-    private static vc: RootSkillViewController
+  protected static async beforeEach() {
+    await super.beforeEach();
+    this.vc = this.Controller("adventure.root", {});
+  }
 
-    protected static async beforeEach() {
-		await super.beforeEach()
-		this.vc = this.Controller('adventure.root', {})
-	}
+  @test()
+  protected static canRenderRootSkillView() {
+    const model = this.vc.render();
+    assert.isTruthy(model);
+  }
 
-    @test()
-    protected static canRenderRootSkillView() {
-        const model = this.vc.render()
-        assert.isTruthy(model)
-    }
+  @test()
+  protected static renders2Cards() {
+    vcAssertUtil.assertSkillViewRendersCards(this.vc, ["profile", "equip"]);
+  }
 
-	@test()
-	protected static renders2Cards() {
-		vcAssertUtil.assertSkillViewRendersCards(this.vc, ['profile','equip'])
-	}
+  @test()
+  protected static async requiresLogin() {
+    await vcAssertUtil.assertLoginIsRequired(this.vc);
+  }
 
-	@test()
-	protected static async requiresLogin() {
-		await vcAssertUtil.assertLoginIsRequired(this.vc)
-	}
+  @test()
+  protected static canGetPofileCard() {
+    const cardVc = vcAssertUtil.assertSkillViewRendersCard(this.vc, "profile");
+    assert.isEqual(cardVc, this.vc.getProfileCardVc());
+  }
 
-	@test()
-	protected static canGetPofileCard() {
-		const cardVc = vcAssertUtil.assertSkillViewRendersCard(this.vc, 'profile')
-		assert.isEqual(cardVc, this.vc.getProfileCardVc())
-	}
-	
-	@test()
-	protected static canGetEquipCard() {
-		const cardVc = vcAssertUtil.assertSkillViewRendersCard(this.vc, 'equip')
-		assert.isEqual(cardVc, this.vc.getEquipCardVc())
-	}
+  @test()
+  protected static canGetEquipCard() {
+    const cardVc = vcAssertUtil.assertSkillViewRendersCard(this.vc, "equip");
+    assert.isEqual(cardVc, this.vc.getEquipCardVc());
+  }
 
-	@test()
-	protected static async redirectsToAddOrganizationOnLoadIfNoCurrentOrganization() {
-		let wasHit = false
+  @test()
+  protected static async redirectsToAddOrganizationOnLoadIfNoCurrentOrganization() {
+    let wasHit = false;
 
-		await this.Fixture('view')
-				.getRouter()
-				.on('did-redirect', () => {
+    await this.Fixture("view")
+      .getRouter()
+      .on("did-redirect", () => {
+        wasHit = true;
+      });
 
-			wasHit = true
-		})
+    await this.load(this.vc);
 
-		await this.load(this.vc)
-
-		assert.isTrue(wasHit)
-	} 
+    assert.isTrue(wasHit);
+  }
 }
-
 ```
 
 ### 2. Passing the test
@@ -137,107 +133,105 @@ Instantiate 2 `Cards` in the constructor of your vc and render them in your vc's
 
 ```ts
 import {
-	AbstractSkillViewController,
-	CardViewController,
-	ViewControllerOptions,
-} from '@sprucelabs/heartwood-view-controllers'
+  AbstractSkillViewController,
+  CardViewController,
+  ViewControllerOptions,
+} from "@sprucelabs/heartwood-view-controllers";
 
 export default class RootSkillViewController extends AbstractSkillViewController {
-    public static id = 'root'
-    private profileCardVc: CardViewController
-    private equipCardVc: CardViewController
+  public static id = "root";
+  private profileCardVc: CardViewController;
+  private equipCardVc: CardViewController;
 
-    public constructor(options: ViewControllerOptions) {
-		super(options)
+  public constructor(options: ViewControllerOptions) {
+    super(options);
 
-		this.profileCardVc = this.ProfileCardVc()
-        this.equipCardVc = this.EquipCardVc()
-	}
+    this.profileCardVc = this.ProfileCardVc();
+    this.equipCardVc = this.EquipCardVc();
+  }
 
-	private EquipCardVc() {
-		return this.Controller('card', {
-			id: 'equip',
-			header: {
-				title: 'My great card 2!',
-			},
-			body: {
-				isBusy: true
-			},
-		})
-	}
+  private EquipCardVc() {
+    return this.Controller("card", {
+      id: "equip",
+      header: {
+        title: "My great card 2!",
+      },
+      body: {
+        isBusy: true,
+      },
+    });
+  }
 
-	private ProfileCardVc() {
-		return this.Controller('card', {
-			id: 'profile',
-			header: {
-				title: 'My great card!',
-			},
-			body: {
-				isBusy: true
-			},
-		})
-	}
+  private ProfileCardVc() {
+    return this.Controller("card", {
+      id: "profile",
+      header: {
+        title: "My great card!",
+      },
+      body: {
+        isBusy: true,
+      },
+    });
+  }
 
-	public getProfileCardVc() {
-		return this.profileCardVc
-	}
+  public getProfileCardVc() {
+    return this.profileCardVc;
+  }
 
-	public getEquipCardVc() {
-		return this.equipCardVc
-	}
+  public getEquipCardVc() {
+    return this.equipCardVc;
+  }
 
-    public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView {
-		return {
-			layouts: [
-				{
-					cards: [this.profileCardVc.render()],
-				},
-				{
-					cards: [this.equipCardVc.render()],
-				},
-			],
-		}
-	}
+  public render(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.SkillView {
+    return {
+      layouts: [
+        {
+          cards: [this.profileCardVc.render()],
+        },
+        {
+          cards: [this.equipCardVc.render()],
+        },
+      ],
+    };
+  }
 }
 ```
 
 ## Authentication
+
 Using `MercuryFixture.setDefaultClient()` you can set a client all fixtures will share that make api request. This will also be the client returned from `this.connectToApi()` in your views.
 
 ```ts
-
 //test
 @login(DEMO_NUMBER_ROOT_SVC)
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
-	protected static async beforeEach() {
-		await super.beforeEach()
+  protected static async beforeEach() {
+    await super.beforeEach();
 
-		/**
-		* Is the exact same as @login decorator, don't bother doing this manually
-		* const { client } = await this.Fixture('view').loginAsDemoPerson(DEMO_NUMBER_ROOT_SVC)
-		* MercuryFixture.setDefaultClient(client)
-		**/
+    /**
+     * Is the exact same as @login decorator, don't bother doing this manually
+     * const { client } = await this.Fixture('view').loginAsDemoPerson(DEMO_NUMBER_ROOT_SVC)
+     * MercuryFixture.setDefaultClient(client)
+     **/
 
-		const client = login.getClient()
-		this.vc = this.Controller('adventure.root')
-	}
+    const client = login.getClient();
+    this.vc = this.Controller("adventure.root");
+  }
 }
 
 //production
 class RootSkillviewController extends AbstractSkillViewController {
-	public async load(options: SkillViewControllerLoadOptions) {
-		const client = await this.connectToApi()
+  public async load(options: SkillViewControllerLoadOptions) {
+    const client = await this.connectToApi();
 
-		const results = await client.emit('whoami::v2020_01_10')
-		const { person } = eventResponseUtil.getFirstResponseOrThrow(results)
-
-	}
+    const results = await client.emit("whoami::v2020_01_10");
+    const { person } = eventResponseUtil.getFirstResponseOrThrow(results);
+  }
 }
-
-
 ```
 
 ## Testing lists
+
 ```ts
 
 //test
@@ -270,108 +264,107 @@ class RootSkillviewController extends AbstractSkillViewController {
 ```
 
 ## Testing confirmation dialogs
-```ts
 
+```ts
 //test
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+  @test()
+  protected static async confirmsBeforeSaving() {
+    const formVc = this.vc.getFormVc();
 
-	@test()
-	protected static async confirmsBeforeSaving() {
-		const formVc = this.vc.getFormVc()
+    formVc.setValue("name", "Haircut");
 
-		formVc.setValue('name', 'Haircut')
+    const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+      interactionUtil.submitForm(formVc)
+    );
 
-		const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
-			interactionUtil.submitForm(formVc)
-		)
+    await confirmVc.accept();
 
-		await confirmVc.accept()
+    const match = await this.Store("services").findOne({});
 
-		const match = await this.Store('services').findOne({})
+    assert.isEqual(match.name, "Haircut");
+  }
 
-		assert.isEqual(match.name, 'Haircut')
-	}
-	
-	@test()
-	protected static async rejectingConfirmDoesNotSave() {
-		const formVc = this.vc.getFormVc()
+  @test()
+  protected static async rejectingConfirmDoesNotSave() {
+    const formVc = this.vc.getFormVc();
 
-		formVc.setValue('name', 'Haircut')
+    formVc.setValue("name", "Haircut");
 
-		const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
-			interactionUtil.submitForm(formVc)
-		)
+    const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+      interactionUtil.submitForm(formVc)
+    );
 
-		await confirmVc.reject()
+    await confirmVc.reject();
 
-		const match = await this.Store('services').findOne({})
+    const match = await this.Store("services").findOne({});
 
-		assert.isNotEqual(match.name, 'Haircut')
-	}
+    assert.isNotEqual(match.name, "Haircut");
+  }
 }
 
 //production
 class RootSkillviewController extends AbstractSkillViewController {
-	public constructor(options: ViewControllerOptions) {
-		super(options)
+  public constructor(options: ViewControllerOptions) {
+    super(options);
 
-		this.formVc = this.FormVc()
-		this.formCardVc = this.FormCardVc()
-	}
+    this.formVc = this.FormVc();
+    this.formCardVc = this.FormCardVc();
+  }
 
-	private FormVc() {
-		return this.Controller(
-			'form',
-			buildForm({
-				id: 'service',
-				schema: serviceSchema,
-				onSubmit: this.handleSubmit.bind(this),
-				sections: [
-					{
-						fields: [
-							{
-								name: 'name',
-								hint: 'Give it something good!'
-							},
-							'duration',
-						],
-					},
-				],
-			})
-		)
-	}
+  private FormVc() {
+    return this.Controller(
+      "form",
+      buildForm({
+        id: "service",
+        schema: serviceSchema,
+        onSubmit: this.handleSubmit.bind(this),
+        sections: [
+          {
+            fields: [
+              {
+                name: "name",
+                hint: "Give it something good!",
+              },
+              "duration",
+            ],
+          },
+        ],
+      })
+    );
+  }
 
-	private FormCardVc() {
-		return this.Controller('card', {
-			id: 'service',
-			header: {
-				title: 'Create your service!',
-			},
-			body: {
-				sections: [
-					{
-						form: this.formVc.render(),
-					},
-				],
-			},
-		})
-	}
+  private FormCardVc() {
+    return this.Controller("card", {
+      id: "service",
+      header: {
+        title: "Create your service!",
+      },
+      body: {
+        sections: [
+          {
+            form: this.formVc.render(),
+          },
+        ],
+      },
+    });
+  }
 
-	private async handleSubmit({ values }: SubmitHandler<ServiceSchema>) {
-		const confirm = await this.confirm({ message: 'You ready to do this?' })
-		if (confirm) {
-			await this.createService(values)
-		}
-	}
+  private async handleSubmit({ values }: SubmitHandler<ServiceSchema>) {
+    const confirm = await this.confirm({ message: "You ready to do this?" });
+    if (confirm) {
+      await this.createService(values);
+    }
+  }
 
-	public getFormVc() {
-		return this.formVc
-	}
+  public getFormVc() {
+    return this.formVc;
+  }
 }
-
 ```
 
 ## Testing active record cards
+
 A card with a list that is wicked easy to use and cuts out a ton of reduntant work!
 
 Make sure you `load` your Active Record Card for it to show any results!
@@ -379,63 +372,59 @@ Make sure you `load` your Active Record Card for it to show any results!
 ```ts
 //test
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+  @test()
+  protected static async rendersActiveRecordCard() {
+    const vc = this.Controller("my-skill.root", {});
+    const activeVc = vcAssertUtil.assertSkillViewRendersActiveRecordCard(vc);
+    assert.isEqual(vc.getActiveRecordCard(), activeVc);
 
-	@test()
-	protected static async rendersActiveRecordCard() {
-		const vc = this.Controller('my-skill.root', {})
-		const activeVc = vcAssertUtil.assertSkillViewRendersActiveRecordCard(vc)
-		assert.isEqual(vc.getActiveRecordCard(), activeVc)
+    await this.load(vc);
 
-		await this.load(vc)
-
-		assert.isTrue(activeVc.getIsLoaded())
-	
-	}
+    assert.isTrue(activeVc.getIsLoaded());
+  }
 }
 
 //production
 
 export default class RootSkillViewController extends AbstractViewController<Card> {
+  public constructor(options: ViewControllerOptions) {
+    super(options);
+    this.activeRecrodCardVc = this.ActiveRecordVc();
+  }
 
-	public constructor(options: ViewControllerOptions) {
-		super(options)
-		this.activeRecrodCardVc = this.ActiveRecordVc()
-	}
+  private ActiveRecordVc() {
+    return this.Controller(
+      "activeRecordCard",
+      buildActiveRecordCard({
+        header: {
+          title: "Your locations",
+        },
+        eventName: "list-locations::v2020_12_25",
+        payload: {
+          includePrivateLocations: true,
+        },
+        responseKey: "locations",
+        rowTransformer: (location) => ({ id: location.id, cells: [] }),
+      })
+    );
+  }
 
-	private ActiveRecordVc() {
-		return this.Controller(
-			'activeRecordCard',
-			buildActiveRecordCard({
-				header: {
-					title: 'Your locations',
-				},
-				eventName: 'list-locations::v2020_12_25',
-				payload: {
-					includePrivateLocations: true,
-				},
-				responseKey: 'locations',
-				rowTransformer: (location) => ({ id: location.id, cells: [] })
-			})
-		)
-	}
+  public load(options: SkillViewControllerLoadOptions) {
+    const organization = await options.scope.getCurrentOrganization();
+    this.activeRecordCardVc.setTarget({ organizationId: organization.id });
+  }
 
-	public load(options: SkillViewControllerLoadOptions) {
-		const organization = await options.scope.getCurrentOrganization()
-		this.activeRecordCardVc.setTarget({ organizationId: organization.id })
-	}
-
-	public getActiveRecordCardVc() {
-		return this.activeRecordCardVc
-	}
-	
+  public getActiveRecordCardVc() {
+    return this.activeRecordCardVc;
+  }
 }
-
 ```
 
 ## Testing scope
+
 Scoping experience to a specific organization or location.
 
-By default, you will be scoped to your latest organization and location. 
+By default, you will be scoped to your latest organization and location.
 
 Learn more [here](views/scope.md).
 
@@ -443,124 +432,112 @@ Learn more [here](views/scope.md).
 //test
 @login(DEMO_NUMBER_ROOT_SVC)
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+  protected static async beforeEach() {
+    await super.beforeEach();
+    this.viewFixture = this.Fixture("view");
+    this.orgFixture = this.Fixture("organization");
+  }
 
-	protected static async beforeEach() {
-		await super.beforeEach() 
-		this.viewFixture = this.Fixture('view')
-		this.orgFixture = this.Fixture('organization')
-	}
+  @test()
+  protected static async redirectsWhenNoCurrentOrg() {
+    let wasHit = false;
 
+    await vcAssertUtil.assertActionRedirects({
+      router: this.viewFixture.getRouter(),
+      action: () => this.load(this.vc),
+      destination: {
+        id: "organization.add",
+      },
+    });
+  }
 
-	@test()
-	protected static async redirectsWhenNoCurrentOrg() {
-		let wasHit = false
-		
-		await vcAssertUtil.assertActionRedirects({
-			router: this.viewFixture.getRouter(),
-			action: () => this.load(this.vc),
-			destination: {
-				id: 'organization.add',
-			},
-		})
-	}
+  @test()
+  @seed("organization", 1)
+  protected static async doesNotRedirectWhenCurrentOrg() {
+    const organization = await this.orgFixture.getNewestOrganization();
 
+    //this is optional, the current org defaults to the newest added
+    //this.viewFixture.getScope().setCurrentOrganization(organization.id)
 
-	@test()
-	@seed('organization', 1)
-	protected static async doesNotRedirectWhenCurrentOrg() {
-		const organization = await this.orgFixture.getNewestOrganization()
-	
-		//this is optional, the current org defaults to the newest added
-		//this.viewFixture.getScope().setCurrentOrganization(organization.id)
+    await vcAssertUtil.assertActionDidNotRedirect({
+      router: this.viewFixture.getRouter(),
+      action: () => this.load(this.vc),
+    });
 
-		await vcAssertUtil.assertActionDidNotRedirect({
-			router: this.viewFixture.getRouter(),
-			action: () => this.load(this.vc),
-		})
+    assert.isEqualDeep(this.vc.currentOrg, organization);
+  }
 
-		assert.isEqualDeep(this.vc.currentOrg, organization)
-	}
+  @test()
+  @seed("organizations", 3)
+  protected static async usesOrgFromScope() {
+    // since scope loads the newest org by default, we can set
+    // it back to the first org to test our productions code
+    const [organizations] = await this.orgFixture.listOrganizations();
 
-	@test()
-	@seed('organizations',3)
-	protected static async usesOrgFromScope() {
-		// since scope loads the newest org by default, we can set 
-		// it back to the first org to test our productions code
-		const [organizations] = await this.orgFixture.listOrganizations()
-	
-		this.viewFixture.getScope().setCurrentOrganization(organization.id)
+    this.viewFixture.getScope().setCurrentOrganization(organization.id);
 
-		let wasHit = false
+    let wasHit = false;
 
-		await this.load(this.vc)
+    await this.load(this.vc);
 
-		assert.isEqualDeep(this.vc.currentOrg, organization)
-	}
-
-
-	
+    assert.isEqualDeep(this.vc.currentOrg, organization);
+  }
 }
 
 //production
 class RootSkillviewController extends AbstractSkillViewController {
-	public async load(options: SkillViewControllerLoadOptions) {
-		const organization = await options.scope.getCurrentOrganization()
+  public async load(options: SkillViewControllerLoadOptions) {
+    const organization = await options.scope.getCurrentOrganization();
 
-		if (!organization) {
-			await options.router.redirect('organization.add' as any)
-			return
-		}
+    if (!organization) {
+      await options.router.redirect("organization.add" as any);
+      return;
+    }
 
-		this.currentOrganization = organization
-		this.profileCardVc.setRouter(options.router)
-		this.profileCardVc.setIsBusy(false)
-	}
+    this.currentOrganization = organization;
+    this.profileCardVc.setRouter(options.router);
+    this.profileCardVc.setIsBusy(false);
+  }
 }
 ```
 
 ## Testing Stats
 
-
 ```ts
 //test
 @login(DEMO_NUMBER_ROOT_SVC)
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+  @test()
+  protected static rendersStats() {
+    vcAssertUtil.assertRendersStats(this.vc.getCardVc());
+  }
 
-	@test()
-	protected static rendersStats() {
-		vcAssertUtil.assertRendersStats(this.vc.getCardVc())
-	}
+  @test()
+  @seed("organization", 1)
+  protected static async rendersExpectedStatsAfterLoad() {
+    await this.bootAndLoad();
+  }
 
-
-	@test()
-	@seed('organization', 1)
-	protected static async rendersExpectedStatsAfterLoad() {
-		await this.bootAndLoad()
-	}
-
-	private static async bootAndLoad() {
-		await this.bootSkill()
-		await this.load(this.vc)
-	}
-	
+  private static async bootAndLoad() {
+    await this.bootSkill();
+    await this.load(this.vc);
+  }
 }
 
 //production
 class RootSkillviewController extends AbstractSkillViewController {
+  public constructor(options: ViewControllerOptions) {
+    super(options);
 
-	public constructor(options: ViewControllerOptions) {
-		super(options)
-		
-		this.cardVc = this.CardVc()
-	}
+    this.cardVc = this.CardVc();
+  }
 
-	public async load(options: SkillViewControllerLoadOptions) {
-		
-	}
+  public async load(options: SkillViewControllerLoadOptions) {}
 }
 ```
 
 ## Testing forms
+
 It is important that you test the graceful handling of failed requests on save. Use the `eventMocker` to make events throw so you can gracefully handle them!
 
 ```ts
@@ -571,8 +548,8 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 	@test()
 	protected static async showsErrorWhenSavingFails() {
 
-		await eventMocker.makeEventThrow(this.Fixture('mercury'), 'create-organization::v2020_01_01')
-	
+		await eventMocker.makeEventThrow('create-organization::v2020_01_01')
+
 		const formVc = this.vc.getFormVc()
 		formVc.setValues({...})
 
@@ -611,7 +588,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 		const values = this.formVc.getValues()
 
 		try {
-			const client = await this.connectToApi() 
+			const client = await this.connectToApi()
 			const results = await client.emit('create-organization::v2020_01_01', {
 				payload: values
 			})
@@ -623,17 +600,18 @@ class RootSkillviewController extends AbstractSkillViewController {
 ```
 
 ## Testing toolbelt
+
 ```ts
 //test
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
 	@test()
 	protected static rendersToolBelt() {
 		vcAssertUtil.assertDoesNotRenderToolBelt(this.vc)
-		
+
 		await this.load(this.vc)
 
 		const toolBeltVc = vcAssertUtil.assertRendersToolBelt(this.vc)
-		
+
 		const { tool, toolBeltVc: toolBeltVc2, cardVc} = vcAssertUtil.assertToolBeltRendersTool(this.vc, 'edit')
 
 		assert.isTruthy(cardVc, 'Your ToolBelt does not render a tool with a properly rendered CardVc.')
@@ -671,6 +649,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 ```
 
 ## Testing redirects
+
 ```ts
 //test
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
@@ -741,14 +720,12 @@ class RootSkillviewController extends AbstractSkillViewController {
 }
 ```
 
-
 ## Test hints
 
 1. Look at locations skill
 1. Look at forms skill
-2. Use `spruce watch.views` and then visit the `https://developer.spruce.bot/#views/heartwood.watch`
-3. Checkout the `VcAssertUtil.test.ts` in `heartwood-view-controllers`
-4. Give your buttons, list rows, and cards ids and assert against them
-	* vcAssertUtil.assertListRendersRow(rowVc, service.id)
-	* interactionUtil.clickButtonInFooter(cardVc, 'edit')
-
+1. Use `spruce watch.views` and then visit the `https://developer.spruce.bot/#views/heartwood.watch`
+1. Checkout the `VcAssertUtil.test.ts` in `heartwood-view-controllers`
+1. Give your buttons, list rows, and cards ids and assert against them
+   - vcAssertUtil.assertListRendersRow(rowVc, service.id)
+   - interactionUtil.clickButtonInFooter(cardVc, 'edit')
