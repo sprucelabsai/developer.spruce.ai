@@ -1,3 +1,10 @@
+# [4.5.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v4.4.3...v4.5.0) (2021-12-16)
+
+
+### Features
+
+* nem assertSuccessAlerts! ([04e4607](https://github.com/sprucelabsai/developer.spruce.ai/commit/04e4607))
+
 ## [4.4.3](https://github.com/sprucelabsai/developer.spruce.ai/compare/v4.4.2...v4.4.3) (2021-12-15)
 
 ## [4.4.2](https://github.com/sprucelabsai/developer.spruce.ai/compare/v4.4.1...v4.4.2) (2021-12-15)
