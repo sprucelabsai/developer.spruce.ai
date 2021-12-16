@@ -553,7 +553,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 		const formVc = this.vc.getFormVc()
 		formVc.setValues({...})
 
-		await vcAssertUtil.assertDoesRenderAlert(this.vc, () => interactionUtil.submitForm(formVc))
+		await vcAssertUtil.assertRenderAlert(this.vc, () => interactionUtil.submitForm(formVc))
 	}
 
 
@@ -563,7 +563,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
 		formVc.setValues({...})
 
-		await interactionUtil.submitForm(formVc)
+		await vcAssertUtil.assertRendersSuccessAlert(this.vc, () => interactionUtil.subimForm(formVc))
 
 		...
 	}
@@ -571,31 +571,36 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
 //production
 class RootSkillviewController extends AbstractSkillViewController {
-	public constructor(options: SkillViewControllerOptions) {
-		super(options)
+    public constructor(options: SkillViewControllerOptions) {
+        super(options)
 
-		this.formVc = this.FormVc()
-	}
+        this.formVc = this.FormVc()
+    }
 
-	private FormVc() {
-		return this.Controller('form', buildForm({
-			...,
-			onSubmit: this.handleSubmit.bind(this)
-		}))
-	}
+    private FormVc() {
+        return this.Controller('form', buildForm({
+            ...,
+            onSubmit: this.handleSubmit.bind(this)
+        }))
+    }
 
-	private async handleSubmit() {
-		const values = this.formVc.getValues()
+    private async handleSubmit() {
+        const values = this.formVc.getValues()
 
-		try {
-			const client = await this.connectToApi()
-			const results = await client.emit('create-organization::v2020_01_01', {
-				payload: values
-			})
-		} catch (err:any) {
-			await this.alert({ message: err.message })
-		}
-	}
+        try {
+            const client = await this.connectToApi()
+            const results = await client.emit('create-organization::v2020_01_01', {
+                payload: values
+            })
+
+            eventResponsUtil.getFirstResponseOrThrow(results)
+
+            await this.alert({ message: 'You did it!!', style: 'success' })
+
+        } catch (err: any) {
+            await this.alert({ message: err.message })
+        }
+    }
 }
 ```
 
