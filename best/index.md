@@ -65,14 +65,24 @@ Testing is so important to us, there is a [section](../tests/index.md?id=best-pr
 Setting up your event can be very easy. Managing events can be just as easy if you setup everything correctly. In this scenario, let's say we are managing `Invites`. Here is how you should approach designing your event.
 
 ### Naming events
+If your skill is responsible for one primary data type or the work an event is getting done can be said to be done to your skill, you can use shortened event names that are only the verb:
 
+1. `appointments.book::v2020_02_02`
+2. `invites.send::v2020_02_02`
+2. `profiles.create::v2020_02_02`
+
+As the types of data and actions you perform broaden, you'll need to include the subject along with the verb.
+
+1. `appointments.create-category::v2020_02_02`
+2. `invites.update-notification-preferences::v2020_02_02`
+2. `profiles.set-photo::v2020_02_02`
 
 ### With schemas
 
 1. Create the invite schema
 	* `spruce create.schema`
 	* Configure your schema as desired
-	* Use `isHidden: true` on fields you do not want to be exposed outside your skill
+	* Use `isPrivate: true` on fields you do not want to be exposed outside your skill
 2. Create the event
 	* `spruce create.event`
 3. Configure target
