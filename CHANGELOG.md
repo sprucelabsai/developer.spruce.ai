@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.0.1...v5.1.0) (2021-12-23)
+
+
+### Features
+
+* event naming ([9bdab98](https://github.com/sprucelabsai/developer.spruce.ai/commit/9bdab98))
+
 ## [5.0.1](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.0.0...v5.0.1) (2021-12-23)
 
 # [5.0.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v4.6.1...v5.0.0) (2021-12-23)
