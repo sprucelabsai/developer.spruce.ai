@@ -136,14 +136,14 @@ This is an example of what your skill's test file may look like after a few test
 
 ```ts
 export default class AbstractProfileTest extends AbstractViewControllerTest {
-	protected static viewFixture: ViewFixture
+	protected static views: ViewFixture
 	protected static profileStore: ProfilesStore
 	protected static router: Router
 
 	protected static async beforeEach() {
 		await super.beforeEach()
 
-		this.viewFixture = this.Fixture('view')
+		this.views = this.Fixture('view')
 		this.profileStore = await this.Fixture('store').Store('profiles')
 		this.router = this.Fixture('view').getRouter()
 	}
