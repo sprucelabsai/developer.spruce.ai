@@ -461,8 +461,8 @@ Learn more [here](views/scope.md).
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
   protected static async beforeEach() {
     await super.beforeEach();
-    this.viewFixture = this.Fixture("view");
-    this.orgFixture = this.Fixture("organization");
+    this.views = this.Fixture("view");
+    this.orgs = this.Fixture("organization");
   }
 
   @test()
@@ -470,7 +470,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
     let wasHit = false;
 
     await vcAssertUtil.assertActionRedirects({
-      router: this.viewFixture.getRouter(),
+      router: this.views.getRouter(),
       action: () => this.load(this.vc),
       destination: {
         id: "organization.add",
@@ -481,13 +481,13 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
   @test()
   @seed("organization", 1)
   protected static async doesNotRedirectWhenCurrentOrg() {
-    const organization = await this.orgFixture.getNewestOrganization();
+    const organization = await this.orgs.getNewestOrganization();
 
     //this is optional, the current org defaults to the newest added
-    //this.viewFixture.getScope().setCurrentOrganization(organization.id)
+    //this.views.getScope().setCurrentOrganization(organization.id)
 
     await vcAssertUtil.assertActionDidNotRedirect({
-      router: this.viewFixture.getRouter(),
+      router: this.views.getRouter(),
       action: () => this.load(this.vc),
     });
 
@@ -499,9 +499,9 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
   protected static async usesOrgFromScope() {
     // since scope loads the newest org by default, we can set
     // it back to the first org to test our productions code
-    const [organizations] = await this.orgFixture.listOrganizations();
+    const [organizations] = await this.orgs.listOrganizations();
 
-    this.viewFixture.getScope().setCurrentOrganization(organization.id);
+    this.views.getScope().setCurrentOrganization(organization.id);
 
     let wasHit = false;
 
@@ -688,10 +688,10 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 	@test()
 	protected static redirectsOnSelectLocation() {
 		const locationsCardVc = this.vc.getLocationsCardVc()
-		const location = await this.viewFixture.getScope().getCurrentLocation()
+		const location = await this.views.getScope().getCurrentLocation()
 
 		await vcAssertUtil.assertActionRedirects({
-			router: this.viewFixture.getRouter(),
+			router: this.views.getRouter(),
 			action: () =>
 				interactionUtil.clickButtonInRow(
 					locationsCardVc.getListVc(),
