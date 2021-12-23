@@ -14,6 +14,32 @@ spruce sync.events
 
 ```
 
+## Anatomy of an event
+
+### Structure
+
+1. Fully qualified event name (fqen)
+2. Target
+3. Payload
+4. Source
+
+### Naming
+
+Core Events
+
+* action-subject::version
+* `create-organization::v2020_01_01`
+* `update-role::v2020_01_01`
+
+Skill Events
+
+1. namespace.action-subject::version
+	* `appointments.create-category::v2020_01_10`
+	* `shifts.create-shift-type::v2020_01_10`
+2. namespace.subject::version
+	* `invite.send::v2020_01_01`
+	* `appointments.book::v2020_01_01`
+
 ## Global events
 Events that are global do not need a target with `organizationId` or `locationId`. Your skill will need special permissions to be able to emit global events. 
 

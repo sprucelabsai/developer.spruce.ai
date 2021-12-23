@@ -65,13 +65,13 @@ Testing is so important to us, there is a [section](../tests/index.md?id=best-pr
 Setting up your event can be very easy. Managing events can be just as easy if you setup everything correctly. In this scenario, let's say we are managing `Invites`. Here is how you should approach designing your event.
 
 ### Naming events
-If your skill is responsible for one primary data type or the work an event is getting done can be said to be done to your skill, you can use shortened event names that are only the verb:
+If your skill is responsible for one data type or the work an event is getting done can be said to be 'done to your skill', your skill's namespace becomes the subject and you  use shortened event names that are only the action:
 
 1. `appointments.book::v2020_02_02`
 2. `invites.send::v2020_02_02`
 2. `profiles.create::v2020_02_02`
 
-As the types of data and actions you perform broaden, you'll need to include the subject along with the verb.
+As the types of data and actions you perform broaden, you'll need to include the subject along with the action.
 
 1. `appointments.create-category::v2020_02_02`
 2. `invites.update-notification-preferences::v2020_02_02`
