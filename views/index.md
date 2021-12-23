@@ -199,12 +199,14 @@ export default class RootSkillViewController extends AbstractSkillViewController
 
 ## Authentication
 
-Using `MercuryFixture.setDefaultClient()` you can set a client all fixtures will share that make api request. This will also be the client returned from `this.connectToApi()` in your views.
+Using `@login()` you can set a client all fixtures will share that make api request. This will also be the client returned from `this.connectToApi()` in your views.
 
 ```ts
 //test
 @login(DEMO_NUMBER_ROOT_SVC)
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+  
+  @seed('organizations', 1)
   protected static async beforeEach() {
     await super.beforeEach();
 
@@ -214,8 +216,28 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
      * MercuryFixture.setDefaultClient(client)
      **/
 
-    const client = login.getClient();
+    this.client = login.getClient();
     this.vc = this.Controller("adventure.root");
+  }
+
+  @test()
+  protected static async trySomethingAsPrimaryPerson() {
+    await this.bootAndLoad()
+    ...
+  }
+
+  @test()
+  protected static async tryAsSomeoneNotPartOfOrg() {
+      await this.Fixture('view').loginAsDemoPerson(DEMO_NUMBER_OUTSIDER)
+
+      // skill will now boot and load with DEMO_NUMBER_OUTSIDER for this test
+      await this.bootAndLoad()
+      ...
+  }
+
+  protected static async bootAndLoad() {
+      await this.bootSkill()
+      await this.load(this.vc)
   }
 }
 
@@ -226,6 +248,11 @@ class RootSkillviewController extends AbstractSkillViewController {
 
     const results = await client.emit("whoami::v2020_01_10");
     const { person } = eventResponseUtil.getFirstResponseOrThrow(results);
+
+    testLog.info(person.phone) 
+    //first test logs DEMO_NUMBER_ROOT_SVC
+    //second test logs DEMO_NUMBER_OUTSIDER
+
   }
 }
 ```

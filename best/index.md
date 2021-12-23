@@ -55,3 +55,31 @@ export default class AddServiceSkillViewController extends AbstractSkillViewCont
 
 Testing is so important to us, there is a [section](../tests/index.md?id=best-practices) dedicated to it.
 
+## Stores
+
+1. Whenever you are querying a data store, only ask for the fields you need. 
+	* In an event, use the fields from the [reponsePayload or emitPayload](../stores/index.md?id=stores-in-tests).
+
+
+## Events 
+Setting up your event can be very easy. Managing events can be just as easy if you setup everything correctly. In this scenario, let's say we are managing `Invites`. Here is how you should approach designing your event.
+
+### Naming events
+
+
+### With schemas
+
+1. Create the invite schema
+	* `spruce create.schema`
+	* Configure your schema as desired
+	* Use `isHidden: true` on fields you do not want to be exposed outside your skill
+2. Create the event
+	* `spruce create.event`
+3. Configure target
+	* You probably need an `organizationId` or `locationId`
+	* If the event were `invite.update::v2020_01_10` you would want `inviteId` in the target.
+4. Configure payload
+	* Make sure hidden fields are dropped using `dropPrivateFields()`
+	* Use `dropFields()` to remove anything else you don't need.
+	* See the [event docs](../events/index?id=payloads).
+
