@@ -67,7 +67,7 @@ export default class MySkillViewControllerTest extends AbstractSpruceFixtureTest
 ## Seeding data
 Seeders for core data (people, locations, roles, etc.) are provided through some killer decorators.
 
-You can also `@seed` from any of your local stores.
+You can also `@seed` from any of your local [stores](/stores.md/index?id=stores).
 
 ```ts
 //@login sets the default client for all fixtures and seeders going forward
@@ -115,9 +115,18 @@ Everything you need to know is under the [Views](/views/index.md?id=testing-view
 
 ## Best Practices
 
-1. Create an abstract test for your skill on your second test.
+1. Create an abstract test for your skill on the first test where you need something twice.
     * E.g. `AbstractProfileTest`
     * All your future tests should extend this test.
+    * Creating helpers like `getNewestInvite` and `listOrgs` is extremely helpful.
+    * Set fixtures you need often to local props in `beforeEach()`:
+        * Name the prop the plural name of the fixturce
+        * `this.views = this.Fixture('views')`
+        * `this.orgs = this.Fixture('organizations')`
+    * Set stores to local props in `beforeEach`.
+        * Name the prop the name of the store: 
+        * `this.invites = await this.Store('invites')`
+        * `this.profiles = await this.Store('profiles')`
 2. Don't create fixtures over and over, save them as protected properties on your Abstract Test.
 3. Create helpful getters for things you fetch over and over, e.g. `this.getNewestOrganization()`.
     * Use assertions and helpful error messages to guide future you through proper test setup.

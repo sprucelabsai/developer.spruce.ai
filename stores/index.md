@@ -12,6 +12,7 @@ spruce sync.stores
 
 
 ## Stores in listeners
+Make sure you are loading only the fields you need (with `includeFields`) so your store doesn't return too many fields and cause your response payload to fail validation. 
 
 ```ts
 export default async (
@@ -37,55 +38,50 @@ export default async (
 ```
 
 ## Stores in tests
+You can access all the stores you need from test in 2 ways.
+
+1. If your test extends `AbstractStoreTest` -> `const store = await this.Store('invites')`
+2. If your test extends `AbstractSpruceFixtureTest` -> `const store = await Fixture('store').Store('invites')`
 
 ```ts
-export default class AcceptingAnInviteTest extends AbstractInviteTest {
+export default class AcceptingAnInviteTest extends AbstractStoreTest {
 	private static vc: AcceptSkillViewController
     private static invites: InvitesStore
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.vc = this.Controller('invite.accept', {})
-        this.invites = this.Fixture('store').Store('invites')
-	}
-
-	@test()
-	protected static async alertsAndRedirectsIfLoadedWithBadInviteId() {
-		await this.bootSkill()
-
-		await vcAssertUtil.assertRendersAlertThenRedirects({
-			router: this.viewFixture.getRouter(),
-			vc: this.vc,
-			action: () => this.load(this.vc, { inviteId: 'aoeu' }),
-			destination: {
-				id: 'heartwood.root',
-			},
-		})
+        this.invites = await this.Store('invites')
 	}
 
 	@test()
 	@seed('invites', 1)
-	protected static async loadsAPendingInvite() {
+	protected static async youCanSeedDataIntoYourStore() {
         const invite = await this.getNewestInvite()
-
-		await vcAssertUtil.assertActionDoesNotRedirect({
-			router: this.viewFixture.getRouter(),
-			action: () => this.bootAndLoadWithInvite(),
-		})
+		assert.isTruthy(invite)
 	}
 
-    private static async bootAndLoadWithInvite() {
-        await this.bootSkill()
-        const invite = await this.getNewestInvite()
-        await this.load(this.vc, {
-            inviteId: invite.id
-        })
+   @test()
+   @seed('invites', 20)
+    proctected static async helpersLikeGetNewestAndListAreSoNice() {
+        const invites = this.listInvites()
+		assert.isLength(invites, 20)
     }
 
-    private static async getNewestInvite() {
-        return this.invites.findOne({})
-    }
+	private static async getNewestInvite() {
+		const invite = await this.invites.findOne({})
+		assert.isTruthy(invite, `Don't forget to @seed('invites', 1) to get started!`)
+		return invite
+	}
+	
+	private static async listInvites() {
+		const invites = await this.invites.find({})
+		assert.isAbove(invite.length, 0, `Don't forget to @seed('invites', 1) to get started!`)
+		return invites
+	}
+
+	
 }
 
 ```
+
 
