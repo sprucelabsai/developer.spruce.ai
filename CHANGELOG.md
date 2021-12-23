@@ -1,3 +1,10 @@
+# [4.6.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v4.5.0...v4.6.0) (2021-12-23)
+
+
+### Features
+
+* docs on stores ([6d8cb85](https://github.com/sprucelabsai/developer.spruce.ai/commit/6d8cb85))
+
 # [4.5.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v4.4.3...v4.5.0) (2021-12-16)
 
 
