@@ -643,12 +643,10 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 		await this.load(this.vc)
 
 		const toolBeltVc = vcAssertUtil.assertRendersToolBelt(this.vc)
+		const toolVc = vcAssertUtil.assertToolBeltRendersTool(this.vc, 'edit')
 
-		const { tool, toolBeltVc: toolBeltVc2, cardVc} = vcAssertUtil.assertToolBeltRendersTool(this.vc, 'edit')
-
-		assert.isTruthy(cardVc, 'Your ToolBelt does not render a tool with a properly rendered CardVc.')
-		assert.isEqual(toolBeltVc, toolBeltVc2)
-		assert.isEqual(tool.lineIcon, 'glob')
+		assert.isTruthy(toolVc, 'Your ToolBelt does not render a tool with a properly rendered CardVc.')
+    vcAssertUtil.assertRendersAsInstanceOf(toolVc, PeopleSelectViewController)
 	}
 }
 
