@@ -25,6 +25,17 @@ Fixtures are utility classes to help you setup your environment for testing.
 ## Testing
 Fixtures are available when extending `AbstractSpruceFixtureTest` and anything that extends it (all abstract tests that come with the sdk extend this class).
 
+Note that all built in fixtures are available via protected fields on the `AbstractSpruceFixtureTest`.
+
+1. `this.views` => `ViewFixture`
+1. `this.roles` => `RoleFixture`
+1. `this.locations` => `LocationFixture`
+1. `this.organizations` => `OrganizationFixture`
+1. `this.people` => `PersonFixture`
+1. `this.seeder` => `SeedFixture`
+1. `this.skills` => `SkillFixture`
+
+
 ```ts
 export default class RenderingRootViewControllerTest extends AbstractSpruceFixtureTest {
 
@@ -33,7 +44,11 @@ export default class RenderingRootViewControllerTest extends AbstractSpruceFixtu
 
         const organizationFixture = this.Fixture('organization')
 
-        assert.isTruthy(organizationFixture.)
+        assert.isTruthy(organizationFixture)
+
+        //Save time by accessing the fixture via protected pro
+        assert.isTruthy(this.organizations)
+        assert.isTruthy(this.locations)
     }
 }
 ```
