@@ -1,3 +1,10 @@
+# [5.2.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.1.2...v5.2.0) (2022-01-05)
+
+
+### Features
+
+* docs on writing stats ([20004ca](https://github.com/sprucelabsai/developer.spruce.ai/commit/20004ca))
+
 ## [5.1.2](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.1.1...v5.1.2) (2022-01-04)
 
 ## [5.1.1](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.1.0...v5.1.1) (2021-12-23)
