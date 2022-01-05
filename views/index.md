@@ -646,7 +646,8 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 		const toolVc = vcAssertUtil.assertToolBeltRendersTool(this.vc, 'edit')
 
 		assert.isTruthy(toolVc, 'Your ToolBelt does not render a tool with a properly rendered CardVc.')
-    vcAssertUtil.assertRendersAsInstanceOf(toolVc, PeopleSelectViewController)
+   
+    vcAssertUtil.assertToolInstanceOf(this.vc, 'edit', PeopleSelectViewController)
 	}
 }
 
@@ -749,6 +750,16 @@ class RootSkillviewController extends AbstractSkillViewController {
 	}
 }
 ```
+
+## Optimizing source
+
+You can inspect your bundled view controller source by setting this in your skill's env:
+
+```bash
+VIEW_PROFILER_STATS_DESTINATION_DIR=/path/to/a/dir/that/exists
+```
+
+This will write a file called `stats.json` at that destination. You can upload it to [https://webpack.github.io/analyse/#modules](https://webpack.github.io/analyse/#modules) to see what is being included.
 
 ## Test hints
 
