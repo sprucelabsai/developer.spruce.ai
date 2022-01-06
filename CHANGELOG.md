@@ -1,3 +1,10 @@
+# [5.4.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.3.1...v5.4.0) (2022-01-06)
+
+
+### Features
+
+* seed example ([ce3f82c](https://github.com/sprucelabsai/developer.spruce.ai/commit/ce3f82c))
+
 ## [5.3.1](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.3.0...v5.3.1) (2022-01-06)
 
 # [5.3.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.2.0...v5.3.0) (2022-01-06)
