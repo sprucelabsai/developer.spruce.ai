@@ -6,7 +6,19 @@ While a person is viewing one of your Skill Views, they may chose to only show i
 
 It is up to you, the mightly skills developer, to honor any scope set (if it makes sense for your skill).
 
-### Production scope
+### Scoping your skill view's behaviors
+You can let Heartwood take care of requiring a location or an organization to be selected by implementing `getScopedBy()` in your skill view.
+
+```ts
+export default class RootSkillViewController extends AbstractSkillViewController<Args> {
+    public getScopedBy() {
+        return 'organization' // 'location' 'none'
+    }
+}
+
+```
+
+### Loading scope
 A Scope instance is passed to your Skill View Controller's `load` hook when invoked after first render.
 
 ```ts
@@ -34,9 +46,16 @@ Test scope is accessible through the View Fixture. Make sure you have [seeded so
 
 ```ts
 export default class RenderingRootViewControllerTest extends AbstractLocationsViewsTest {
+
+
+    @test()
+    protected static isScopedByOrganization() {
+        vcAssertUtil.assertSkillViewScopedBy(this.vc, 'organization')
+    }
+
     @test()
 	protected static async loadingSetsStartingLocation() {
-        const scope = this.Fixture('view').getScope()
+        const scope = this.views.getScope()
 
         //getting scope
 		const organization = await scope.getCurrentLocation()
@@ -47,5 +66,7 @@ export default class RenderingRootViewControllerTest extends AbstractLocationsVi
         scope.setCurrentLocation(organization.id)
 
 	}
+
+    
 }
 ```
