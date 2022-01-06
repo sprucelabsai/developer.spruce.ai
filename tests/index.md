@@ -101,7 +101,6 @@ export default class RenderingRootViewControllerTest extends AbstractSpruceFixtu
     }
 
     @test()
-    @seed('organizations',1)
     @seed('locations',10)
     protected static async locationsShouldSeed() {
         const currentOrg = await this.organizations.getNewestOrganization()
@@ -111,8 +110,9 @@ export default class RenderingRootViewControllerTest extends AbstractSpruceFixtu
     }
 
     @test()
-    @seed('organizations', 1)
     protected static async seedingEntireAccount() {
+
+        // will seed data under newest organization
         const {
             locations, 
             guests, 
