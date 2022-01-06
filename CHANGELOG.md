@@ -1,3 +1,11 @@
+# [5.3.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.2.0...v5.3.0) (2022-01-06)
+
+
+### Features
+
+* fixture field examples ([1aadf83](https://github.com/sprucelabsai/developer.spruce.ai/commit/1aadf83))
+* scope ([6ba65d8](https://github.com/sprucelabsai/developer.spruce.ai/commit/6ba65d8))
+
 # [5.2.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.1.2...v5.2.0) (2022-01-05)
 
 
