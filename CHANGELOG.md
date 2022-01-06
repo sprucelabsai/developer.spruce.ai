@@ -1,3 +1,5 @@
+## [5.4.1](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.4.0...v5.4.1) (2022-01-06)
+
 # [5.4.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.3.1...v5.4.0) (2022-01-06)
 
 
