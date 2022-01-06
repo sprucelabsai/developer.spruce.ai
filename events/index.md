@@ -94,7 +94,7 @@ export default sendEmitPayloadBuilder
 
 ```ts
 
-// will throw an error
+// will throw an error if any response fails
 const [{ auth }] = await client.emitAndFlattenResponses('whoami::v2020_12_25')
 
 //functionally equivalent to
