@@ -1,3 +1,10 @@
+# [5.5.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.4.3...v5.5.0) (2022-01-06)
+
+
+### Features
+
+* emitting event tips ([2d2d5b9](https://github.com/sprucelabsai/developer.spruce.ai/commit/2d2d5b9))
+
 ## [5.4.3](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.4.2...v5.4.3) (2022-01-06)
 
 ## [5.4.2](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.4.1...v5.4.2) (2022-01-06)
