@@ -176,20 +176,18 @@ This is an example of what your skill's test file may look like after a few test
 
 ```ts
 export default class AbstractProfileTest extends AbstractViewControllerTest {
-	protected static views: ViewFixture
-	protected static profileStore: ProfilesStore
+	protected static profiles: ProfilesStore
 	protected static router: Router
 
 	protected static async beforeEach() {
 		await super.beforeEach()
 
-		this.views = this.Fixture('view')
-		this.profileStore = await this.Fixture('store').Store('profiles')
-		this.router = this.Fixture('view').getRouter()
+		this.profiles = await this.stores.Store('profiles')
+		this.router = this.views.getRouter()
 	}
 
 	protected static async getNewestProfile() {
-		const profile = await this.profileStore.findOne({})
+		const profile = await this.profiles.findOne({})
 
 		assert.isTruthy(profile, `You gotta @seed('profiles',1) to continue.`)
 		return profile
@@ -202,7 +200,7 @@ export default class AbstractProfileTest extends AbstractViewControllerTest {
 	}
 
     protected static async listProfiles () {
-        const profiles = await this.profileStore.findOne({})
+        const profiles = await this.profiles.findOne({})
         assert.isAbove(profiles.length, 0, `You gotta @seed('profiles',1) to continue.`)
         return profiles
     }
