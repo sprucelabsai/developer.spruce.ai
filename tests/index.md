@@ -34,6 +34,7 @@ Note that all built in fixtures are available via protected fields on the `Abstr
 1. `this.people` => `PersonFixture`
 1. `this.seeder` => `SeedFixture`
 1. `this.skills` => `SkillFixture`
+1. `this.mercury` => `MercuryFixture`
 
 
 ```ts
@@ -42,7 +43,7 @@ export default class RenderingRootViewControllerTest extends AbstractSpruceFixtu
     @test()
     protected static gettingFixtures() {
 
-        const organizationFixture = this.Fixture('organization')
+        const organizationFixture = this.organizations
 
         assert.isTruthy(organizationFixture)
 
@@ -93,19 +94,43 @@ export default class RenderingRootViewControllerTest extends AbstractSpruceFixtu
     protected static async beforeEach() {
         await super.beforeEach()
 
-        const totalOrgs = await this.Fixture('organization').listOrganizations()
+        const totalOrgs = await this.organizations.listOrganizations()
         assert.isLength(totalOrgs, 2)
 
         //since this is in the beforeEach(), every test will come with 2 organizations
     }
 
     @test()
+    @seed('organizations',1)
     @seed('locations',10)
     protected static async locationsShouldSeed() {
-        const currentOrg = await this.Fixture('organization').getNewestOrganization()
-        const locations = await this.Fixture('locations').listLocations({ organizationId: currentOrg?.id })
+        const currentOrg = await this.organizations.getNewestOrganization()
+        const locations = await this.locations.listLocations({ organizationId: currentOrg?.id })
+
         assert.isLength(locations, 10)
     }
+
+    @test()
+    @seed('organizations', 1)
+    protected static async seedingEntireAccount() {
+        const {
+            locations, 
+            guests, 
+            managers, 
+            owners, 
+            teammates 
+        } = await this.seeder.seedAccount({
+            totalLocations: 1,
+            totalGuests: 3,
+            totalManagers: 5,
+            totalOwners: 2,
+            totalTeammetes: 3,
+            startingPhone: DEMO_NUMBER_SEED_STARTING_PHONE
+        })
+
+
+    }
+
 }
 ```
 
@@ -171,7 +196,7 @@ export default class AbstractProfileTest extends AbstractViewControllerTest {
 	}
 
 	protected static async getNewestOrg() {
-		const org = await this.Fixture('organization').getNewestOrganization()
+		const org = await this.organizations.getNewestOrganization()
 		assert.isTruthy(org, `You gotta @seed('organizations',1) to continue.`)
 		return org
 	}
