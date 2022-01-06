@@ -45,6 +45,7 @@ export default class RootSkillViewController extends AbstractSkillViewController
 Test scope is accessible through the View Fixture. Make sure you have [seeded some organizations and locations](tests/index?id=seeding-data) before starting!
 
 ```ts
+@login(DEMO_NUMBER_SCOPE)
 export default class RenderingRootViewControllerTest extends AbstractLocationsViewsTest {
 
 
@@ -55,6 +56,8 @@ export default class RenderingRootViewControllerTest extends AbstractLocationsVi
     }
 
     @test()
+    @seed('organizations', 1)
+    @seed('locations', 1)
 	protected static async loadingSetsStartingLocation() {
         const scope = this.views.getScope()
 
