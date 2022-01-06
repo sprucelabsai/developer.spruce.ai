@@ -616,11 +616,9 @@ class RootSkillviewController extends AbstractSkillViewController {
 
         try {
             const client = await this.connectToApi()
-            const results = await client.emit('create-organization::v2020_01_01', {
+            await client.emitAndFlattenResponses('create-organization::v2020_01_01', {
                 payload: values
             })
-
-            eventResponsUtil.getFirstResponseOrThrow(results)
 
             await this.alert({ message: 'You did it!!', style: 'success' })
 

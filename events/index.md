@@ -87,3 +87,35 @@ export default sendEmitPayloadBuilder
 ```
 
 **Notes**: You should never include one of your own generated files in your builder. Include builders in builders is the rule.
+
+
+## Emitting events
+
+
+```ts
+
+// will throw an error
+const [{ auth }] = await client.emitAndFlattenResponses('whoami::v2020_12_25')
+
+//functionally equivalent to
+const results = await client.emit('whoami::v2020_12_25')
+const { auth } = eventResponseUtil.getFirstResponseOrThrow(results)
+
+
+
+const payloads = []
+
+//listening to each skill that response
+const results = await client.emit('test-skill::register-dashboard-cards', {}, ({ payload }) => {
+	payloads.push(payload)
+})
+
+//getting all payloads from responses
+const { payloads: all, errors } = eventResponseUtil.getAllPayloadsAndErrors(results, SpruceError)
+
+assert.isFalsy(errors)
+assert.isEqualDeep(all, payloads)
+
+```
+
+
