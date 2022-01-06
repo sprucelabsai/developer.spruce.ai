@@ -85,7 +85,7 @@ workflows:
           context: public_package_publish
     triggers:
       - schedule:
-          cron: "40 * * * *"
+          cron: "40 0,4,8,12,16,20 * * *"
           filters:
             branches:
               only:
