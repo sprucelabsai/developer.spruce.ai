@@ -636,7 +636,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
 	@test()
 	protected static rendersToolBelt() {
-		vcAssert.assertDoesNotRenderToolBelt(this.vc)
+		tt.assertDoesNotRenderToolBelt(this.vc)
 
 		await this.load(this.vc)
 
