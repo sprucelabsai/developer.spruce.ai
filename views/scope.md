@@ -51,8 +51,8 @@ export default class RenderingRootViewControllerTest extends AbstractLocationsVi
 
     @test()
     protected static isScopedByOrganization() {
-        vcAssertUtil.assertSkillViewScopedBy(this.vc, 'organization')
-        vcAssertUtil.assertSkillViewNotScoped(this.vc) //will fail if 
+        vcAssert.assertSkillViewScopedBy(this.vc, 'organization')
+        vcAssert.assertSkillViewNotScoped(this.vc) //will fail if 
     }
 
     @test()

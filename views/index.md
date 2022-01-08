@@ -63,14 +63,14 @@ Your RootViewController should always successfully render. If this test ever fai
 
 ## View Controller Assertions
 
-The [`vcAssertUtil`](https://github.com/sprucelabsai/heartwood-view-controllers/blob/master/src/tests/utilities/vcAssert.utility.ts) is the primary mechanism for building failing tests. For example, you may want to ensure your `RootViewController` renders 2 `Cards`.
+The [`vcAssert`](https://github.com/sprucelabsai/heartwood-view-controllers/blob/master/src/tests/utilities/vcAssert.utility.ts) is the primary mechanism for building failing tests. For example, you may want to ensure your `RootViewController` renders 2 `Cards`.
 
 ### 1. Failing test
 
-This will involve moving the instantiation of your vc to the `beforeEach` and then using `vcAssertUtil` to assert that your vc renders 2 cards.
+This will involve moving the instantiation of your vc to the `beforeEach` and then using `vcAssert` to assert that your vc renders 2 cards.
 
 ```ts
-import { vcAssertUtil } from "@sprucelabs/heartwood-view-controllers";
+import { vcAssert } from "@sprucelabs/heartwood-view-controllers";
 import { AbstractViewControllerTest } from "@sprucelabs/spruce-view-plugin";
 import RootSkillViewController from "../../skillViewControllers/Root.svc";
 
@@ -90,23 +90,23 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
   @test()
   protected static renders2Cards() {
-    vcAssertUtil.assertSkillViewRendersCards(this.vc, ["profile", "equip"]);
+    vcAssert.assertSkillViewRendersCards(this.vc, ["profile", "equip"]);
   }
 
   @test()
   protected static async requiresLogin() {
-    await vcAssertUtil.assertLoginIsRequired(this.vc);
+    await vcAssert.assertLoginIsRequired(this.vc);
   }
 
   @test()
   protected static canGetPofileCard() {
-    const cardVc = vcAssertUtil.assertSkillViewRendersCard(this.vc, "profile");
+    const cardVc = vcAssert.assertSkillViewRendersCard(this.vc, "profile");
     assert.isEqual(cardVc, this.vc.getProfileCardVc());
   }
 
   @test()
   protected static canGetEquipCard() {
-    const cardVc = vcAssertUtil.assertSkillViewRendersCard(this.vc, "equip");
+    const cardVc = vcAssert.assertSkillViewRendersCard(this.vc, "equip");
     assert.isEqual(cardVc, this.vc.getEquipCardVc());
   }
 
@@ -265,9 +265,9 @@ class RootSkillviewController extends AbstractSkillViewController {
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
 	@test()
 	protected static async rendersList() {
-		const listVc = vcAssertUtil.assertCardRendersList(this.vc.getEquipCardVc())
+		const listVc = vcAssert.assertCardRendersList(this.vc.getEquipCardVc())
 
-		vcAssertUtil.assertListRendersRow(vc, 'no-entries')
+		vcAssert.assertListRendersRow(vc, 'no-entries')
 
 
 		listVc.addRow({...})
@@ -301,7 +301,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
     formVc.setValue("name", "Haircut");
 
-    const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+    const confirmVc = await vcAssert.assertRendersConfirm(this.vc, () =>
       interactionUtil.submitForm(formVc)
     );
 
@@ -318,7 +318,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
     formVc.setValue("name", "Haircut");
 
-    const confirmVc = await vcAssertUtil.assertRendersConfirm(this.vc, () =>
+    const confirmVc = await vcAssert.assertRendersConfirm(this.vc, () =>
       interactionUtil.submitForm(formVc)
     );
 
@@ -402,7 +402,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
   @test()
   protected static async rendersActiveRecordCard() {
     const vc = this.Controller("my-skill.root", {});
-    const activeVc = vcAssertUtil.assertSkillViewRendersActiveRecordCard(vc);
+    const activeVc = vcAssert.assertSkillViewRendersActiveRecordCard(vc);
     assert.isEqual(vc.getActiveRecordCard(), activeVc);
 
     await this.load(vc);
@@ -469,7 +469,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
   protected static async redirectsWhenNoCurrentOrg() {
     let wasHit = false;
 
-    await vcAssertUtil.assertActionRedirects({
+    await vcAssert.assertActionRedirects({
       router: this.views.getRouter(),
       action: () => this.load(this.vc),
       destination: {
@@ -486,7 +486,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
     //this is optional, the current org defaults to the newest added
     //this.views.getScope().setCurrentOrganization(organization.id)
 
-    await vcAssertUtil.assertActionDidNotRedirect({
+    await vcAssert.assertActionDidNotRedirect({
       router: this.views.getRouter(),
       action: () => this.load(this.vc),
     });
@@ -536,7 +536,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
   @test()
   protected static rendersStats() {
-    vcAssertUtil.assertRendersStats(this.vc.getCardVc());
+    vcAssert.assertRendersStats(this.vc.getCardVc());
   }
 
   @test()
@@ -580,7 +580,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 		const formVc = this.vc.getFormVc()
 		formVc.setValues({...})
 
-		await vcAssertUtil.assertRenderAlert(this.vc, () => interactionUtil.submitForm(formVc))
+		await vcAssert.assertRenderAlert(this.vc, () => interactionUtil.submitForm(formVc))
 	}
 
 
@@ -590,7 +590,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
 		formVc.setValues({...})
 
-		await vcAssertUtil.assertRendersSuccessAlert(this.vc, () => interactionUtil.subimForm(formVc))
+		await vcAssert.assertRendersSuccessAlert(this.vc, () => interactionUtil.subimForm(formVc))
 
 		...
 	}
@@ -636,16 +636,16 @@ class RootSkillviewController extends AbstractSkillViewController {
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
 	@test()
 	protected static rendersToolBelt() {
-		vcAssertUtil.assertDoesNotRenderToolBelt(this.vc)
+		vcAssert.assertDoesNotRenderToolBelt(this.vc)
 
 		await this.load(this.vc)
 
-		const toolBeltVc = vcAssertUtil.assertRendersToolBelt(this.vc)
-		const toolVc = vcAssertUtil.assertToolBeltRendersTool(this.vc, 'edit')
+		const toolBeltVc = vcAssert.assertRendersToolBelt(this.vc)
+		const toolVc = vcAssert.assertToolBeltRendersTool(this.vc, 'edit')
 
 		assert.isTruthy(toolVc, 'Your ToolBelt does not render a tool with a properly rendered CardVc.')
    
-    vcAssertUtil.assertToolInstanceOf(this.vc, 'edit', PeopleSelectViewController)
+    vcAssert.assertToolInstanceOf(this.vc, 'edit', PeopleSelectViewController)
 	}
 }
 
@@ -687,7 +687,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 		const locationsCardVc = this.vc.getLocationsCardVc()
 		const location = await this.views.getScope().getCurrentLocation()
 
-		await vcAssertUtil.assertActionRedirects({
+		await vcAssert.assertActionRedirects({
 			router: this.views.getRouter(),
 			action: () =>
 				interactionUtil.clickButtonInRow(
@@ -764,7 +764,7 @@ This will write a file called `stats.json` at that destination. You can upload i
 1. Look at locations skill
 1. Look at forms skill
 1. Use `spruce watch.views` and then visit the `https://developer.spruce.bot/#views/heartwood.watch`
-1. Checkout the `VcAssertUtil.test.ts` in `heartwood-view-controllers`
+1. Checkout the `vcAssert.test.ts` in `heartwood-view-controllers`
 1. Give your buttons, list rows, and cards ids and assert against them
-   - vcAssertUtil.assertListRendersRow(rowVc, service.id)
+   - vcAssert.assertListRendersRow(rowVc, service.id)
    - interactionUtil.clickButtonInFooter(cardVc, 'edit')
