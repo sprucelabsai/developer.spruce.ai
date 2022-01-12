@@ -12,5 +12,6 @@
 -   [Errors](/errors/index.md)
 -   [Deploys](/deploys/index.md)
 -   [Stores](/stores/index.md)
+-   [Utility Modules](/utilities/index.md)
 -   [Best Practices](/best/index.md)
 
