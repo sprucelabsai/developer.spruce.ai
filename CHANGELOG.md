@@ -1,3 +1,10 @@
+# [5.7.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.6.0...v5.7.0) (2022-01-28)
+
+
+### Features
+
+* tool belt assertion example ([02c1e7e](https://github.com/sprucelabsai/developer.spruce.ai/commit/02c1e7e))
+
 # [5.6.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.5.2...v5.6.0) (2022-01-12)
 
 
