@@ -645,7 +645,6 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
 		assert.isTruthy(toolVc, 'Your ToolBelt does not render a tool with a properly rendered CardVc.')
    
-    vcAssert.assertToolInstanceOf(this.vc, 'edit', PeopleSelectViewController)
 	}
 
   @test()
