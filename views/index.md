@@ -650,17 +650,15 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
   @test()
 	protected static async addsTitleSubTitleCard() {
-		await this.sm.transitionTo(this.state)
-
     // check if a tool is an instance of a specific Class
-		const vc = vcAssert.assertToolInstanceOf(
+		const toolVc = vcAssert.assertToolInstanceOf(
 			this.toolBeltVc,
 			'title',
 			EventTitleCardViewController
 		)
 
-    // check if tool is accessible 
-		assert.isEqual(vc, this.state.getTitleCardVc())
+    // check if tool is accessible off the parent view controller
+		assert.isEqual(toolVc, this.vc.getTitleCardVc())
 	}
   
 }
