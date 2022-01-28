@@ -1,3 +1,10 @@
+# [5.6.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.5.2...v5.6.0) (2022-01-12)
+
+
+### Features
+
+* list of utility modules ([528252f](https://github.com/sprucelabsai/developer.spruce.ai/commit/528252f))
+
 ## [5.5.2](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.5.1...v5.5.2) (2022-01-08)
 
 ## [5.5.1](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.5.0...v5.5.1) (2022-01-08)
