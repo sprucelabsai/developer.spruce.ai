@@ -10,7 +10,7 @@ You'll need 2 dependencies to continue. 1 development (for testing) and 1 produc
 
 ```bash
 yarn add -D @sprucelabs/spruce-calendar-test-utils
-yarn add @sprucelabs/spruce-calendar-skill-support
+yarn add @sprucelabs/spruce-calendar-skill-components
 ```
 
 ## 2. Register your event types
