@@ -105,4 +105,4 @@ export default class CalendarEventViewControllerTest extends AbstractShiftsTest 
 
 ## 5. Optional: Extend AbstractCalendarToolBeltState
 
-You can provide any tool belt state you want from your calendar event, but if you want to get up and moving fast, you'll want to have your state extend `AbstractCalendarToolBeltState`.
+You can provide any tool belt state you want from your calendar event, but if you want to get up and moving fast, you'll want to have your state extend `AbstractCalendarEventToolBeltState`.
