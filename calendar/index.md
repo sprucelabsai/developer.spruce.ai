@@ -298,15 +298,13 @@ export default class EventTitleToolTest extends AbstractToolBeltStateTest {
 		})
 
 		assert.isFalse(wasHit)
+		await this.formVc.setValues(updates)
+		assert.isTrue(wasHit)
 
 		const { event } = this.context
 
-		await this.formVc.setValues(updates)
-
 		event.timeBlocks[0].title = updates.title
 		event.timeBlocks[0].subtitle = updates.subtitle
-
-		assert.isTrue(wasHit)
 
 		assert.isEqualDeep(passedUpdates, {
 			event,
@@ -328,30 +326,6 @@ export default class EventTitleToolTest extends AbstractToolBeltStateTest {
 		})
 	}
 
-	@test()
-	protected static async updatingContextAndThenChangingFormPassesUpdatedContext() {
-		let passedUpdates: any
-
-		this.vc = this.Vc({
-			updateContext: async (context) => {
-				passedUpdates = context.event
-			},
-		})
-
-		const { event } =
-			await calendarToolBeltInteractor.simulateRandomContextUpdate(
-				this.sm,
-				this.vc
-			)
-
-		await this.formVc.setValue('title', 'gummy')
-
-		event.timeBlocks[0].title = 'gummy'
-
-		assert.isEqualDeep(passedUpdates, {
-			...event,
-		})
-	}
 
 	private static Vc(options?: Partial<CalendarToolOptions>) {
 		return CalendarToolFactory.Tool(this.sm, 'calendar.event-title-card', {
@@ -373,15 +347,15 @@ export default class EventTitleToolViewController
 	public static id = 'event-title-card'
 	private cardVc: CardViewController
 	private formVc: FormVc
-	private context: CalendarToolBeltContext
+	private getContext: GetCalendarToolBeltContextHandler
 	private updateContextHandler: UpdateCalendarToolBeltContextHandler
 
 	public constructor(options: ViewControllerOptions & CalendarToolOptions) {
 		super(options)
 
-		const { context, updateContext } = options
+		const { getContext, updateContext } = options
 
-		this.context = context
+		this.getContext = getContext
 		this.updateContextHandler = updateContext
 
 		this.formVc = this.FormVc()
@@ -413,15 +387,15 @@ export default class EventTitleToolViewController
 					},
 				],
 				values: {
-					title: this.context?.event?.timeBlocks?.[0]?.title,
-					subtitle: this.context?.event?.timeBlocks?.[0]?.subtitle,
+					title: this.getContext().event?.timeBlocks?.[0]?.title,
+					subtitle: this.getContext().event?.timeBlocks?.[0]?.subtitle,
 				},
 			})
 		)
 	}
 
 	private async handleChangeForm() {
-		const { event } = this.context
+		const { event } = this.getContext()
 
 		event.timeBlocks[0] = {
 			...event.timeBlocks[0],
@@ -438,7 +412,6 @@ export default class EventTitleToolViewController
 	public async handleUpdateContext(
 		context: CalendarToolBeltContext
 	): Promise<void> {
-		this.context = context
 		await this.formVc.setValues({
 			title: context.event.timeBlocks[0].title,
 			subtitle: context.event.timeBlocks[0].subtitle,
