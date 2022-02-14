@@ -445,3 +445,8 @@ spruce add.listener --namespace calendar
 ```
 
 
+## Notes:
+
+1. If you are trying to get the person off an event, use `getPersonFromEvent()` that is passed to the constructor of your tool. Don't use `event.target.personId` as the person tied ot an event might be different than the person the event is targeting.
+
+`getPersonFromEvent()` is implemented by the skill creator and may do other lookups, like finding a client vs a teammate.
