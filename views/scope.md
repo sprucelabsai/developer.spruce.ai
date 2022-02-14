@@ -1,10 +1,14 @@
 ## What does scope even mean?
 
-In the context of Heartwood "scope" specifically refers to an organization or a location that all operations, permissions, and data filter by for a particular session.
+In the context of Heartwood "scope" specifically refers to an `organization` or a `location` that all operations, permissions, and data filter by for a particular session.
 
 While a person is viewing one of your Skill Views, they may chose to only show information relevant for a specific location and later decide to change to another location.
 
 It is up to you, the mightly skills developer, to honor any scope set (if it makes sense for your skill).
+
+`Global` is a term used to let you know that an object is not tied to an organization or location. 
+
+***You will need special permissions for your skill to emit global events.***
 
 ### Scoping your skill view's behaviors
 You can let Heartwood take care of requiring a location or an organization to be selected by implementing `getScopedBy()` in your skill view.
