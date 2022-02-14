@@ -431,3 +431,17 @@ export default class EventTitleToolViewController
 
 
 ## 7. Providing remote tools
+
+If you want to drop a tool inter the Tool Belt for an event type a different skill provides, you can do the following:
+
+1. Listen to `calendar.register-event-tools`
+2. Array of view controller id's for all the tools you want
+3. Create your tool (just an AbstractViewController<Card>)
+4. Implement `RemoteCalendarTool` interface how you see fit
+
+
+```bash
+spruce add.listener --namespace calendar
+```
+
+
