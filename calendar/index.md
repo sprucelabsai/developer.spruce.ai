@@ -110,7 +110,7 @@ Since you've already specified an `vcId` in step 2, it's time to create a valid 
 
 This is one of the shortest, yet most critical pieces of this exercise. One assertion and you'll be walked through the rest. Note, a `CalendarEventViewController` will need to provide a `ToolBeltState` that conforms to the `CalendarTool` interface.
 
-It will help to be familar with the [Tool Belt](/toolBelt/index.md) before continuing!
+It will help to be familiar with the [Tool Belt](/toolBelt/index.md) before continuing!
 
 First, create your view and select the `CalendarEvent` view model.
 
