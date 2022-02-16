@@ -214,7 +214,10 @@ This interface is built to handle State Machine context changes on the calendar.
 1. Make sure your tool populates as expected based on context returned from `getContext()` sent to the constructor.
 2. Make sure your tool updates as expected when `handleUpdateContext(context)` is invoked on your vc.
 3. Make sure your tool invokes `updateContext` whenever changes need to be propagated to the calendar and other tools (honoring any changes passed to `handleUpdateContext(context)`)
-4. You use `getPersonFromEvent()` passed to the constructor to get the person off the event (not event.target.personId, may return null).
+
+
+
+**Note:** Use `getPersonFromEvent()` passed to the constructor to get the person off the event (not event.target.personId). This may return null, so write tests accordingly.
 
 This is pretty close to how your test will end up:
 
