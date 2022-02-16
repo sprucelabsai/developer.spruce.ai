@@ -206,17 +206,20 @@ class ShiftsEventToolBeltState extends AbstractCalendarEventToolBeltState {
 
 A `Tool` is just a `Card` that renders in the [Tool Belt](../toolBelt/index.md). The difference is that your tool will implement the `CalendarTool` interface.
 
-This interface is built to handle State Machine context changes on the calendar. Here are the tests you need:
+This interface is built to handle State Machine context changes on the calendar. 
 
-1. Your tool populates based on `context` sent to the constructor.
-2. Your tool updates as expected when `handleUpdateContext(context)` is invoked on your vc.
-3. Your tool invokes `updateContext` whenever changes need to be propagated to the calendar and other tools (honoring any changes passed to `handleUpdateContext(context)`)
-4. You use `getPersonFromEvent()` passed to the constructor to get the person off the event.
+***Here's how you should approach writing your tool tests:***
+
+1. Write your tests as if you're not a tool to get all the functionality in.
+1. Make sure your tool populates as expected based on context returned from `getContext()` sent to the constructor.
+2. Make sure your tool updates as expected when `handleUpdateContext(context)` is invoked on your vc.
+3. Make sure your tool invokes `updateContext` whenever changes need to be propagated to the calendar and other tools (honoring any changes passed to `handleUpdateContext(context)`)
+4. You use `getPersonFromEvent()` passed to the constructor to get the person off the event (not event.target.personId, may return null).
 
 This is pretty close to how your test will end up:
 
 ```ts
-export default class EventTitleToolTest extends AbstractToolBeltStateTest {
+export default class EventTitleToolTest extends AbstractSpruceFixtureTest {
 	private static vc: EventTitleToolViewController
 	private static context: CalendarToolBeltContext
 
@@ -232,7 +235,6 @@ export default class EventTitleToolTest extends AbstractToolBeltStateTest {
 			CalendarToolBeltStateMachineTestFactory.StateMachine(this.views)
 
 		this.sm = stateMachine
-		this.state = new ShiftsEventToolBeltState()
 		this.context = this.sm.getContext()
 		this.vc = this.Vc()
 	}
