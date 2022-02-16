@@ -217,7 +217,7 @@ This interface is built to handle State Machine context changes on the calendar.
 
 
 
-**Note:** Use `getPersonFromEvent()` passed to the constructor to get the person off the calendar event (not event.target.personId). This may return null, so write tests accordingly.
+**Note:** Use `getPersonFromEvent()` passed to the constructor of your tool to get the person off the calendar event (not event.target.personId). This may return null, so write tests accordingly.
 
 This is pretty close to how your test will end up:
 
