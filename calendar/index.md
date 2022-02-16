@@ -62,7 +62,7 @@ export default class SettingUpCalendarEventTypesOnBootTest extends AbstractAppoi
 
 ## 3. Register your calendar
 
-Calendars are simple filters on the events to render based on a person's preferences. When you create an event, you can specify it's calendar id. Any calendar can support many event types (or none), but I highly recommend you assigne the event types you've previously created above to your calendar for the best experience.
+Calendars are simple filters on the events to render based on a person's preferences. When you create an event, you can specify it's calendar id. Any calendar can support many event types (or none), but I highly recommend you assign the event types you've previously created above to your calendar for the best experience.
 
 ```ts
 @login(DEMO_NUMBER_INSTALL_SKILL)
