@@ -335,6 +335,7 @@ export default class EventTitleToolTest extends AbstractSpruceFixtureTest {
 	private static Vc(options?: Partial<CalendarToolOptions>) {
 		return CalendarToolFactory.Tool(this.sm, 'calendar.event-title-card', {
 			updateContext: async () => {},
+			getPersonFromEvent: () => login.getPerson(),
 			...options,
 		}) as EventTitleToolViewController
 	}
@@ -443,6 +444,7 @@ If you want to drop a tool inter the Tool Belt for an event type a different ski
 2. Array of view controller id's for all the tools you want
 3. Create your tool (just an AbstractViewController<Card>)
 4. Implement `RemoteCalendarTool` interface how you see fit
+5. Follow the test instructions above
 
 
 ```bash
