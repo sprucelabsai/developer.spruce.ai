@@ -1,3 +1,10 @@
+# [6.0.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.7.16...v6.0.0) (2022-02-18)
+
+
+### Breaking Changes
+
+* calendar doc upbates ([48982d5](https://github.com/sprucelabsai/developer.spruce.ai/commit/48982d5))
+
 ## [5.7.16](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.7.15...v5.7.16) (2022-02-18)
 
 ## [5.7.15](https://github.com/sprucelabsai/developer.spruce.ai/compare/v5.7.14...v5.7.15) (2022-02-17)
