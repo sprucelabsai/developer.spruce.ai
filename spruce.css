@@ -59,7 +59,8 @@
 	
 	/* inline code */
 	--code-inline-border-radius: 6px;
-	--code-inline-background: linear-gradient(to left, #24c6dc, #514a9d) !important;
+	/* --code-inline-background: linear-gradient(to left, #24c6dc, #514a9d) !important; */
+	--code-inline-background: #514a9d !important;
 	--code-inline-color: var(--dark-theme-color) !important;
 
 

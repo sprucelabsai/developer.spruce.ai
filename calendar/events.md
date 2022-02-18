@@ -116,7 +116,7 @@ export default class CalendarEventViewControllerTest extends AbstractShiftsTest 
 		calendarSkillAssert.isValidEventViewController({
 			views: this.views,
 			CalendarEventClass: ShiftsEventViewController,
-			ToolBeltStateClass: ShiftsEventToolBeltState,
+			ToolBeltStateClass: ShiftsToolBeltState,
 		})
 	}
 }
@@ -135,7 +135,7 @@ Once your View Controller is created, you'll be able to import to first the firs
 There is nothing special about a state other than it conforming to the `ToolBeltState` interface. 
 
 1. Create a state file
-	* `/src/toolBelt/ShiftsEventToolBeltState.ts`
+	* `/src/toolBelt/ShiftsToolBeltState.ts`
 2. Make sure it implements the `ToolBeltState` interface.
 3. Fix the import in your test to make it fail on the next step.
 
@@ -150,7 +150,7 @@ You can provide any tool belt state you want from your calendar event, but if yo
 ```ts
 export default class CalendarToolBeltStateTest extends AbstractShiftsTest {
 	protected static sm: CalendarToolBeltStateMachine
-	protected static state: ShiftsEventToolBeltState
+	protected static state: ShiftsToolBeltState
 
 	protected static async beforeEach() {
 		await super.beforeEach()
@@ -160,7 +160,7 @@ export default class CalendarToolBeltStateTest extends AbstractShiftsTest {
 			CalendarToolBeltStateMachineTestFactory.StateMachine(this.views)
 
 		this.sm = stateMachine
-		this.state = new ShiftsEventToolBeltState()
+		this.state = new ShiftsToolBeltState()
 	}
 
 
@@ -196,7 +196,7 @@ export default class CalendarToolBeltStateTest extends AbstractShiftsTest {
 Production code for your state:
 
 ```ts
-class ShiftsEventToolBeltState extends AbstractCalendarEventToolBeltState {
+class ShiftsToolBeltState extends AbstractCalendarEventToolBeltState {
 	public id = 'shift'
 
 	public async load(options: any) {
