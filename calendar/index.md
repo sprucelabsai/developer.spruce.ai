@@ -333,7 +333,7 @@ export default class EventTitleToolTest extends AbstractSpruceFixtureTest {
 
 
 	private static Vc(options?: Partial<CalendarToolOptions>) {
-		return CalendarToolFactory.Tool(this.sm, 'calendar.event-title-card', {
+		return CalendarToolTestFactory.Tool(this.sm, 'calendar.event-title-card', {
 			updateContext: async () => {},
 			getPersonFromEvent: () => login.getPerson(),
 			...options,
@@ -359,10 +359,11 @@ export default class EventTitleToolViewController
 	public constructor(options: ViewControllerOptions & CalendarToolOptions) {
 		super(options)
 
-		const { getContext, updateContext } = options
+		const { getContext, updateContext, getPersonFromEvent } = options
 
 		this.getContext = getContext
 		this.updateContextHandler = updateContext
+		this.getPersonFromEvent = getPersonFromEvent
 
 		this.formVc = this.FormVc()
 		this.cardVc = this.CardVc()
@@ -454,6 +455,5 @@ spruce add.listener --namespace calendar
 
 ## Notes:
 
-1. If you are trying to get the person off an event, use `getPersonFromEvent()` that is passed to the constructor of your tool. Don't use `event.target.personId` as the person tied ot an event might be different than the person the event is targeting.
-
-`getPersonFromEvent()` is implemented by the skill creator and may do other lookups, like finding a client vs a teammate.
+1. If you are trying to get the person off an event, use `getPersonFromEvent()` that is passed to the constructor of your tool. Don't use `event.target.personId` as the person tied to an event might be different than the person the event is targeting. `getPersonFromEvent()` is implemented by the skill creator and may do other lookups, like finding a client vs a teammate.
+2. When building a tool, use `CalendarToolTestFactory.Tool(...)` instead of `this.Controller(...)` so your tool gets all the required params sent to it's constructor.
