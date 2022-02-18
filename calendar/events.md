@@ -103,13 +103,11 @@ This is one of the shortest, yet most critical pieces of this exercise. One asse
 
 It will help to be familiar with the [Tool Belt](/toolBelt/index.md) before continuing!
 
-First, create your view and select the `CalendarEvent` view model.
+First, do your assertion like below. In fact, just copy and past this test and work to make it pass.
 
-```bash
-spruce create.view --viewModel CalendarEvent
-```
+### Step 1: Make failing test
 
-Then, do your assertion and follow the instructions:
+Even types will fail on this one. As you work to make types pass, the `calendarSkillAssert` library will walk you through implementation details.
 
 ```ts
 export default class CalendarEventViewControllerTest extends AbstractShiftsTest {
@@ -123,6 +121,27 @@ export default class CalendarEventViewControllerTest extends AbstractShiftsTest 
 	}
 }
 ```
+
+### Step 2: Create your view controller
+
+```bash
+spruce create.view --viewModel CalendarEvent
+```
+
+Once your View Controller is created, you'll be able to import to first the first type issue.
+
+### Step 3: Create your Tool Belt State
+
+There is nothing special about a state other than it conforming to the `ToolBeltState` interface. 
+
+1. Create a state file
+	* `/src/toolBelt/ShiftsEventToolBeltState.ts`
+2. Make sure it implements the `ToolBeltState` interface.
+3. Fix the import in your test to make it fail on the next step.
+
+If you don't want to start your tool belt from scratch (which I don't recommend), you can extend `AbstractCalendarEventToolBeltState`. 
+
+Keep on reading!
 
 ## 4. Optional: Extend AbstractCalendarEventToolBeltState
 
