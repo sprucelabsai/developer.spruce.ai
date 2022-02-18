@@ -161,6 +161,8 @@ export default class CalendarToolBeltStateTest extends AbstractShiftsTest {
 
 		this.sm = stateMachine
 		this.state = new ShiftsToolBeltState()
+
+		await calendarSkillAssert.beforeEach(this.views, login.getClient())
 	}
 
 
@@ -190,6 +192,14 @@ export default class CalendarToolBeltStateTest extends AbstractShiftsTest {
 			Class: EventTitleToolViewController,
 		})
 	}
+
+	@test()
+	protected static async loadsRemoteTools() {
+		await calendarSkillAssert.stateFetchesAndRendersRemoteTools({
+			state: this.state,
+			views: this.views,
+		})
+	}
 }
 ```
 
@@ -199,15 +209,19 @@ Production code for your state:
 class ShiftsToolBeltState extends AbstractCalendarEventToolBeltState {
 	public id = 'shift'
 
-	public async load(options: any) {
-		await super.load(options)
+	public async load(sm: CalendarToolBeltStateMachine): Promise<void> {
 
-        // add any tools you want by vcId
+		await super.load(sm)
+
 		await this.addTool({
 			cardVcId: 'calendar.event-title-card',
 			id: 'title',
 			lineIcon: 'add-circle',
 		})
+
+
+		const tools = new CalendarToolRegistrar(sm)
+		await tools.fetchAndAddCards()
 	}
 }
 
