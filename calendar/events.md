@@ -1,0 +1,195 @@
+# Custom events and tool belts
+
+You can customize how the calendar renders your events and how the tool belt renders using most the tools you already know. Follow the steps below if you want to customize how an event renders OR you want to customize the tool belt for your event! 👇
+
+---
+
+## 1. Register your event types
+Events have a type. These types help me understand where and how to render your events. The calendar will render events with a matching `eventTypeSlug`. Event types have a `slug` for easy lookup and a `vcId` to know which view controller to use to render your event.
+
+You will want to create your `CalendarEventType` during boot of your skill since they are [global](/views/scope.md?id=what-does-scope-even-mean). But, lets start with your first assertions. Remember, write one test at a time and only extract when needed.
+
+```ts
+@login(DEMO_NUMBER_CALENDAR_TYPES_ON_BOOT)
+export default class SettingUpCalendarEventTypesOnBootTest extends AbstractAppointmentTest {
+	private static client: MercuryClient
+
+	protected static async beforeEach() {
+		await super.beforeEach()
+
+        // your default client must be a skill client since that's what it will be on boot
+		const { client } = await this.skills.loginAsCurrentSkill()
+		this.client = client
+	}
+
+	@test()
+	protected static async canCreateSettingUpCalendarEventTypesOnBoot() {
+		await calendarSkillAssert.createsEventTypesOnBoot(
+			[
+				// using the same vcId for both types for this example
+				{typeSlug: 'break', vcId: 'shifts.calendar-event'},
+				{typeSlug: 'block', vcId: 'shifts.calendar-event'},
+				{typeSlug: 'shift', vcId: 'shifts.calendar-event'},
+			],
+			this.client,
+			() => this.bootSkill()
+		)
+	}
+
+	@test()
+	protected static async createsFromMultipleBoots() {
+		await calendarSkillAssert.createsEventTypesWithMultipleBoots(
+			[
+				{typeSlug: 'break', vcId: 'shifts.calendar-event'},
+				{typeSlug: 'block', vcId: 'shifts.calendar-event'},
+				{typeSlug: 'shift', vcId: 'shifts.calendar-event'},
+			],
+			this.client,
+			() => this.bootSkill()
+		)
+	}
+}
+```
+
+## 2. Register your calendar
+
+Calendars are simple filters on the events to render based on a person's preferences. When you create an event, you can specify it's calendar id. Any calendar can support many event types (or none), but I highly recommend you assign the event types you've previously created above to your calendar for the best experience.
+
+```ts
+@login(DEMO_NUMBER_INSTALL_SKILL)
+export default class SettingUpCalendarsOnInstallTest extends AbstractAppointmentTest {
+	@seed('organizations', 1)
+	@install.skills('appointments')
+	protected static async beforeEach() {
+		await super.beforeEach()
+		await this.bootSkill()
+	}
+
+	@test()
+	protected static async canCreateSettingUpCalendarsOnInstall() {
+		await calendarSkillAssert.createsCalendarOnInstall(
+			'breaks-blocks',
+			login.getClient(),
+			['break','block']
+		)
+		
+		await calendarSkillAssert.createsCalendarOnInstall(
+			'shifts',
+			login.getClient(),
+			['shift']
+		)
+	}
+
+	@test()
+	protected static async canBeInstalledMultipleTimes() {
+		await calendarSkillAssert.createsCalendarsWithMultipleInstalls(
+			'breaks-blocks',
+			login.getClient()
+		)
+		
+		await calendarSkillAssert.createsCalendarsWithMultipleInstalls(
+			'shifts',
+			login.getClient()
+		)
+	}
+}
+```
+
+## 3. Build your CalendarEventViewController
+
+Since you've already specified an `vcId` in step 2, it's time to create a valid `CalendarEventViewController`.
+
+This is one of the shortest, yet most critical pieces of this exercise. One assertion and you'll be walked through the rest. Note, a `CalendarEventViewController` will need to provide a `ToolBeltState` that conforms to the `CalendarTool` interface.
+
+It will help to be familiar with the [Tool Belt](/toolBelt/index.md) before continuing!
+
+First, create your view and select the `CalendarEvent` view model.
+
+```bash
+spruce create.view --viewModel CalendarEvent
+```
+
+Then, do your assertion and follow the instructions:
+
+```ts
+export default class CalendarEventViewControllerTest extends AbstractShiftsTest {
+	@test()
+	protected static async canCreateCalendarEventViewController() {
+		calendarSkillAssert.isValidEventViewController({
+			views: this.views,
+			CalendarEventClass: ShiftsEventViewController,
+			ToolBeltStateClass: ShiftsEventToolBeltState,
+		})
+	}
+}
+```
+
+## 4. Optional: Extend AbstractCalendarEventToolBeltState
+
+You can provide any tool belt state you want from your calendar event, but if you want to get up and moving fast, you'll want to have your state extend `AbstractCalendarEventToolBeltState`.
+
+```ts
+export default class CalendarToolBeltStateTest extends AbstractShiftsTest {
+	protected static sm: CalendarToolBeltStateMachine
+	protected static state: ShiftsEventToolBeltState
+
+	protected static async beforeEach() {
+		await super.beforeEach()
+		await this.bootSkill()
+
+		const { stateMachine, toolBeltVc } =
+			CalendarToolBeltStateMachineTestFactory.StateMachine(this.views)
+
+		this.sm = stateMachine
+		this.state = new ShiftsEventToolBeltState()
+	}
+
+
+	@test()
+	protected static async stateInheritsCalendarToolBeltState() {
+		await calendarSkillAssert.toolBeltStateProperlyInheritsAbstractToolBeltState(
+			this.sm,
+			this.state
+		)
+	}
+
+	@test()
+	protected static async stateAddsTitleTool() {
+		await calendarSkillAssert.toolBeltStateAddsTool({
+			state: this.state,
+			toolId: 'title',
+			views: this.views,
+		})
+	}
+	
+	@test()
+	protected static async titleToolIsCorrectType() {
+		await calendarSkillAssert.toolBeltStateAddsTool({
+			state: this.state,
+			toolId: 'shift',
+			views: this.views,
+			Class: EventTitleToolViewController,
+		})
+	}
+}
+```
+
+Production code for your state:
+
+```ts
+class ShiftsEventToolBeltState extends AbstractCalendarEventToolBeltState {
+	public id = 'shift'
+
+	public async load(options: any) {
+		await super.load(options)
+
+        // add any tools you want by vcId
+		await this.addTool({
+			cardVcId: 'calendar.event-title-card',
+			id: 'title',
+			lineIcon: 'add-circle',
+		})
+	}
+}
+
+```

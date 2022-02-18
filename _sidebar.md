@@ -3,6 +3,8 @@
 -   [Getting started](/getting-started.md)
 -   [CLI](/cli.md)
 -   [Calendar](/calendar/index.md)
+    -   [Events & Tool Belt](/calendar/events.md)
+    -   [Tools](/calendar/tools.md)
 -   [Deploys](/deploys/index.md)
 -   [Errors](/errors/index.md)
 -   [Events (Mercury)](/events/index.md)
