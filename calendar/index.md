@@ -17,6 +17,24 @@ This is an overview on how the [calendar.spruce.bot](https://calendar.spruce.bot
 	* You can also provide "remote" tools to populate events defined by other skills
 
 
+## Definition
+
+1. **Calendar Event** - An object represented in the Calendar Skill and defined in `@sprucelabs/calendar-utils` that is represented in the calendar. In context, sometimes just called "Event".
+	* *"Don't forget to click the Calendar Event"*
+	* *"There are way too many events in this calendar"*
+2. **Repeating Event** - Any event with `repeats` set.
+	* *"Is that a repeating event?"*
+	* *"Configure your repeating event for weekly on Mon, Wed, and Fri"*
+3. **Source Event** - The "Repeating Event" future events are generated from (never actually returned from api)
+	* *"When updating a repeating event, if they chose 'Update All Events', we actually update the source event"*
+	* *"The source event is actually never rendered in the calendar."*
+4. **Generated Event** - The event generated from the "Source Event". Will have the same `id` as the source event, but with a different `startDateTimeMs`.
+	* *"If we're talking a repeating event, then only generated events are rendered on the calendar."*
+5. **Series** - All generated events.
+	* *"How many events are in the series?"*
+	* *"Technically you'd ask, 'How many generated events are in the series?', but everyone here knows what you mean, so don't sweat it."*
+
+
 I'm gonna take you through everything right now! But first, lets make sure we have the dependencies we need!
 
 ## Add calendar dependencies
