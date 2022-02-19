@@ -19,7 +19,7 @@ This is an overview on how the [calendar.spruce.bot](https://calendar.spruce.bot
 
 ## Definitions
 
-1. **Calendar Event** - An object represented in the Calendar Skill and defined in `@sprucelabs/calendar-utils` that is represented in the calendar. In context, sometimes just called "Event".
+1. **Calendar Event** - An object represented in the Calendar Skill and defined in `@sprucelabs/calendar-utils`. In context, sometimes just called "Event".
 	* *"Don't forget to click the Calendar Event"*
 	* *"There are way too many events in this calendar"*
 2. **Repeating Event** - Any event with `repeats` set.
