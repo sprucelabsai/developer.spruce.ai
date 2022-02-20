@@ -47,7 +47,7 @@
     "conventional-changelog-sprucelabs": "^1.1.2",
     "docsify": "^4.12.2",
     "docsify-cli": "^4.4.3",
-    "eslint": "^8.8.0",
+    "eslint": "^8.9.0",
     "eslint-config-spruce": "^10.11.2",
     "semantic-release": "^19.0.2"
   }
