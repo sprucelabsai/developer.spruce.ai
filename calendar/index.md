@@ -39,11 +39,12 @@ I'm gonna take you through everything right now! But first, lets make sure we ha
 
 ## Add calendar dependencies
 
-We're gonna need 2 dependencies to continue. 1 development (for testing) and 1 production (for code compiled and sent to Heartwood.)
+We're gonna need 3 dependencies to continue. 1 development (for testing) and 1 production (for code compiled and sent to Heartwood), and the Calendar skill itself.
 
 ```bash
 yarn add -D @sprucelabs/spruce-calendar-test-utils
 yarn add @sprucelabs/spruce-calendar-components
+spruce add.dependency
 
 ```
 
