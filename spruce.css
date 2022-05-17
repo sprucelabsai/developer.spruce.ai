@@ -30,7 +30,7 @@
 	--cover-color: var(--dark-theme-color);
 	--cover-heading-color: var(--dark-theme-color);
 	--cover-heading-font-size: 2rem;
-	--cover-heading-font-weight: normal;
+	--cover-heading-font-weight: 600;
 	--cover-link-color: --dark-theme-color;
 	--cover-button-border: 1px solid #fff !important;
 	--cover-button-border-radius: 20px;
