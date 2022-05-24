@@ -286,7 +286,10 @@ body.playing .cover {
 	color: black;
 }
 
-body.playing a,
+body.playing input,
+body.playing h1,
+body.playing h2,
+body.playing .sidebar-nav a,
 body.playing p,
 body.playing .sidebar-toggle .sidebar-toggle-button {
 	opacity: 0;
