@@ -14,7 +14,7 @@ spruce [command] --help
 Configuring the CLI is done through your skill or module's `package.json`.
 
 * [Ignoring node modules on upgrade](cli.md?id=ignoring-node-modules-on-upgrade)
-* Overriding command options
+* [Overriding command options](cli.md?id=overriding-command-options)
 
 
 ### Ignoring node modules on upgrade

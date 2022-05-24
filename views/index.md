@@ -1,6 +1,6 @@
 # Skill Views
 
-Skill Views are top level views, comprised of Views, and controlled by `SkillViewControllers`. Every skill gets a `RootSkillViewController` that is loaded by the Skill's namespace. A Skill can have as many Skill Views (and Views) as desired.
+Skill Views are what you see when you visit [spruce.bot](https://spruce.bot). They are top level views, comprised of (Card|List|Form|etc)Views, and controlled by `SkillViewControllers`. Every skill gets a `RootSkillViewController` that is loaded by the Skill's namespace. A Skill can have as many Skill Views (and Views) as desired.
 
 ---
 
@@ -114,7 +114,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
   protected static async redirectsToAddOrganizationOnLoadIfNoCurrentOrganization() {
     let wasHit = false;
 
-    await this.Fixture("view")
+    await this.views
       .getRouter()
       .on("did-redirect", () => {
         wasHit = true;
@@ -199,25 +199,18 @@ export default class RootSkillViewController extends AbstractSkillViewController
 
 ## Authentication
 
-Using `@login()` you can set a client all fixtures will share that make api request. This will also be the client returned from `this.connectToApi()` in your views.
+Using `@fake.login()` you can set a client all fixtures will share that make api request. This will also be the client returned from `this.connectToApi()` in your views.
 
 ```ts
 //test
-@login(DEMO_NUMBER_ROOT_SVC)
+@fake.login()
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
   
   @seed('organizations', 1)
   protected static async beforeEach() {
     await super.beforeEach();
-
-    /**
-     * Is the exact same as @login decorator, don't bother doing this manually
-     * const { client } = await this.Fixture('view').loginAsDemoPerson(DEMO_NUMBER_ROOT_SVC)
-     * MercuryFixture.setDefaultClient(client)
-     **/
-
-    this.client = login.getClient();
-    this.vc = this.Controller("adventure.root");
+    this.client = fake.getClient();
+    this.vc = this.Controller("adventure.root", {});
   }
 
   @test()
@@ -228,7 +221,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
   @test()
   protected static async tryAsSomeoneNotPartOfOrg() {
-      await this.Fixture('view').loginAsDemoPerson(DEMO_NUMBER_OUTSIDER)
+      await this.views.loginAsDemoPerson(DEMO_NUMBER_OUTSIDER)
 
       // skill will now boot and load with DEMO_NUMBER_OUTSIDER for this test
       await this.bootAndLoad()
@@ -334,8 +327,6 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 class RootSkillviewController extends AbstractSkillViewController {
   public constructor(options: ViewControllerOptions) {
     super(options);
-
-    this.formVc = this.FormVc();
     this.formCardVc = this.FormCardVc();
   }
 
@@ -461,8 +452,6 @@ Learn more [here](views/scope.md).
 export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
   protected static async beforeEach() {
     await super.beforeEach();
-    this.views = this.Fixture("view");
-    this.orgs = this.Fixture("organization");
   }
 
   @test()
@@ -481,7 +470,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
   @test()
   @seed("organization", 1)
   protected static async doesNotRedirectWhenCurrentOrg() {
-    const organization = await this.orgs.getNewestOrganization();
+    const organization = await this.fakedOrganizations[0]
 
     //this is optional, the current org defaults to the newest added
     //this.views.getScope().setCurrentOrganization(organization.id)
@@ -499,7 +488,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
   protected static async usesOrgFromScope() {
     // since scope loads the newest org by default, we can set
     // it back to the first org to test our productions code
-    const [organizations] = await this.orgs.listOrganizations();
+    const [organizations] = await this.fakedOrganizations
 
     this.views.getScope().setCurrentOrganization(organization.id);
 
