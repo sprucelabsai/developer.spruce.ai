@@ -250,6 +250,9 @@ body .sidebar .search input[type="search"] {
 
 body a,
 body p,
+body.playing input,
+body.playing h1,
+body.playing h2,
 body .sidebar-toggle .sidebar-toggle-button,
 body .sidebar .search .input-wrap,
 body .sidebar .search input[type="search"],
@@ -287,8 +290,8 @@ body.playing .cover {
 }
 
 body.playing input,
-body.playing h1,
-body.playing h2,
+body.playing .content h1,
+body.playing .content h2,
 body.playing .sidebar-nav a,
 body.playing p,
 body.playing .sidebar-toggle .sidebar-toggle-button {
