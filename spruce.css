@@ -248,12 +248,14 @@ body .sidebar .search input[type="search"] {
 	width: 100%;
 }
 
+body a,
+body p,
 body .sidebar-toggle .sidebar-toggle-button,
 body .sidebar .search .input-wrap,
 body .sidebar .search input[type="search"],
 body .cover.show,
 body {
-	transition: all 2s
+	transition: all 2s !important;
 }
 
 
@@ -284,9 +286,12 @@ body.playing .cover {
 	color: black;
 }
 
+body.playing a,
+body.playing p,
 body.playing .sidebar-toggle .sidebar-toggle-button {
 	opacity: 0;
 }
+
 
 @media screen and (max-width: 500px) {
 	.markdown-section {
