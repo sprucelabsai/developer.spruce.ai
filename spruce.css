@@ -248,6 +248,46 @@ body .sidebar .search input[type="search"] {
 	width: 100%;
 }
 
+body .sidebar-toggle .sidebar-toggle-button,
+body .sidebar .search .input-wrap,
+body .sidebar .search input[type="search"],
+body .cover.show,
+body {
+	transition: all 2s
+}
+
+
+body.playing .cover.show,
+body.playing {
+	background: black !important;
+	color: black;
+}
+
+body.playing .sidebar .search .input-wrap,
+body.playing .sidebar .search input[type="search"] {
+	border-color: black;
+}
+
+body.playing aside.sidebar {
+	overflow: hidden;
+}
+
+body.playing h1 {
+	color: black;
+}
+
+body.playing h2 {
+	color: black;
+}
+
+body.playing .cover {
+	color: black;
+}
+
+body.playing .sidebar-toggle .sidebar-toggle-button {
+	opacity: 0;
+}
+
 @media screen and (max-width: 500px) {
 	.markdown-section {
 		padding-top: 50px;

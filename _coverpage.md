@@ -54,6 +54,6 @@
 Build experiences, connect people.
 </h1>
 
-[Adventure mode 👇](/?id=introduction)
+[Adventure mode 👇](/?id=introducing)
 [Quick start ⚡️](/getting-started)
 
