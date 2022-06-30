@@ -58,7 +58,7 @@ BASE_URL=https://dev.spruce.bot HEADLESS=false yarn polish
 },
 
 
-# to click a navMenu (the calendar icon)
+# to click the navMenu calendar icon
 {
 	click: {
 		target: [['NavMenu', 'calendar']],
@@ -66,7 +66,7 @@ BASE_URL=https://dev.spruce.bot HEADLESS=false yarn polish
 },
 
 
-# to click a link under a navMenu,
+# to click a link on a navMenu
 {
 	click: {
 		target: [['NavLink', 'appointments']],
@@ -122,7 +122,7 @@ BASE_URL=https://dev.spruce.bot HEADLESS=false yarn polish
 	},
 },
 
-# to assert the slideIdx on the present slide (0 based!)
+# to assert the zero based slideIdx on the present slide
 {
 	assert: {
 		target: ['Card'],
@@ -132,7 +132,7 @@ BASE_URL=https://dev.spruce.bot HEADLESS=false yarn polish
 	},
 },
 
-# to assert both a title & slideIdx on the present slide (0 based!)
+# to assert both a title & slideIdx on the present slide
 {
 	assert: {
 		target: ['Card'],
