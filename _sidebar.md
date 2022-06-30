@@ -15,6 +15,7 @@
     -   [Scope](/views/scope.md)
 -   [Stores](/stores/index.md)
 -   [Tests](/tests/index.md)
+-   [Polish](/polish/index.md)
 -   [Tool Belt](/toolBelt/index.md)
 -   [Utility Modules](/utilities/index.md)
 -   [Best Practices](/best/index.md)
