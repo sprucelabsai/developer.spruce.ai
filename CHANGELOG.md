@@ -1,3 +1,10 @@
+# [6.1.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v6.0.27...v6.1.0) (2022-06-30)
+
+
+### Features
+
+* polish placeholder ([eb58b3b](https://github.com/sprucelabsai/developer.spruce.ai/commit/eb58b3b))
+
 ## [6.0.27](https://github.com/sprucelabsai/developer.spruce.ai/compare/v6.0.26...v6.0.27) (2022-06-30)
 
 ## [6.0.26](https://github.com/sprucelabsai/developer.spruce.ai/compare/v6.0.25...v6.0.26) (2022-05-24)
