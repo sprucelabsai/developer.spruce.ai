@@ -49,6 +49,6 @@
     "docsify-cli": "^4.4.4",
     "eslint": "^8.22.0",
     "eslint-config-spruce": "^10.11.3",
-    "semantic-release": "^19.0.3"
+    "semantic-release": "^19.0.4"
   }
 }
