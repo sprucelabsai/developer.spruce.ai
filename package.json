@@ -39,6 +39,10 @@
     "watch.rebuild": "true",
     "watch.tsc": "true"
   },
+  "resolutions": {
+    "libnpmversion": "3.0.6",
+    "*/libnpmversion": "3.0.6"
+  },
   "dependencies": {},
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.1",
@@ -48,7 +52,7 @@
     "docsify": "^4.12.2",
     "docsify-cli": "^4.4.4",
     "eslint": "^8.23.0",
-    "eslint-config-spruce": "^10.11.3",
+    "eslint-config-spruce": "^10.11.4",
     "semantic-release": "^19.0.5"
   }
 }
