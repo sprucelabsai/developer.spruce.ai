@@ -102,7 +102,6 @@ const results = await client.emit('whoami::v2020_12_25')
 const { auth } = eventResponseUtil.getFirstResponseOrThrow(results)
 
 
-
 const payloads = []
 
 //listening to each skill that response
