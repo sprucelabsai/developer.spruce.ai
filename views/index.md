@@ -24,7 +24,7 @@ This is your primary view accessible by your Skill's namespace. For example, the
 ### 1. Create your test file
 
 - Run `spruce create.test`
-- Select `AbstractViewControllerTest`
+- Select `AbstractSpruceFixtureTest`
   - Or select your Skill's primary AbstractTest if this is your third test
 
 ### 2. Write your first failing test
@@ -37,7 +37,7 @@ This is your primary view accessible by your Skill's namespace. For example, the
 ```ts
 @test()
 protected static async canRenderRootSkillView() {
-    const vc = this.Controller('adventure.root', {})
+    const vc = this.views.Controller('adventure.root', {})
 }
 
 ```
@@ -54,7 +54,7 @@ Your first test should be passing minus a type issue. Lets bring it home!
 ```ts
 @test()
 protected static async canRenderRootSkillView() {
-    const vc = this.Controller('adventure.root', {})
+    const vc = this.views.Controller('adventure.root', {})
     this.render(vc)
 }
 ```
@@ -71,15 +71,15 @@ This will involve moving the instantiation of your vc to the `beforeEach` and th
 
 ```ts
 import { vcAssert } from "@sprucelabs/heartwood-view-controllers";
-import { AbstractViewControllerTest } from "@sprucelabs/spruce-view-plugin";
+import { AbstractSpruceFixtureTest } from "@sprucelabs/spruce-view-plugin";
 import RootSkillViewController from "../../skillViewControllers/Root.svc";
 
-export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractSpruceFixtureTest {
   private static vc: RootSkillViewController;
 
   protected static async beforeEach() {
     await super.beforeEach();
-    this.vc = this.Controller("adventure.root", {});
+    this.vc = this.views.Controller("adventure.root", {});
   }
 
   @test()
@@ -120,7 +120,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
         wasHit = true;
       });
 
-    await this.load(this.vc);
+    await this.views.load(this.vc);
 
     assert.isTrue(wasHit);
   }
@@ -151,7 +151,7 @@ export default class RootSkillViewController extends AbstractSkillViewController
   }
 
   private EquipCardVc() {
-    return this.Controller("card", {
+    return this.views.Controller("card", {
       id: "equip",
       header: {
         title: "My great card 2!",
@@ -163,7 +163,7 @@ export default class RootSkillViewController extends AbstractSkillViewController
   }
 
   private ProfileCardVc() {
-    return this.Controller("card", {
+    return this.views.Controller("card", {
       id: "profile",
       header: {
         title: "My great card!",
@@ -204,13 +204,13 @@ Using `@fake.login()` you can set a client all fixtures will share that make api
 ```ts
 //test
 @fake.login()
-export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractSpruceFixtureTest {
   
   @seed('organizations', 1)
   protected static async beforeEach() {
     await super.beforeEach();
     this.client = fake.getClient();
-    this.vc = this.Controller("adventure.root", {});
+    this.vc = this.views.Controller("adventure.root", {});
   }
 
   @test()
@@ -230,7 +230,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
   protected static async bootAndLoad() {
       await this.bootSkill()
-      await this.load(this.vc)
+      await this.views.load(this.vc)
   }
 }
 
@@ -239,10 +239,9 @@ class RootSkillviewController extends AbstractSkillViewController {
   public async load(options: SkillViewControllerLoadOptions) {
     const client = await this.connectToApi();
 
-    const results = await client.emit("whoami::v2020_01_10");
-    const { person } = eventResponseUtil.getFirstResponseOrThrow(results);
+    const { auth } = await client.emitAndFlattenResponses("whoami::v2020_01_10");
 
-    testLog.info(person.phone) 
+    this.log(person.phone) 
     //first test logs DEMO_NUMBER_ROOT_SVC
     //second test logs DEMO_NUMBER_OUTSIDER
 
@@ -255,20 +254,19 @@ class RootSkillviewController extends AbstractSkillViewController {
 ```ts
 
 //test
-export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractSpruceFixtureTest {
 	@test()
 	protected static async rendersList() {
-		const listVc = vcAssert.assertCardRendersList(this.vc.getEquipCardVc())
+		const listVc = listAssert.cardRendersList(this.vc.getEquipCardVc())
 
-		vcAssert.assertListRendersRow(vc, 'no-entries')
-
+		listAssert.listRendersRow(vc, 'no-entries')
 
 		listVc.addRow({...})
 		listVc.addRow({...})
 		listVc.addRow({ id: location.id, ...})
 
-		await interactionUtil.clickInRow(vc, 2, 'edit')
-		await interactionUtil.clickInRow(vc, location.id, 'edit')
+		await interactor.clickInRow(vc, 2, 'edit')
+		await interactor.clickInRow(vc, location.id, 'edit')
 	}
 }
 
@@ -276,9 +274,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 class RootSkillviewController extends AbstractSkillViewController {
 	public constructor(options: ViewControllerOptions) {
 		super(options)
-
-		this.equipmentList = this.Controller('list', {...})
-
+		this.equipmentListVc = this.views.Controller('list', {...})
 	}
 }
 ```
@@ -287,7 +283,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 
 ```ts
 //test
-export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractSpruceFixtureTest {
   @test()
   protected static async confirmsBeforeSaving() {
     const formVc = this.vc.getFormVc();
@@ -295,7 +291,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
     formVc.setValue("name", "Haircut");
 
     const confirmVc = await vcAssert.assertRendersConfirm(this.vc, () =>
-      interactionUtil.submitForm(formVc)
+      interactor.submitForm(formVc)
     );
 
     await confirmVc.accept();
@@ -309,10 +305,10 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
   protected static async rejectingConfirmDoesNotSave() {
     const formVc = this.vc.getFormVc();
 
-    formVc.setValue("name", "Haircut");
+    await formVc.setValue("name", "Haircut");
 
     const confirmVc = await vcAssert.assertRendersConfirm(this.vc, () =>
-      interactionUtil.submitForm(formVc)
+      interactor.submitForm(formVc)
     );
 
     await confirmVc.reject();
@@ -331,7 +327,7 @@ class RootSkillviewController extends AbstractSkillViewController {
   }
 
   private FormVc() {
-    return this.Controller(
+    return this.views.Controller(
       "form",
       buildForm({
         id: "service",
@@ -353,7 +349,7 @@ class RootSkillviewController extends AbstractSkillViewController {
   }
 
   private FormCardVc() {
-    return this.Controller("card", {
+    return this.views.Controller("card", {
       id: "service",
       header: {
         title: "Create your service!",
@@ -389,14 +385,14 @@ Make sure you `load` your Active Record Card for it to show any results!
 
 ```ts
 //test
-export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractSpruceFixtureTest {
   @test()
   protected static async rendersActiveRecordCard() {
-    const vc = this.Controller("my-skill.root", {});
+    const vc = this.views.Controller("my-skill.root", {});
     const activeVc = vcAssert.assertSkillViewRendersActiveRecordCard(vc);
     assert.isEqual(vc.getActiveRecordCard(), activeVc);
 
-    await this.load(vc);
+    await this.views.load(vc);
 
     assert.isTrue(activeVc.getIsLoaded());
   }
@@ -411,7 +407,7 @@ export default class RootSkillViewController extends AbstractViewController<Card
   }
 
   private ActiveRecordVc() {
-    return this.Controller(
+    return this.views.Controller(
       "activeRecordCard",
       buildActiveRecordCard({
         header: {
@@ -449,7 +445,7 @@ Learn more [here](views/scope.md).
 ```ts
 //test
 @login(DEMO_NUMBER_ROOT_SVC)
-export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractSpruceFixtureTest {
   protected static async beforeEach() {
     await super.beforeEach();
   }
@@ -460,7 +456,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
     await vcAssert.assertActionRedirects({
       router: this.views.getRouter(),
-      action: () => this.load(this.vc),
+      action: () => this.views.load(this.vc),
       destination: {
         id: "organization.add",
       },
@@ -477,7 +473,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
     await vcAssert.assertActionDidNotRedirect({
       router: this.views.getRouter(),
-      action: () => this.load(this.vc),
+      action: () => this.views.load(this.vc),
     });
 
     assert.isEqualDeep(this.vc.currentOrg, organization);
@@ -494,7 +490,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
     let wasHit = false;
 
-    await this.load(this.vc);
+    await this.views.load(this.vc);
 
     assert.isEqualDeep(this.vc.currentOrg, organization);
   }
@@ -522,7 +518,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 ```ts
 //test
 @login(DEMO_NUMBER_ROOT_SVC)
-export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractSpruceFixtureTest {
   @test()
   protected static rendersStats() {
     vcAssert.assertRendersStats(this.vc.getCardVc());
@@ -536,12 +532,12 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 
   private static async bootAndLoad() {
     await this.bootSkill();
-    await this.load(this.vc);
+    await this.views.load(this.vc);
   }
 }
 
 //production
-class RootSkillviewController extends AbstractSkillViewController {
+class RootSkillViewController extends AbstractSkillViewController {
   public constructor(options: ViewControllerOptions) {
     super(options);
 
@@ -559,7 +555,7 @@ It is important that you test the graceful handling of failed requests on save. 
 ```ts
 //test
 @login(DEMO_PHONE)
-export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractSpruceFixtureTest {
 
 	@test()
 	protected static async showsErrorWhenSavingFails() {
@@ -569,17 +565,15 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 		const formVc = this.vc.getFormVc()
 		formVc.setValues({...})
 
-		await vcAssert.assertRenderAlert(this.vc, () => interactionUtil.submitForm(formVc))
+		await vcAssert.assertRenderAlert(this.vc, () => interactor.submitForm(formVc))
 	}
 
 
 	@test()
 	protected static async savesOrgWhenSubmittingForm() {
 		const formVc = this.vc.getFormVc()
-
-		formVc.setValues({...})
-
-		await vcAssert.assertRendersSuccessAlert(this.vc, () => interactionUtil.subimForm(formVc))
+		await formVc.setValues({...})
+		await vcAssert.assertRendersSuccessAlert(this.vc, () => interactor.subimForm(formVc))
 
 		...
 	}
@@ -589,12 +583,11 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 class RootSkillviewController extends AbstractSkillViewController {
     public constructor(options: SkillViewControllerOptions) {
         super(options)
-
         this.formVc = this.FormVc()
     }
 
     private FormVc() {
-        return this.Controller('form', buildForm({
+        return this.views.Controller('form', buildForm({
             ...,
             onSubmit: this.handleSubmit.bind(this)
         }))
@@ -622,12 +615,12 @@ class RootSkillviewController extends AbstractSkillViewController {
 
 ```ts
 //test
-export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractSpruceFixtureTest {
 	@test()
 	protected static rendersToolBelt() {
 		tt.assertDoesNotRenderToolBelt(this.vc)
 
-		await this.load(this.vc)
+		await this.views.load(this.vc)
 
 		const toolBeltVc = vcAssert.assertRendersToolBelt(this.vc)
 		const toolVc = vcAssert.assertToolBeltRendersTool(this.vc, 'edit')
@@ -660,7 +653,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 	}
 
 	private ToolBelt() {
-		return this.Controller('toolBelt', {
+		return this.views.Controller('toolBelt', {
 			...,
 		})
 	}
@@ -669,7 +662,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 		this.toolBeltVc.addTool({
 			id: 'edit',
 			lineIcon: 'globe',
-			card: this.Controller('card', { ... })
+			card: this.views.Controller('card', { ... })
 		})
 	}
 
@@ -683,7 +676,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 
 ```ts
 //test
-export default class RootSkillViewControllerTest extends AbstractViewControllerTest {
+export default class RootSkillViewControllerTest extends AbstractSpruceFixtureTest {
 	@test()
 	protected static redirectsOnSelectLocation() {
 		const locationsCardVc = this.vc.getLocationsCardVc()
@@ -692,7 +685,7 @@ export default class RootSkillViewControllerTest extends AbstractViewControllerT
 		await vcAssert.assertActionRedirects({
 			router: this.views.getRouter(),
 			action: () =>
-				interactionUtil.clickButtonInRow(
+				interactor.clickButtonInRow(
 					locationsCardVc.getListVc(),
 					location.id,
 					'edit'
@@ -720,7 +713,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 	}
 
 	private activeRecordCardVc() {
-		return this.Controller('activeRecordCard', buildActiveRecordCard({
+		return this.views.Controller('activeRecordCard', buildActiveRecordCard({
 			...,
 			rowTransformer: (location) => ({
 				id: location.id
@@ -769,4 +762,4 @@ This will write a file called `stats.json` at that destination. You can upload i
 1. Checkout the `vcAssert.test.ts` in `heartwood-view-controllers`
 1. Give your buttons, list rows, and cards ids and assert against them
    - vcAssert.assertListRendersRow(rowVc, service.id)
-   - interactionUtil.clickButtonInFooter(cardVc, 'edit')
+   - interactor.clickButtonInFooter(cardVc, 'edit')

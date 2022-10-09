@@ -66,5 +66,6 @@
 	],
 	"debug.javascript.unmapMissingSources": true,
 	"javascript.preferences.importModuleSpecifier": "relative",
-	"typescript.preferences.importModuleSpecifier": "relative"
+	"typescript.preferences.importModuleSpecifier": "relative",
+	"task.allowAutomaticTasks": "on"
 }
