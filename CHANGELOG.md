@@ -1,3 +1,10 @@
+# [6.2.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v6.1.10...v6.2.0) (2022-10-10)
+
+
+### Features
+
+* vsoced ([6e0a319](https://github.com/sprucelabsai/developer.spruce.ai/commit/6e0a319))
+
 ## [6.1.10](https://github.com/sprucelabsai/developer.spruce.ai/compare/v6.1.9...v6.1.10) (2022-10-09)
 
 ## [6.1.9](https://github.com/sprucelabsai/developer.spruce.ai/compare/v6.1.8...v6.1.9) (2022-10-09)
