@@ -22,6 +22,55 @@ When creating an event to manipulate data, our generic verbs are as follows:
     * fqen: `appointments.list-services::v2020_01_01`
     * Target should be used to filter results and include an organizationId or locationId, e.g. `{ categorieIds?: string[], organizationId: string }`
 
+## Visual Studio Code Keyboard Shortcuts
+
+```json
+[
+    {
+        "key": "cmd+r",
+        "command": "workbench.action.debug.restart",
+        "when": "inDebugMode"
+    },
+    {
+        "key": "cmd+u",
+        "command": "workbench.action.debug.start",
+        "when": "debuggersAvailable && !inDebugMode"
+    },
+    {
+        "key": "shift+cmd+t",
+        "command": "workbench.action.tasks.runTask",
+        "args": "test.file"
+    },
+    {
+        "key": "ctrl+space",
+        "command": "workbench.action.tasks.runTask",
+        "args": "spruce"
+    },
+    {
+        "key": "ctrl+alt+space",
+        "command": "workbench.action.tasks.runTask",
+        "args": "shell"
+    },
+    {
+        "key": "shift+cmd+w",
+        "command": "-workbench.action.closeWindow"
+    },
+    {
+        "key": "shift+cmd+w",
+        "command": "workbench.action.closeEditorsInGroup"
+    },
+    {
+        "key": "ctrl+alt+cmd+enter",
+        "command": "git.sync"
+    },
+    {
+        "key": "ctrl+shift+alt+cmd+enter",
+        "command": "git.push"
+    }
+]
+
+```
+
 ## View Controllers
 
 ### Constructors
