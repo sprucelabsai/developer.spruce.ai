@@ -22,6 +22,7 @@ Configuring the CLI is done through your skill or module's `package.json`.
 These modules will be ignored everytime you run `spruce upgrade` or `spruce update.dependencies`. All other modules will be upgraded to the latest version (including jumping majors). Also, any new dependencies the platform depends on will be added.
 
 ```json
+//package.json
 "skill": {
     "upgradeIgnoreList": [
         "module-1",
@@ -35,9 +36,23 @@ These modules will be ignored everytime you run `spruce upgrade` or `spruce upda
 You can override the options passed to any `spruce` command by setting `skill.commandOverrides`. The key is the command, the value is the option flags you want passed (I will mixin these options with any you pass via command line).
 
 ```json
+//package.json
 "skill": {
     "commandOverrides": {
         "sync.schemas": "--shouldFetchCoreSchemas false",
+    }
+}
+```
+
+### Blocking commands
+
+Sometimes your skill or module is not compatible with a command and you wanna ensure someone doesn't accidently run it.
+
+```json
+//package.json
+"skill": {
+    "blockedCommands": {
+        "schema.create": "Creating schemas is blocked for very good reasons, I promise!",
     }
 }
 ```
