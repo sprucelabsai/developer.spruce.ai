@@ -11,7 +11,7 @@
 -   [Events (Local)](/events/emitter.md)
 -   [Schemas](/schemas/index.md)
 -   [Skills](/skills/index.md)
--   [Skill Views](/views/index.md)
+-   [Views](/views/index.md)
     -   [Scope](/views/scope.md)
 -   [Stores](/stores/index.md)
 -   [Tests](/tests/index.md)
