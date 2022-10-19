@@ -23,7 +23,7 @@ Ok, so, we're going to build a simple [Todo Skill](https://todos.spruce.bot)!
 
 A Skill is a "micro-app" or a "macro-service". That is, a bit of functionality that is hyper-focused facilitating a discrete real world or digital experience. 
 
-To give you a sense of how skills work together, a small barbershop could install the following skills:
+To give you a sense of how skills might work together, a small barbershop could install the following skills:
 
 1. Shifts - Schedule your team with ease!
 2. Appointments - Let people book time with your team!
