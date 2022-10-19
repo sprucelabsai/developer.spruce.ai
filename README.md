@@ -16,7 +16,7 @@ Jeezy, that was a bold claim...
 
 I don't even know where to start...
 
-How about this, let's start with what you'll be able to do by the time this adventure is over and work backgrounds from there!
+How about this; let's start with what you'll be able to do by the time this adventure is over and work backwards from there!
 
 Ok, so, we're going to build a simple Todo Skill!
 
