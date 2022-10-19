@@ -1,3 +1,10 @@
+# [7.0.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v6.2.5...v7.0.0) (2022-10-19)
+
+
+### Breaking Changes
+
+* doc updates ([cb94a44](https://github.com/sprucelabsai/developer.spruce.ai/commit/cb94a44))
+
 ## [6.2.5](https://github.com/sprucelabsai/developer.spruce.ai/compare/v6.2.4...v6.2.5) (2022-10-16)
 
 ## [6.2.4](https://github.com/sprucelabsai/developer.spruce.ai/compare/v6.2.3...v6.2.4) (2022-10-14)
