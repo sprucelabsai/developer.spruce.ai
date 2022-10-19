@@ -1,50 +1,48 @@
 
 # Introducing...
 
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe id="teaser" src="https://player.vimeo.com/video/196923365?h=eb9c76f29b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="The 4th Runtime"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe id="teaser" src="https://player.vimeo.com/video/707599932?h=68534a1ece&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="The 4th Runtime"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
 
 ## Hey Skills Developer 👋
 
-My name is Sprucebot 🌲🤖 and I'll be your robot co-pilot on the mission to connect humanity.
+My name is Sprucebot 🌲🤖 and I'll be your robot co-pilot on the mission to launch the next runtime!
 
-Together, we're going to build a skill!
+This SDK is designed to enable you to build *beautiful*, *intuitive* enterprise grade solutions *fast*!
+
+But like, actually be *fun*... know what I mean?
+
+Jeezy, that was a bold claim...
+
+I don't even know where to start...
+
+How about this, let's start with what you'll be able to do by the time this adventure is over and work backgrounds from there!
+
+Ok, so, we're going to build a simple Todo Skill!
 
 ## What is a skill?
 
-A Skill is a "micro-app" or a "macro-service". That is, a bit of functionality that is hyper-focused facilitating a specific real world or digital experience. 
+A Skill is a "micro-app" or a "macro-service". That is, a bit of functionality that is hyper-focused facilitating a descrete real world or digital experience. 
 
-## Skills manifesto
+To give you a sense of how skills work together, a barbershop could install the following skills:
 
-Skills are programs with a purpose: human-to-human connection.
+1. Shifts - Schedule your team with ease!
+2. Appointments - Let people book time with your team!
+3. Reminders - Don't forget!
+4. Feedback - Keep getting better!
+5. Profile - Build a profile for your guests and team to fill out!
+5. Little Black Book - Take notes about your guests to personalize their services!
 
-They accomplish this in one of two ways:
+An enterprise may add in these skills ontop of what is above:
 
-1. Automation - tech runs the show with oversight from humans
-2. Augmentation - humans run the show using technology as a force multiplier
+1. Groups - Manage many locations at once by region, population, or anything you want!
+2. Enterprise Service Management - Roll out time-sensitive service menu changes to groups!
+3. Forms - Build custom intake forms for your guests!
+4. Waivers - Require the filling out of a form before any services are provided!
 
-## Automation
-
-Lets say there is an entrepreneur named Becca. She loves fashion. So, she decided to open a [men's head-to-toe boutique](https://spruce.me). She loves it. But, do you know what she didn't expect? That she'd be spending so much time doing boring admin work. Automation is a way to take the things a machine can do better and deligate them to a machine! These are things like checkout, reports, schedule management, etc. Automation done right allows Becca to focus on the things she loves and the people that are part of it.
-
-## Augmentation
-
-Becca may greet hundreds of guests a day. How in the world is she supposed to personalize the experience for each of them when it's impossible to even remember their names? Good augmentation is much harder to achieve than good automation. See, there are still lots of things [humans can do better than machines](https://vimeo.com/196923365/eb9c76f29b). Good augmentation does not replace, but supports those things. Things like memory, or the volume of your voice.
-
-## Un-Amazon'able
-
-Amazon rocks, doesn't it? Pretty much everything you need delivered right to your door. If Becca tried to compete with Amazon, she'd get smoked. She's gotta focus on the things that make brick-and-mortar unique. This means she needs to be building human-to-human relationships.
-
-Luckily, Becca has huge a advantage. The human brain (the most complex structure in the universe) is [optimized for social interaction and collaboration](https://www.amazon.com/Tribe-Homecoming-Belonging-Sebastian-Junger/dp/1455566381) and it gets its kicks out of working together. Machines can't compete. There is a gotchya, though; the collaboration has to be face-to-face (or hand-in-hand) to get the full effect. [Zoom does not count](https://news.stanford.edu/2021/02/23/four-causes-zoom-fatigue-solutions/).
-
-## Promote human-to-human connection
-
-Not only does your skill need to connect people, it needs to know when to back out. Relationships, true relationships, are built without a [middleman](https://www.amazon.com/How-Win-Friends-Influence-People/dp/0671027034).
-
-> “A person's name is to him or her the sweetest and most important sound in any language.” 
->
-> – Dale Carnegie.
+Skills come in all sizes, coupled to the complexity of the one problem they are trying to solve.
 ## What's next?
 
-Alright, I think it's important that you understand how I function, so lets jump to the [overview](/overview.md).
+Alright, I think it's important that you understand how I function on a high level, so lets jump to the [overview](/overview.md).
 
 

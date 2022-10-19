@@ -51,7 +51,7 @@
 </p>
 
 <h1>
-Build experiences, connect people.
+Developer Experience First
 </h1>
 
 [Adventure mode 👇](/?id=introducing)
