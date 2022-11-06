@@ -4,7 +4,7 @@ orbs:
 jobs:
   release_prod:
     docker:
-      - image: cimg/node:16.14
+      - image: cimg/node:lts
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -16,7 +16,7 @@ jobs:
       - run: yarn run release
   upgrade:
     docker:
-      - image: cimg/node:16.14
+      - image: cimg/node:lts
     steps:
       - run:
           name: "Check for auto upgrade"
