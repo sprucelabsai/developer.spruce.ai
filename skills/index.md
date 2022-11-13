@@ -18,7 +18,9 @@ spruce boot
 
 ```
 
-## Previewing your skill
+## Booting your skill!
+
+You can't just boot your skill, you are going to need to register it in an environment first!
 
 1. Log in as a developer using: `spruce login`
 2. Set remote to *Development* using: `spruce set.remote`
