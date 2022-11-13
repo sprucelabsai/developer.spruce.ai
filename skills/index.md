@@ -26,3 +26,4 @@ spruce boot
 
 During your skill's boot it will compile your skill views and register them with Heartwood. This may take a moment, so wait until you see the "Skill Booted" message at the end!
 
+From this point forward you can use `spruce boot` every time you make View changes.
