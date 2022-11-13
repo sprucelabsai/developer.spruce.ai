@@ -56,7 +56,7 @@ export default class RenderingRootViewControllerTest extends AbstractSpruceFixtu
 
 ## Authentication
 ```ts
-@login(DEMO_NUMBER_ROOT)
+@login()
 export default class MySkillViewControllerTest extends AbstractSpruceFixtureTest {
 
     @test()
@@ -87,7 +87,7 @@ You can also `@seed` from any of your local [stores](/stores.md/index?id=stores)
 
 ```ts
 //@login sets the default client for all fixtures and seeders going forward
-@login(DEMO_NUMBER)
+@login()
 export default class RenderingRootViewControllerTest extends AbstractSpruceFixtureTest {
 
     @seed('organizations', 2)
@@ -136,7 +136,7 @@ export default class RenderingRootViewControllerTest extends AbstractSpruceFixtu
 
 ## Installing your skill
 ```ts
-@login(DEMO_NUMBER)
+@login()
 export default class RenderingRootViewControllerTest extends AbstractSpruceFixtureTest {
 
     @test()

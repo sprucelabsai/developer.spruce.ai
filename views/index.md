@@ -444,7 +444,7 @@ Learn more [here](views/scope.md).
 
 ```ts
 //test
-@login(DEMO_NUMBER_ROOT_SVC)
+@login()
 export default class RootSkillViewControllerTest extends AbstractSpruceFixtureTest {
   protected static async beforeEach() {
     await super.beforeEach();
@@ -517,7 +517,7 @@ class RootSkillviewController extends AbstractSkillViewController {
 
 ```ts
 //test
-@login(DEMO_NUMBER_ROOT_SVC)
+@login()
 export default class RootSkillViewControllerTest extends AbstractSpruceFixtureTest {
   @test()
   protected static rendersStats() {
@@ -554,7 +554,7 @@ It is important that you test the graceful handling of failed requests on save. 
 
 ```ts
 //test
-@login(DEMO_PHONE)
+@login()
 export default class RootSkillViewControllerTest extends AbstractSpruceFixtureTest {
 
 	@test()

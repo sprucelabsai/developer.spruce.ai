@@ -10,7 +10,7 @@ Events have a type. These types help me understand where and how to render your 
 You will want to create your `CalendarEventType` during boot of your skill since they are [global](/views/scope.md?id=what-does-scope-even-mean). But, lets start with your first assertions. Remember, write one test at a time and only extract when needed.
 
 ```ts
-@login(DEMO_NUMBER_CALENDAR_TYPES_ON_BOOT)
+@login()
 export default class SettingUpCalendarEventTypesOnBootTest extends AbstractAppointmentTest {
 	private static client: MercuryClient
 
@@ -56,7 +56,7 @@ export default class SettingUpCalendarEventTypesOnBootTest extends AbstractAppoi
 Calendars are simple filters on the events to render based on a person's preferences. When you create an event, you can specify it's calendar id. Any calendar can support many event types (or none), but I highly recommend you assign the event types you've previously created above to your calendar for the best experience.
 
 ```ts
-@login(DEMO_NUMBER_INSTALL_SKILL)
+@login()
 export default class SettingUpCalendarsOnInstallTest extends AbstractAppointmentTest {
 	@seed('organizations', 1)
 	@install.skills('appointments')

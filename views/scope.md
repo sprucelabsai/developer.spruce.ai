@@ -12,15 +12,17 @@ It is up to you, the mightly skills developer, to honor any scope set (if it mak
 
 ### Scoping your skill view's behaviors
 
-You can let Heartwood take care of requiring a location or an organization to be selected by implementing `getScopedBy()` in your skill view.
+You can let Heartwood take care of requiring a location or an organization to be selected by implementing `getScope()` in your skill view.
 
 ```ts
 export default class RootSkillViewController extends AbstractSkillViewController<Args> {
-  public getScopedBy() {
-    return "organization"; // 'location' 'none'
+  public getScope() {
+    return ['organization', 'employed'];
   }
 }
 ```
+
+Valid scopes are: [`organization`,`location`,`employed`]. If you add `employed` the person viewing must actually work at the organization or location in scope. All these permissions are managed for you.
 
 ### Loading scope
 
@@ -47,7 +49,7 @@ export default class RootSkillViewController extends AbstractSkillViewController
 Test scope is accessible through the View Fixture. Make sure you have [seeded some organizations and locations](tests/index?id=seeding-data) before starting!
 
 ```ts
-@login(DEMO_NUMBER_SCOPE)
+@login()
 export default class RenderingRootViewControllerTest extends AbstractLocationsViewsTest {
   @test()
   protected static isScopedByOrganization() {
