@@ -1,3 +1,5 @@
+## [7.0.8](https://github.com/sprucelabsai/developer.spruce.ai/compare/v7.0.7...v7.0.8) (2022-11-13)
+
 ## [7.0.7](https://github.com/sprucelabsai/developer.spruce.ai/compare/v7.0.6...v7.0.7) (2022-11-06)
 
 ## [7.0.6](https://github.com/sprucelabsai/developer.spruce.ai/compare/v7.0.5...v7.0.6) (2022-11-06)
