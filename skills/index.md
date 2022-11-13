@@ -21,7 +21,7 @@ spruce boot
 ## Previewing your skill
 
 1. Log in as a developer using: `spruce login`
-2. Set remote to Developement using: `spruce set.remote`
+2. Set remote to *Development* using: `spruce set.remote`
 3. Register your skill with: `spruce register`
     * Your skill's namespace will be how you access your skill.
 3. Now boot your skill using: `spruce boot`
