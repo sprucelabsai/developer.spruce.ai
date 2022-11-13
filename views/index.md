@@ -19,6 +19,18 @@ Note: You must [register](/skills/index) your skill before being able to publish
 
 This is your primary view accessible by your Skill's namespace. For example, the `Adventure` skill is accessible via [https://adventure.spruce.bot](https://adventure.spruce.bot). You should start each skill by creating your RootViewController.
 
+## Previewing your views
+
+Make sure you have [logged in and registered](../skills/index.md) your skill first!
+
+Then, everytime you build your skill it'll publish to Heartwood in your give environment.
+
+```bash
+spruce register
+spruce boot
+```
+Then you can visit your skill view controller on production using `https://{{namespace}}.spruce.bot` or in development using `https://dev.spruce.bot/#views/{{namespace.root}}
+
 ## Testing View Controllers
 
 ### 1. Create your test file
