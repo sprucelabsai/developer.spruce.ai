@@ -23,7 +23,7 @@ spruce boot
 1. Log in as a developer using: `spruce login`
 2. Set remote to Developement using: `spruce set.remote`
 3. Register your skill with: `spruce register`
-    * Your skill's namespace will be how you access your skill
+    * Your skill's namespace will be how you access your skill.
 3. Now boot your skill using: `spruce boot`
 
 During your skill's boot it will compile your skill views and register them with Heartwood. This may take a moment, so wait until you see the "Skill Booted" message at the end!
