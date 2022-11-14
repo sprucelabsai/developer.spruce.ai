@@ -23,12 +23,11 @@ This is your primary view accessible by your Skill's namespace. For example, the
 
 Make sure you have [logged in and registered](../skills/index.md) your skill first!
 
-Then, everytime you boot your skill it'll publish to Heartwood in your given environment.
-
 ```bash
-spruce boot
+spruce watch.views
 ```
-Then you can visit your skill view controller on production using `https://{{namespace}}.spruce.bot` or in development using `https://dev.spruce.bot/#views/{{namespace.root}}
+
+Your views will be incrementally built as you make changes to source.
 
 ## Testing View Controllers
 
