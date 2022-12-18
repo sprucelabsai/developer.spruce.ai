@@ -45,14 +45,14 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/git": "^10.0.1",
     "@sprucelabs/semantic-release": "^4.0.8",
     "conventional-changelog-sprucelabs": "^1.1.2",
     "docsify": "^4.13.0",
     "docsify-cli": "^4.4.4",
-    "eslint": "^8.26.0",
-    "eslint-config-spruce": "^10.11.4",
+    "eslint": "^8.30.0",
+    "eslint-config-spruce": "^10.11.5",
     "semantic-release": "^19.0.5"
   }
 }
