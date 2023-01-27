@@ -10,6 +10,7 @@
 -   [Events (Mercury)](/events/index.md)
 -   [Events (Local)](/events/emitter.md)
 -   [Forms](/forms/index.md)
+-   [i18n](/i18n/index.md)
 -   [Polish](/polish/index.md)
 -   [Schemas](/schemas/index.md)
 -   [Skills](/skills/index.md)
