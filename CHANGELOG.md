@@ -1,3 +1,10 @@
+# [7.1.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v7.0.16...v7.1.0) (2023-01-27)
+
+
+### Features
+
+* locale documentation ([413ade6](https://github.com/sprucelabsai/developer.spruce.ai/commit/413ade6))
+
 ## [7.0.16](https://github.com/sprucelabsai/developer.spruce.ai/compare/v7.0.15...v7.0.16) (2023-01-14)
 
 ## [7.0.15](https://github.com/sprucelabsai/developer.spruce.ai/compare/v7.0.14...v7.0.15) (2022-11-14)
