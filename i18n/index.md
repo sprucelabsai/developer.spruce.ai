@@ -31,52 +31,40 @@ Timezones can be frustrating because the offset can change based on time of year
 If you want to create a schema before feeding it into a form, you can use something like this:
 
 ```ts
-const timezoneField = personSchema.fields.timezone
-const choices = timezoneField.options.choices
-const sorter = new TimezoneChoiceSorter(new LocaleImpl())
-
-const schemaWithSortedTimezones = {
-    ...personSchema,
-    fields: {
-        ...personSchema.fields,
-        timezone: {
-            ...timezoneField,
-            options: {
-                ...timezoneField.options,
-                choices: sorter.sort(choices),
-            },
-        },
-    },
-}
+import { sortTimezoneChoices } from '@sprucelabs/spruce-calendar-utils'
+const schemaWithSortedTimezones = sortTimezoneChoices(this.locale, personSchema, 'timezone')
 
 ```
 
-Or, you can update the FormViewController after instantiation. Here is a small helper used in the Locations Skill that is helpful
+Here is the implementation of `sortTimezoneChoices` so you can get an idea of how it works.
 
 ```ts
-import { Locale, TimezoneChoiceSorter } from '@sprucelabs/calendar-utils'
-import { FormViewController } from '@sprucelabs/heartwood-view-controllers'
-import {
-	locationSchema,
-	timezoneChoices,
-} from '@sprucelabs/spruce-core-schemas'
+import { cloneDeep, Schema, SchemaFieldNames } from '@sprucelabs/schema'
+import { timezoneChoices } from '@sprucelabs/spruce-core-schemas'
+import TimezoneChoiceSorter from '../locales/TimezoneChoiceSorter'
+import { Locale } from '../types/calendar.types'
 
-export function sortLocationTimezones(
-	formVc: Pick<FormViewController<any>, 'setField'>,
-	locale: Locale
+export default function sortTimezoneChoices<S extends Schema>(
+	locale: Locale,
+	schema: S,
+	fieldName: SchemaFieldNames<S>
 ) {
-	const sorted = new TimezoneChoiceSorter(locale).sort(timezoneChoices)
+	const sorter = new TimezoneChoiceSorter(locale)
+	const choices = sorter.sort(timezoneChoices)
 
-	formVc.setField('timezone', {
-		fieldDefinition: {
-			...locationSchema.fields.timezone,
-			options: {
-				choices: sorted,
-			},
-		},
-	})
+	const copy = cloneDeep(schema)
+
+	const field = copy.fields?.[fieldName]
+
+	if (field) {
+		field.options = {
+			...field.options,
+			choices,
+		}
+	}
+
+	return copy
 }
-
 
 ```
 
