@@ -52,7 +52,7 @@ const formVc = this.Controller(
 ```bash
 yarn add @sprucelabs/spruce-people-utils
 ```
-2. Import the `PersonSelectInputViewController`
+2. Import and mixin the `PersonSelectInputViewController`
 ```ts
 public constructor(options: ViewControllerOptions) {
     super(options)
@@ -60,4 +60,26 @@ public constructor(options: ViewControllerOptions) {
         'people.person-select-input': PersonSelectInputViewController,
     })
 }
+```
+3. Instantiate an input and tell the form to use it
+```ts
+this.personSelectInputVc = this.Controller('people.person-select-input', {})
+this.formVc = this.Controller(
+    'form',
+    buildForm({
+        schema: formSchema,
+        sections: [
+            {
+                fields: [
+                    {
+                        name: 'person',
+                        renderAs: 'autocomplete',
+                        vc: this.personSelectInputVc,
+                    },
+                ],
+            },
+        ],
+    })
+)
+
 ```
