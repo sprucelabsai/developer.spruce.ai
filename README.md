@@ -32,7 +32,7 @@ To give you a sense of how skills might work together, a small barbershop could 
 5. Profile - Build a profile for your guests and team to fill out!
 5. Little Black Book - Take notes about your guests to personalize their services!
 
-An Fortune 500 Enterprise may add in these skills on-top of what is above:
+A Fortune 500 Enterprise may add in these skills on-top of what is above:
 
 1. Groups - Manage many locations at once by region, population, or anything you want!
 2. Enterprise Service Management - Roll out time-sensitive service menu changes to groups!
