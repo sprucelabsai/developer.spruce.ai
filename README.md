@@ -6,6 +6,8 @@
 
 ## Hey Skills Developer 👋
 
+WIP: Sprucebot is in active development.
+
 My name is Sprucebot 🌲🤖 and I'll be your robot co-pilot on the mission to launch the next runtime!
 
 This SDK is designed to enable you to build *beautiful*, *intuitive* enterprise grade solutions *fast*!
