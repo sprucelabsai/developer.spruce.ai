@@ -1,5 +1,5 @@
 # Stores
-A place to store your data, agnostic to any database (ok, only mongodb support for now, but more coming based on needs).
+A place to store your data, agnostic to any database.
 ****
 ```bash
 # Creating your new store
@@ -8,6 +8,57 @@ spruce create.store
 # Sync stores (after you rename a class or file)
 spruce sync.stores
 
+```
+
+## Schemas in stores
+At the bottom of your Store implementation file are the schemas used to validate data based on specific actions. 
+
+
+```ts
+const fullSchema = ... // what is returned from the store when calling .find(...) or .findOne(...)
+const createSchema = ... // validates values passed to .create(...) or .createOne(...)
+const updateSchema = ... // validates values passed to .update(...), .updateOne(...), or .upsert(...)
+const databaseSchema = ... // the actual values stored in the database
+```
+
+It is considered a best practice to create a fully typed schema using `spruce create.schema` and setting it to the fullSchema.
+
+```bash
+spruce create.schema 
+```
+
+```ts
+import userSchema from '#spruce/schemas/namespace/v2023_03_03/user.schema'
+
+...
+
+const fullSchema = userSchema
+```
+
+## Hooks
+
+There are cases when you need to mutate values before they are saved or retrieved from the database. You can implement any of the following methods in your Store implementation to do the work you want before/after saving, updating, or retrieving data!
+
+```ts
+protected willCreate?(
+	values: CreateRecord
+): Promise<Omit<DatabaseRecord, 'id'>>
+
+protected didCreate?(values: CreateRecord): Promise<void>
+
+protected willUpdate?(
+	updates: UpdateRecord,
+	values: DatabaseRecord
+): Promise<Partial<DatabaseRecord>>
+
+protected didUpdate?(
+	old: DatabaseRecord,
+	updated: DatabaseRecord
+): Promise<void>
+
+protected willScramble?(
+	values: Partial<DatabaseRecord> & { _isScrambled: true }
+): Promise<Partial<DatabaseRecord>>
 ```
 
 
@@ -19,10 +70,12 @@ export default async (
 	event: SpruceEvent<SkillEventContract, EmitPayload>
 ): SpruceEventResponse<ResponsePayload> => {
 
-    const store = await event.storeFactory.Store('profiles')
+	const { stores, source } = event
+
+    const store = await stores.getStore('profiles')
     const profile = await store.findOne({
         target: {
-            personId: event.source.personId
+            personId: source.personId
         }
     }, {
         includeFields: getFields(getProfileSchema),
@@ -38,19 +91,15 @@ export default async (
 ```
 
 ## Stores in tests
-You can access all the stores you need from test in 2 ways.
-
-1. If your test extends `AbstractStoreTest` -> `const store = await this.Store('invites')`
-2. If your test extends `AbstractSpruceFixtureTest` -> `const store = await Fixture('store').Store('invites')`
 
 ```ts
-export default class AcceptingAnInviteTest extends AbstractStoreTest {
+export default class AcceptingAnInviteTest extends AbstractSpruceFixtureTest {
 	private static vc: AcceptSkillViewController
     private static invites: InvitesStore
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-        this.invites = await this.Store('invites')
+        this.invites = await this.stores.getStore('invites')
 	}
 
 	@test()
@@ -84,4 +133,17 @@ export default class AcceptingAnInviteTest extends AbstractStoreTest {
 
 ```
 
+## Postgres
+
+By default, when you are using `#sprucelabs/data-stores` you will get a Mongodb and in memory adapters. If you want to add Postgres support, you must import the dependency.
+
+```bash
+yarn add @sprucelabs/postgres-data-store
+```
+
+Then you can configure your databes in your env.
+
+```env
+DATABASE_CONNECTION_STRING="postgres://postgres:password@localhost:5432/database_name"
+```
 
