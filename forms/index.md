@@ -52,7 +52,19 @@ const formVc = this.Controller(
 ```bash
 yarn add @sprucelabs/spruce-people-utils
 ```
-2. Import and mixin the `PersonSelectInputViewController`
+2. Write the failing test
+```ts
+@test()
+protected static async formRendersPersonSelectField() {
+    formAssert.fieldRendersUsingInstanceOf(
+        this.vc.getFormVc(),
+        'person',
+        PersonSelectInputViewController
+    )
+}
+```
+
+3. Import and mixin the `PersonSelectInputViewController`
 ```ts
 public constructor(options: ViewControllerOptions) {
     super(options)
@@ -61,7 +73,7 @@ public constructor(options: ViewControllerOptions) {
     })
 }
 ```
-3. Instantiate an input and tell the form to use it
+4. Instantiate an input and tell the form to use it
 ```ts
 this.personSelectInputVc = this.Controller('people.person-select-input', {})
 this.formVc = this.Controller(
