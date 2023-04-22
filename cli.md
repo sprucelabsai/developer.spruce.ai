@@ -33,7 +33,7 @@ These modules will be ignored everytime you run `spruce upgrade` or `spruce upda
 
 ### Overriding command options
 
-You can override the options passed to any `spruce` command by setting `skill.commandOverrides`. The key is the command, the value is the option flags you want passed (I will mixin these options with any you pass via command line).
+You can override the options passed to any `spruce` command by setting `skill.commandOverrides`. The key is the command, the value is a string of all the args you want passed.
 
 ```json
 //package.json
