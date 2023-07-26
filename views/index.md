@@ -35,7 +35,7 @@ Your views will be incrementally built as you make changes to source.
 
 - Run `spruce create.test`
 - Select `AbstractSpruceFixtureTest`
-  - Or select your Skill's primary AbstractTest if this is your third test
+  - Or select your Skill's primary AbstractTest if created
 
 ### 2. Write your first failing test
 
@@ -70,6 +70,15 @@ protected static async canRenderRootSkillView() {
 ```
 
 Your RootViewController should always successfully render. If this test ever fails, you have problems.
+
+## Assertion Libraries
+These libraries make failing tests easy!
+
+* [vcAssert](#view-controller-assertions)
+  * General catch all. Everything used to be here, but they are starting to be extracted into new assertion tools.
+* [formAssert](#form-assertions)
+* [listAssert](#list-assertions)
+* [buttonAssert](#button-assertions)
 
 ## View Controller Assertions
 
@@ -265,9 +274,19 @@ class RootSkillviewController extends AbstractSkillViewController {
 
 //test
 export default class RootSkillViewControllerTest extends AbstractSpruceFixtureTest {
+
+  protected static vc: SpyRootSkillView
+
+  protected static async beforeEach() {
+    await super.beforeEach()
+
+    this.views.setController('adventure.root', SpyRootSkillView)
+    this.vc = this.views.Controller('adventure.root', {}) as SpyRootSkillView
+  }
+
 	@test()
 	protected static async rendersList() {
-		const listVc = listAssert.cardRendersList(this.vc.getEquipCardVc())
+		const listVc = listAssert.cardRendersList(this.equipCardVc)
 
 		listAssert.listRendersRow(vc, 'no-entries')
 
@@ -278,13 +297,27 @@ export default class RootSkillViewControllerTest extends AbstractSpruceFixtureTe
 		await interactor.clickInRow(vc, 2, 'edit')
 		await interactor.clickInRow(vc, location.id, 'edit')
 	}
+
+  protected static get equipCardVc() {
+    return this.vc.equipCardVc
+  }
+
+}
+
+//for accessing the list vc
+class SpyRootSkillView extends RootSkilLViewController {
+  public equipCardVc: CardViewController
+  public equipmentListVc: ListViewController
 }
 
 //production
 class RootSkillviewController extends AbstractSkillViewController {
+  protected equipCardVc: CardViewController
+  protected equipmentListVc: ListViewController
 	public constructor(options: ViewControllerOptions) {
 		super(options)
-		this.equipmentListVc = this.views.Controller('list', {...})
+		this.equipmentListVc = this.Controller('list', {...})
+    this.equipCardVc = this.Controller('card', ...)
 	}
 }
 ```
