@@ -1,3 +1,10 @@
+# [7.2.0](https://github.com/sprucelabsai/developer.spruce.ai/compare/v7.1.8...v7.2.0) (2025-01-24)
+
+
+### Features
+
+* chroma docs ([4c5b900](https://github.com/sprucelabsai/developer.spruce.ai/commit/4c5b900))
+
 ## [7.1.8](https://github.com/sprucelabsai/developer.spruce.ai/compare/v7.1.7...v7.1.8) (2023-07-26)
 
 ## [7.1.7](https://github.com/sprucelabsai/developer.spruce.ai/compare/v7.1.6...v7.1.7) (2023-04-22)
