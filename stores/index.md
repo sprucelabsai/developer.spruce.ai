@@ -1,6 +1,8 @@
 # Stores
+
 A place to store your data, agnostic to any database.
 ****
+
 ```bash
 # Creating your new store
 spruce create.store
@@ -11,8 +13,8 @@ spruce sync.stores
 ```
 
 ## Schemas in stores
-At the bottom of your Store implementation file are the schemas used to validate data based on specific actions. 
 
+At the bottom of your Store implementation file are the schemas used to validate data based on specific actions. 
 
 ```ts
 const fullSchema = ... // what is returned from the store when calling .find(...) or .findOne(...)
@@ -61,9 +63,9 @@ protected willScramble?(
 ): Promise<Partial<DatabaseRecord>>
 ```
 
-
 ## Stores in listeners
-Make sure you are loading only the fields you need (with `includeFields`) so your store doesn't return too many fields and cause your response payload to fail validation. 
+
+Make sure you are loading only the fields you need (with `includeFields` ) so your store doesn't return too many fields and cause your response payload to fail validation. 
 
 ```ts
 export default async (
@@ -86,7 +88,6 @@ export default async (
     }
 
 }
-
 
 ```
 
@@ -147,3 +148,38 @@ Then you can configure your databes in your env.
 DATABASE_CONNECTION_STRING="postgres://postgres:password@localhost:5432/database_name"
 ```
 
+## Chroma Data Store
+
+Give your skill the ability to store and retrieve data from a Chroma database for vector based searching. This gives your Data Store the ability to handle semantic and nearest neighbor searches.
+
+### Running Chroma
+
+1. Clone this rep
+2. Run `yarn start.chroma.docker`
+
+### Setting an embedding model
+
+By default , the ChromaDabatase class will use llama3.2 hosted through Ollama to generate embeddings
+
+#### Installing Ollama
+
+1. Visit https://ollama.com
+2. Click "Download"
+3. Select your OS
+
+#### Installing Llama3.2
+
+Llama 3.2 is the newest version of Llama (as of this writing) that supports embeddings.
+
+1. Inside of terminal, run `ollama run llama3.2`
+2. You should be able to visit http://localhost:11434/api/embeddings and get a 404 response (this is because the route only accepts POST requests)
+
+### Improving embeddings with `nomic-embed-text`
+
+We have seen significantly better search performance when using `nomic-embed-text` to generate embeddings.
+
+### Connecting to Chroma
+
+Use the connection string: `chromadb://localhost:8000` is your skill.
+
+Coming sooon..
